@@ -1,0 +1,221 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String             @id
+  name            String             @db.Text
+  email           String             @unique
+  emailVerified   Boolean
+  image           String?            @db.Text
+  createdAt       DateTime
+  updatedAt       DateTime
+  ShowComments    ShowComments[]
+  EpisodeComments EpisodesComments[]
+  accounts        Account[]
+  sessions        Session[]
+  users_shows     UserShows[]
+  users_episodes  UserEpisodes[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?  @db.Text
+  userAgent String?  @db.Text
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "session_userId_fkey")
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String    @db.Text
+  providerId            String    @db.Text
+  userId                String
+  accessToken           String?   @db.Text
+  refreshToken          String?   @db.Text
+  idToken               String?   @db.Text
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?   @db.Text
+  password              String?   @db.Text
+  createdAt             DateTime
+  updatedAt             DateTime
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "account_userId_fkey")
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String    @db.Text
+  value      String    @db.Text
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+model Genres {
+  id           Int            @id @default(autoincrement())
+  name         String
+  seriesGenres SeriesGenres[]
+
+  @@map("genres")
+}
+
+model SeriesGenres {
+  id_show  Int
+  id_genre Int
+  genres   Genres @relation(fields: [id_genre], references: [id])
+  shows    Shows  @relation(fields: [id_show], references: [show_id])
+
+  @@id([id_show, id_genre])
+  @@index([id_genre], map: "SeriesGenres_id_genre_fkey")
+  @@map("series_genres")
+}
+
+model ShowComments {
+  id       Int      @id @default(autoincrement())
+  content  String   @db.Text
+  postedAt DateTime @default(now())
+  id_user  String
+  id_show  Int
+  user     User     @relation(fields: [id_user], references: [id])
+  show     Shows    @relation(fields: [id_show], references: [show_id], onDelete: Cascade)
+
+  @@index([id_show], map: "Comments_id_show_fkey")
+  @@index([id_user], map: "Comments_id_user_fkey")
+  @@map("show_comments")
+}
+
+model EpisodesComments {
+  id         Int      @id @default(autoincrement())
+  content    String   @db.Text
+  postedAt   DateTime @default(now())
+  id_user    String
+  id_episode Int
+  user       User     @relation(fields: [id_user], references: [id])
+  episode    Episodes @relation(fields: [id_episode], references: [episode_id], onDelete: Cascade)
+
+  @@index([id_episode], map: "Comments_id_episode_fkey")
+  @@index([id_user], map: "Episode_comments_id_user_fkey")
+  @@map("episode_comments")
+}
+
+model Episodes {
+  episode_id     Int     @id
+  season_id      Int
+  name           String  @db.VarChar(255)
+  season_number  Int
+  episode_number Int?
+  airdate        String? @db.VarChar(512)
+  summary        String? @db.Text
+  url            String? @db.VarChar(255)
+  image          String? @db.VarChar(255)
+  seasons        Seasons @relation(fields: [season_id], references: [season_id], onUpdate: Restrict, map: "episodes_ibfk_1")
+
+  comments EpisodesComments[]
+  users    UserEpisodes[]
+
+  @@index([season_id], map: "season_id")
+  @@map("episodes")
+}
+
+model Cast {
+  person_id Int        @id
+  name      String     @db.VarChar(255)
+  image     String?    @db.VarChar(255)
+  show_cast ShowCast[]
+
+  @@map("cast")
+}
+
+model Seasons {
+  season_id Int        @id
+  show_id   Int
+  summary   String?    @db.Text
+  image     String?    @db.VarChar(255)
+  episodes  Episodes[]
+  shows     Shows      @relation(fields: [show_id], references: [show_id], onUpdate: Restrict, map: "seasons_ibfk_1")
+
+  @@index([show_id], map: "show_id")
+  @@map("seasons")
+}
+
+model ShowCast {
+  show_id        Int
+  person_id      Int
+  character_name String @db.VarChar(255)
+  shows          Shows  @relation(fields: [show_id], references: [show_id], onUpdate: Restrict, map: "show_cast_ibfk_1")
+  cast           Cast   @relation(fields: [person_id], references: [person_id], onUpdate: Restrict, map: "show_cast_ibfk_2")
+
+  @@id([show_id, person_id])
+  @@index([person_id], map: "person_id")
+  @@map("show_cast")
+}
+
+model Shows {
+  show_id     Int            @id
+  title       String         @db.VarChar(255)
+  summary     String?        @db.Text
+  image       String?        @db.VarChar(255)
+  seasons     Seasons[]
+  show_cast   ShowCast[]
+  users_shows UserShows[]
+  genres      SeriesGenres[]
+  comments    ShowComments[]
+
+  @@map("shows")
+}
+
+model UserShows {
+  id_user     String
+  id_show     Int
+  is_favorite Boolean?            @default(false)
+  is_archived Boolean?            @default(false)
+  status      users_shows_status? @default(to_watch)
+  added_at    DateTime?           @default(now()) @db.DateTime(0)
+  rating      Int?                @db.TinyInt
+  shows       Shows               @relation(fields: [id_show], references: [show_id], onDelete: Cascade, onUpdate: Restrict, map: "show_user_fk")
+  user        User                @relation(fields: [id_user], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "user_show_fk")
+
+  @@id([id_user, id_show])
+  @@index([id_show], map: "show_user_fk")
+  @@map("user_shows")
+}
+
+model UserEpisodes {
+  id_user    String
+  id_episode Int
+  watched_at DateTime? @default(now())
+
+  user    User     @relation(fields: [id_user], references: [id], onDelete: Cascade)
+  episode Episodes @relation(fields: [id_episode], references: [episode_id], onDelete: Cascade)
+
+  @@id([id_user, id_episode])
+  @@index([id_episode])
+  @@map("user_episodes")
+}
+
+enum users_shows_status {
+  to_watch
+  ongoing
+  finished
+}
