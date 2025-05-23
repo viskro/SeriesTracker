@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-    const { id } = await params;
+    const { id } = params;
     const user = await getUser();
     const showId = parseInt(id);
     console.log(await getUser());

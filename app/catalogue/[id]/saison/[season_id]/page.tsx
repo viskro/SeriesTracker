@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-    const { season_id } = await params;
+    const { season_id } = params;
     const seasonId = parseInt(season_id);
 
     if (isNaN(seasonId)) {
