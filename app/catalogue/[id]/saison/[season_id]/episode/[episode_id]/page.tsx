@@ -4,7 +4,7 @@ import EpisodeClient from "./EpisodeClient";
 import { trad } from "@/lib/utils";
 import { getUser } from "@/lib/auth-session";
 
-interface Props {
+interface PageProps {
     params: {
         id: string;
         season_id: string;
@@ -12,7 +12,7 @@ interface Props {
     };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: PageProps) {
     const user = await getUser();
     const showId = parseInt(params.id);
     const seasonId = parseInt(params.season_id);
