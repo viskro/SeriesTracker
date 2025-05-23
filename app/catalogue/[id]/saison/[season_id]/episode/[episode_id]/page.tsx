@@ -4,15 +4,13 @@ import EpisodeClient from "./EpisodeClient";
 import { trad } from "@/lib/utils";
 import { getUser } from "@/lib/auth-session";
 
-export default async function Page({
-    params,
-}: {
-    params: { id: string; season_id: string; episode_id: string };
+export default async function Page({ params }: {
+    params: Promise<{ id: string; season_id: string; episode_id: string }>;
 }) {
     const user = await getUser();
-    const { id } = params;
-    const { season_id } = params;
-    const { episode_id } = params;
+    const { id } = await params;
+    const { season_id } = await params;
+    const { episode_id } = await params;
 
     const episodeId = parseInt(episode_id);
     const seasonId = parseInt(season_id);

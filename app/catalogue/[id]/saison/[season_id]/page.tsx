@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import SeasonClient from "./SeasonClient";
 import { trad } from "@/lib/utils";
 
-export default async function Page({ params }: { params: { season_id: string } }) {
-    const { season_id } = params;
+export default async function Page({ params }: { params: Promise<{ season_id: string }> }) {
+    const { season_id } = await params;
     const seasonId = parseInt(season_id);
 
     if (isNaN(seasonId)) {

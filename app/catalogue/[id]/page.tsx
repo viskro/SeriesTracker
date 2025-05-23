@@ -4,8 +4,12 @@ import PageClient from "./PageClient";
 import { getUser } from "@/lib/auth-session";
 import { trad } from "@/lib/utils";
 
-export default async function Page({ params }: { params: { id: string } }) {
-    const { id } = params;
+type PageProps = {
+    params: Promise<{ id: string }>
+};
+
+export default async function Page({ params }: PageProps) {
+    const { id } = await params;
     const user = await getUser();
     const showId = parseInt(id);
     console.log(await getUser());

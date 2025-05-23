@@ -10,9 +10,10 @@ const ITEMS_PER_PAGE = 12;
 export default async function Page({
     searchParams,
 }: {
-    searchParams: { page?: string };
+    searchParams: Promise<{ page?: string }>;
 }) {
-    const currentPage = Number(searchParams.page) || 1;
+    const { page } = await searchParams
+    const currentPage = await Number(page) || 1;
     const skip = (currentPage - 1) * ITEMS_PER_PAGE;
 
     const showCount = await prisma.shows.count();
