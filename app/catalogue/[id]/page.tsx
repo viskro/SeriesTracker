@@ -4,13 +4,7 @@ import PageClient from "./PageClient";
 import { getUser } from "@/lib/auth-session";
 import { trad } from "@/lib/utils";
 
-interface Props {
-    params: {
-        id: string;
-    };
-}
-
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params;
     const user = await getUser();
     const showId = parseInt(id);

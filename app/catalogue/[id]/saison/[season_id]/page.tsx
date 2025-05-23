@@ -3,13 +3,7 @@ import { notFound } from "next/navigation";
 import SeasonClient from "./SeasonClient";
 import { trad } from "@/lib/utils";
 
-interface Props {
-    params: {
-        season_id: string;
-    };
-}
-
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: { params: { season_id: string } }) {
     const { season_id } = params;
     const seasonId = parseInt(season_id);
 

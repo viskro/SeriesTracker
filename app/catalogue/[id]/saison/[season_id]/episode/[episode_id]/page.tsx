@@ -4,19 +4,19 @@ import EpisodeClient from "./EpisodeClient";
 import { trad } from "@/lib/utils";
 import { getUser } from "@/lib/auth-session";
 
-interface PageProps {
-    params: {
-        id: string;
-        season_id: string;
-        episode_id: string;
-    };
-}
-
-export default async function Page({ params }: PageProps) {
+export default async function Page({
+    params,
+}: {
+    params: { id: string; season_id: string; episode_id: string };
+}) {
     const user = await getUser();
-    const showId = parseInt(params.id);
-    const seasonId = parseInt(params.season_id);
-    const episodeId = parseInt(params.episode_id);
+    const { id } = params;
+    const { season_id } = params;
+    const { episode_id } = params;
+
+    const episodeId = parseInt(episode_id);
+    const seasonId = parseInt(season_id);
+    const showId = parseInt(id);
 
     if (isNaN(showId) || isNaN(seasonId) || isNaN(episodeId)) {
         notFound();
@@ -34,15 +34,15 @@ export default async function Page({ params }: PageProps) {
                             show_id: true,
                             title: true,
                             image: true,
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             },
             users: {
                 where: {
-                    id_user: user?.id
-                }
-            }
+                    id_user: user?.id,
+                },
+            },
         },
     });
 
@@ -58,16 +58,16 @@ export default async function Page({ params }: PageProps) {
             user: {
                 select: {
                     name: true,
-                }
-            }
+                },
+            },
         },
         orderBy: {
-            postedAt: 'desc',
+            postedAt: "desc",
         },
     });
 
     const isWatched = episode.users.length > 0;
-    const synopsis = await trad(episode.summary)
+    const synopsis = await trad(episode.summary);
 
     return (
         <EpisodeClient
@@ -79,4 +79,4 @@ export default async function Page({ params }: PageProps) {
             synopsis={synopsis}
         />
     );
-} 
+}
