@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import PrimaryButton from '../Buttons/PrimaryButton'
 import SecondaryButton from '../Buttons/SecondaryButton'
-import { Avatar } from '../shadcn/avatar'
-import { AvatarImage } from '@radix-ui/react-avatar'
+import { Avatar, AvatarImage } from '../shadcn/avatar'
 import { signOut } from '@/lib/auth-client';
 import { Skeleton } from '../shadcn/skeleton';
 import { redirect } from 'next/navigation';
