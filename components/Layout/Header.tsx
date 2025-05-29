@@ -16,8 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Header = () => {
   const { user, isAuthenticated, isLoading, logout } = useAuthStore();
-  const { isMenuOpen, toggleMenu } = useUIStore();
-  const { addNotification } = useUIStore();
+  const { isMenuOpen, toggleMenu, addNotification } = useUIStore();
 
   const handleSignOut = async () => {
     try {

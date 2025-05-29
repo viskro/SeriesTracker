@@ -5,22 +5,22 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-badge w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  "hover:cursor-default inline-flex items-center justify-center rounded-md border px-2.5 py-0.5 text-xs font-badge w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1.5 [&>svg]:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors",
   {
     variants: {
       variant: {
-        vu:
-          "border-transparent bg-accent-secondary text-primary [a&]:hover:bg-accent-secondary/90",
-        enCours:
-          "border-transparent bg-accent-primary text-primary [a&]:hover:bg-accent-primary/90",
-        aVenir:
-          "border-transparent bg-accent-secondary text-primary [a&]:hover:bg-accent-secondary/90",
+        finished:
+          "border-transparent bg-accent-primary/80 text-primary hover:bg-accent-primary/30",
+        ongoing:
+          "border-transparent bg-accent-secondary/80 text-primary hover:bg-accent-secondary/30",
+        to_watch:
+          "border-transparent bg-background-secondary text-primary hover:bg-border-primary",
         category:
-          "bg-background-primary text-primary [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+          "border border-border-primary bg-background-secondary text-primary hover:bg-border-primary hover:text-white",
       },
     },
     defaultVariants: {
-      variant: "vu",
+      variant: "to_watch",
     },
   }
 )

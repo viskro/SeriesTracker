@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Comment } from "@/app/catalogue/[id]/components/Comment";
 import AddComment from "@/app/catalogue/[id]/components/AddComment";
 import { markEpisodeAsWatched, markEpisodeAsUnwatched } from "./actions";
+import { useShowStatus } from "@/lib/hooks/useShowStatus";
 
 interface Comment {
     content: string;
@@ -42,6 +43,7 @@ interface Props {
 
 export default function EpisodeClient({ episode, show, isWatched: initialIsWatched, comments, userId, synopsis }: Props) {
     const [isWatched, setIsWatched] = useState(initialIsWatched);
+    const { handleEpisodeWatched } = useShowStatus();
 
     const handleWatchToggle = async () => {
         if (!userId) return;
@@ -51,6 +53,7 @@ export default function EpisodeClient({ episode, show, isWatched: initialIsWatch
                 await markEpisodeAsUnwatched(episode.episode_id, userId);
             } else {
                 await markEpisodeAsWatched(episode.episode_id, userId);
+                await handleEpisodeWatched(userId, show.show_id);
             }
             setIsWatched(!isWatched);
         } catch (error) {

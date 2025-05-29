@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ProgressionCard } from "./components/ProgressionCard";
 import { ActiviteCard } from "./components/ActiviteCard";
 import { ArchivesCard } from "./components/ArchivesCard";
+import { useRouter } from "next/navigation";
 
 export interface DashboardUserData {
     id: string;
@@ -37,12 +38,30 @@ export interface DashboardUserData {
     countComments: number;
 }
 
+type fiveShows = {
+    show_id: number;
+    title: string;
+    image: string | null;
+    summary: string | null;
+}[];
+
+type fourFavorites = {
+    show_id: number;
+    title: string;
+    image: string | null;
+    summary: string | null;
+}[];
+
+
 interface Props {
     userData: DashboardUserData;
+    fiveShows: fiveShows;
+    fourFavorites: fourFavorites;
 }
 
-export default function DashboardClient({ userData }: Props) {
+export default function DashboardClient({ userData, fiveShows, fourFavorites }: Props) {
     const { isLoading: authLoading } = useAuthStore();
+    const router = useRouter();
 
     if (authLoading) {
         return (
@@ -73,15 +92,25 @@ export default function DashboardClient({ userData }: Props) {
                         {/* Main Content */}
                         <div className="md:col-span-3 space-y-8">
                             <div className="bg-background-secondary border-border-primary p-6 rounded-2xl">
-                                <h2 className="mb-2 text-xl font-title text-accent-primary">Séries</h2>
-                                <p className="mb-6 text-sm text-text-primary/60">Toutes vos séries</p>
+                                <h2 className="mb-2 text-xl font-title text-accent-primary">
+                                    Séries
+                                </h2>
+                                <p className="mb-6 text-sm text-text-primary/60">
+                                    Toutes vos séries
+                                </p>
                                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-                                    {[1, 2, 3, 4, 5].map((item) => (
-                                        <div key={item} className="relative group">
-                                            <div className="aspect-square bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
+                                    {fiveShows.map((show) => (
+                                        <div
+                                            key={show.show_id}
+                                            className="relative group hover:cursor-pointer"
+                                            onClick={() => {
+                                                router.push("/catalogue/" + show.show_id.toString())
+                                            }}
+                                        >
+                                            <div className="aspect-auto bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
                                                 <div className="flex h-full items-center justify-center">
                                                     <Image
-                                                        src="https://placehold.co/400x400"
+                                                        src={show.image || "https://placehold.co/400x400"}
                                                         alt="Série"
                                                         width={400}
                                                         height={400}
@@ -93,21 +122,33 @@ export default function DashboardClient({ userData }: Props) {
                                     ))}
                                 </div>
                                 <div className="mt-4 text-right">
-                                    <button className="text-sm text-accent-primary hover:text-accent-primary/80 transition-colors duration-200">
+                                    <button
+                                        className="text-sm text-accent-primary hover:text-accent-primary/80 transition-colors duration-200 hover:cursor-pointer"
+                                        onClick={
+                                            () => router.push("/dashboard/liste")}
+                                    >
                                         Voir tout
                                     </button>
                                 </div>
                             </div>
 
                             <div className="bg-background-secondary border-border-primary p-6 rounded-2xl">
-                                <h2 className="mb-2 text-xl font-title text-accent-primary">Vos favoris</h2>
+                                <h2 className="mb-2 text-xl font-title text-accent-primary">
+                                    Vos favoris
+                                </h2>
                                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                                    {[1, 2, 3, 4].map((item) => (
-                                        <div key={item} className="relative group">
-                                            <div className="aspect-square bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
+                                    {fourFavorites.map((show) => (
+                                        <div
+                                            key={show.show_id}
+                                            className="relative group hover:cursor-pointer"
+                                            onClick={() => {
+                                                router.push("/catalogue/" + show.show_id.toString())
+                                            }}
+                                        >
+                                            <div className="aspect-auto bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
                                                 <div className="flex h-full items-center justify-center">
                                                     <Image
-                                                        src="https://placehold.co/400x400"
+                                                        src={show.image || "https://placehold.co/400x400"}
                                                         alt="Favori"
                                                         width={400}
                                                         height={400}

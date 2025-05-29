@@ -10,75 +10,95 @@ export default async function Dashboard() {
         redirect('/auth/signin');
     }
 
-    const userData = await prisma.user.findUnique({
-        where: {
-            id: user.id
-        },
-        select: {
-            id: true,
-            ShowComments: {
-                select: {
-                    content: true,
-                    postedAt: true,
-                    user: {
-                        select: {
-                            name: true
-                        }
-                    }
-                }
+    // Requête unique pour récupérer toutes les données nécessaires
+    const [userData, stats] = await Promise.all([
+        prisma.user.findUnique({
+            where: {
+                id: user.id
             },
-            users_shows: {
-                select: {
-                    id_user: true,
-                    id_show: true,
-                    is_favorite: true,
-                    is_archived: true,
-                    status: true,
-                    added_at: true,
-                    shows: {
-                        select: {
-                            show_id: true,
-                            title: true,
-                            image: true,
-                            summary: true
+            select: {
+                id: true,
+                ShowComments: {
+                    select: {
+                        content: true,
+                        postedAt: true,
+                        user: {
+                            select: {
+                                name: true
+                            }
                         }
                     }
                 },
-                orderBy: {
-                    added_at: "desc"
-                }
-            },
-            _count: {
-                select: {
-                    users_shows: true
+                users_shows: {
+                    select: {
+                        id_user: true,
+                        id_show: true,
+                        is_favorite: true,
+                        is_archived: true,
+                        status: true,
+                        added_at: true,
+                        shows: {
+                            select: {
+                                show_id: true,
+                                title: true,
+                                image: true,
+                                summary: true
+                            }
+                        }
+                    },
+                    orderBy: {
+                        added_at: "desc"
+                    }
+                },
+                _count: {
+                    select: {
+                        users_shows: true
+                    }
                 }
             }
-        }
-    });
-
-    const showComments = await prisma.showComments.count({
-        where: {
-            id_user: user.id
-        }
-    });
-    const episodeComments = await prisma.episodesComments.count({
-        where: {
-            id_user: user.id
-        }
-    });
-
-    const countComments = episodeComments + showComments;
-
-    const archivedShowsCount = await prisma.userShows.count({
-        where: {
-            id_user: user.id,
-            is_archived: true
-        }
-    });
+        }),
+        prisma.$transaction([
+            prisma.showComments.count({
+                where: { id_user: user.id }
+            }),
+            prisma.episodesComments.count({
+                where: { id_user: user.id }
+            }),
+            prisma.userShows.count({
+                where: {
+                    id_user: user.id,
+                    is_archived: true
+                }
+            })
+        ])
+    ]);
 
     if (!userData) {
         redirect('/auth/signin');
     }
 
-    return <DashboardClient userData={{ ...userData, archivedShowsCount, countComments }} />;
+    // Extraction des séries récentes et favoris à partir des données déjà récupérées
+    const fiveShows = userData.users_shows
+        .slice(0, 5)
+        .map(item => item.shows);
+
+    const fourFavorites = userData.users_shows
+        .filter(item => item.is_favorite)
+        .slice(0, 4)
+        .map(item => item.shows);
+
+    const [showComments, episodeComments, archivedShowsCount] = stats;
+    const countComments = showComments + episodeComments;
+
+    return (
+        <DashboardClient
+            userData={{
+                ...userData,
+                archivedShowsCount,
+                countComments,
+            }}
+            fiveShows={fiveShows}
+            fourFavorites={fourFavorites}
+        />
+    );
 }

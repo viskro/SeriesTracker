@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
 	const sessionToken = request.cookies.get("better-auth.session_token")?.value;
 
-	const protectedRoutes = ["/dashboard", "/profile", "/settings"];
+	const protectedRoutes = ["/dashboard"];
 	const isProtectedRoute = protectedRoutes.some((route) =>
 		request.nextUrl.pathname.startsWith(route)
 	);
@@ -17,5 +17,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/dashboard/:path*", "/profile/:path*", "/settings/:path*"],
+	matcher: ["/dashboard/:path*"],
 };

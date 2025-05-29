@@ -12,7 +12,6 @@ export default async function Page({ params }: PageProps) {
     const { id } = await params;
     const user = await getUser();
     const showId = parseInt(id);
-    console.log(await getUser());
 
     if (isNaN(showId)) {
         notFound();
