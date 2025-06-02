@@ -68,6 +68,7 @@ export default async function Page({
         where: whereClause,
         skip,
         take: ITEMS_PER_PAGE,
+        // @ts-ignore
         orderBy,
         select: {
             show_id: true,
