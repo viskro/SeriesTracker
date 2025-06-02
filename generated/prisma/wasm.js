@@ -223,6 +223,18 @@ exports.Prisma.ShowCastScalarFieldEnum = {
   character_name: 'character_name'
 };
 
+exports.Prisma.PlatformsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  country_code: 'country_code'
+};
+
+exports.Prisma.SeriesPlatformsScalarFieldEnum = {
+  id_show: 'id_show',
+  id_platform: 'id_platform'
+};
+
 exports.Prisma.ShowsScalarFieldEnum = {
   show_id: 'show_id',
   title: 'title',
@@ -325,6 +337,12 @@ exports.Prisma.ShowCastOrderByRelevanceFieldEnum = {
   character_name: 'character_name'
 };
 
+exports.Prisma.PlatformsOrderByRelevanceFieldEnum = {
+  name: 'name',
+  type: 'type',
+  country_code: 'country_code'
+};
+
 exports.Prisma.ShowsOrderByRelevanceFieldEnum = {
   title: 'title',
   summary: 'summary',
@@ -357,6 +375,8 @@ exports.Prisma.ModelName = {
   Cast: 'Cast',
   Seasons: 'Seasons',
   ShowCast: 'ShowCast',
+  Platforms: 'Platforms',
+  SeriesPlatforms: 'SeriesPlatforms',
   Shows: 'Shows',
   UserShows: 'UserShows',
   UserEpisodes: 'UserEpisodes'

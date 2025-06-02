@@ -171,6 +171,27 @@ model ShowCast {
   @@map("show_cast")
 }
 
+model Platforms {
+  id           Int              @id @default(autoincrement())
+  name         String
+  type         String          @db.VarChar(50) // "network" ou "webChannel"
+  country_code String?         @db.VarChar(10)
+  seriesPlatforms SeriesPlatforms[]
+
+  @@map("platforms")
+}
+
+model SeriesPlatforms {
+  id_show      Int
+  id_platform  Int
+  platforms    Platforms @relation(fields: [id_platform], references: [id])
+  shows        Shows     @relation(fields: [id_show], references: [show_id])
+
+  @@id([id_show, id_platform])
+  @@index([id_platform], map: "SeriesPlatforms_id_platform_fkey")
+  @@map("series_platforms")
+}
+
 model Shows {
   show_id     Int            @id
   title       String         @db.VarChar(255)
@@ -181,6 +202,7 @@ model Shows {
   users_shows UserShows[]
   genres      SeriesGenres[]
   comments    ShowComments[]
+  platforms   SeriesPlatforms[]
 
   @@map("shows")
 }

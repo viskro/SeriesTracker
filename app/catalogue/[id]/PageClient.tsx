@@ -30,9 +30,11 @@ interface Props {
         image?: string | null;
     }[];
     synopsis: string;
+    genres: string[];
+    platforms: string[];
 }
 
-export default function PageClient({ show, isInList, isFavorite, currentRating, averageRating, totalRatings, cast, seasons, synopsis }: Props) {
+export default function PageClient({ show, isInList, isFavorite, currentRating, averageRating, totalRatings, cast, seasons, synopsis, genres, platforms }: Props) {
     const { user, isAuthenticated, isLoading } = useAuthStore();
 
     if (!show) {
@@ -58,15 +60,29 @@ export default function PageClient({ show, isInList, isFavorite, currentRating, 
                     <div className="flex flex-col gap-6 flex-1">
                         <div className="space-y-4">
                             <h1 className="text-4xl font-title text-text-primary">{show.title}</h1>
-                            <div className="flex items-center gap-4">
-                                <StarRating rating={averageRating} size="lg" />
-                                <span className="text-text-primary/80">({totalRatings} avis)</span>
+                            <div className='flex flex-col gap-2'>
+                                <h2 className="text-xl font-title text-accent-primary">Genres</h2>
+                                <p className='text-text-primary/80'>{genres.join(', ')}</p>
                             </div>
-                            <p className="text-text-primary/90">Nombre de saisons : {show._count.seasons}</p>
+                            <div className='flex flex-col gap-2'>
+                                <h2 className="text-xl font-title text-accent-primary">Note</h2>
+                                <div className="flex items-center gap-4">
+                                    <StarRating rating={averageRating} size="lg" />
+                                    <span className="text-text-primary/80">({totalRatings} avis)</span>
+                                </div>
+                            </div>
+                            <div className='flex flex-col gap-2'>
+                                <h2 className="text-xl font-title text-accent-primary">Nombre de saisons</h2>
+                                <p className="text-text-primary/90">{show._count.seasons}</p>
+                            </div>
                         </div>
                         <div className="space-y-2">
                             <h2 className="text-xl font-title text-accent-primary">Synopsis</h2>
                             <p className="text-text-primary/90 leading-relaxed">{synopsis}</p>
+                        </div>
+                        <div className='flex flex-col gap-2'>
+                            <h2 className="text-xl font-title text-accent-primary">Plateformes</h2>
+                            <p className='text-text-primary/80'>{platforms.join(', ')}</p>
                         </div>
 
                         {user && (

@@ -57,9 +57,16 @@ interface Props {
     userData: DashboardUserData;
     fiveShows: fiveShows;
     fourFavorites: fourFavorites;
+    lastEpisodeWatched: {
+        shows: {
+            title: string;
+        };
+    } | null;
+    countShowsFinished: number;
+    countShowsOngoing: number;
 }
 
-export default function DashboardClient({ userData, fiveShows, fourFavorites }: Props) {
+export default function DashboardClient({ userData, fiveShows, fourFavorites, lastEpisodeWatched, countShowsFinished, countShowsOngoing }: Props) {
     const { isLoading: authLoading } = useAuthStore();
     const router = useRouter();
 
@@ -76,7 +83,7 @@ export default function DashboardClient({ userData, fiveShows, fourFavorites }: 
     return (
         <main className="w-full min-h-screen bg-background-primary">
             <Section className="mt-20 mx-auto max-w-7xl px-4">
-                <div className="bg-background-secondary border-border-primary p-8 rounded-3xl shadow-lg">
+                <div className="bg-gradient-to-br from-background-secondary to-background-primary border-border-primary p-8 rounded-3xl shadow-lg">
                     <h1 className="mb-12 text-center text-3xl font-title text-text-primary">
                         Mon espace personnel
                     </h1>
@@ -84,14 +91,25 @@ export default function DashboardClient({ userData, fiveShows, fourFavorites }: 
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
                         {/* Sidebar */}
                         <div className="space-y-6 md:col-span-1">
-                            <ProgressionCard />
-                            <ActiviteCard userData={userData} />
-                            <ArchivesCard userData={userData} />
+                            <ProgressionCard
+                                userData={userData}
+                                countShowsFinished={countShowsFinished}
+                                countShowsOngoing={countShowsOngoing}
+                            />
+
+                            <ActiviteCard
+                                userData={userData}
+                                lastEpisodeWatched={lastEpisodeWatched}
+                            />
+
+                            <ArchivesCard
+                                userData={userData}
+                            />
                         </div>
 
                         {/* Main Content */}
                         <div className="md:col-span-3 space-y-8">
-                            <div className="bg-background-secondary border-border-primary p-6 rounded-2xl">
+                            <div className="bg-gradient-to-br from-background-secondary to-background-primary border border-border-primary hover:border-accent-primary/40 transition-all duration-300 p-6 rounded-2xl">
                                 <h2 className="mb-2 text-xl font-title text-accent-primary">
                                     Séries
                                 </h2>
@@ -132,7 +150,7 @@ export default function DashboardClient({ userData, fiveShows, fourFavorites }: 
                                 </div>
                             </div>
 
-                            <div className="bg-background-secondary border-border-primary p-6 rounded-2xl">
+                            <div className="bg-gradient-to-br from-background-secondary to-background-primary border border-border-primary hover:border-accent-primary/40 transition-all duration-300 p-6 rounded-2xl">
                                 <h2 className="mb-2 text-xl font-title text-accent-primary">
                                     Vos favoris
                                 </h2>

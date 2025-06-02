@@ -4,26 +4,76 @@ import Sort from "@/components/Filters/Sort";
 import { Section } from "@/components/Layout/Section";
 import { Pagination } from "@/components/shared/Pagination";
 import prisma from "@/lib/prisma";
+import { buildOrderBy, buildWhereClause, FilterType } from "@/lib/types/filters";
 
 const ITEMS_PER_PAGE = 12;
+
+type ShowWithRelations = {
+    show_id: number;
+    title: string;
+    image: string | null;
+    summary: string | null;
+    seasons: {
+        episodes: {
+            airdate: string | null;
+        }[];
+    }[];
+    platforms: {
+        platforms: {
+            name: string;
+        };
+    }[];
+    genres: {
+        genres: {
+            name: string;
+        };
+    }[];
+};
 
 export default async function Page({
     searchParams,
 }: {
-    searchParams: Promise<{ page?: string }>;
+    searchParams: Promise<{
+        page?: string;
+        platform?: string;
+        category?: string;
+        rating?: string;
+        initial?: string;
+        sort?: string;
+        order?: string;
+    }>;
 }) {
-    const { page } = await searchParams
+    const { page, platform, category, initial, sort, order, rating } = await searchParams;
     const currentPage = await Number(page) || 1;
     const skip = (currentPage - 1) * ITEMS_PER_PAGE;
 
-    const showCount = await prisma.shows.count();
+    // Construire les filtres
+    const filters: Partial<Record<FilterType, string[]>> = {};
+    if (platform) filters.platform = platform.split(',').filter(Boolean);
+    if (category) filters.category = category.split(',').filter(Boolean);
+    if (rating) filters.rating = rating.split(',').filter(Boolean);
+    if (initial) filters.initial = initial.split(',').filter(Boolean);
+
+    // Construire la clause where
+    const whereClause = buildWhereClause(filters as Record<FilterType, string[]>);
+
+    // Construire l'ordre de tri
+    const orderBy = buildOrderBy(sort as any, order as any);
+
+    const showCount = await prisma.shows.count({
+        where: whereClause
+    });
+
     const shows = await prisma.shows.findMany({
+        where: whereClause,
         skip,
         take: ITEMS_PER_PAGE,
+        orderBy,
         select: {
             show_id: true,
             title: true,
             image: true,
+            summary: true,
             seasons: {
                 select: {
                     episodes: {
@@ -32,9 +82,27 @@ export default async function Page({
                         }
                     }
                 }
+            },
+            platforms: {
+                select: {
+                    platforms: {
+                        select: {
+                            name: true,
+                        }
+                    }
+                }
+            },
+            genres: {
+                select: {
+                    genres: {
+                        select: {
+                            name: true
+                        }
+                    }
+                }
             }
         }
-    });
+    }) as ShowWithRelations[];
 
     // Récupérer les notes moyennes pour toutes les séries
     const ratingStats = await prisma.userShows.groupBy({
@@ -83,10 +151,12 @@ export default async function Page({
                                 <CardSerieCatalogue
                                     key={show.show_id}
                                     title={show.title}
-                                    image={show.image || 'https://placehold.co/400x400'}
+                                    image={show.image || undefined}
                                     airdate={show.seasons[0]?.episodes[0]?.airdate || 'Date inconnue'}
                                     showId={show.show_id}
                                     averageRating={rating?.average || 0}
+                                    platforms={show.platforms}
+                                    genres={show.genres.map(g => g.genres.name)}
                                 />
                             );
                         })}

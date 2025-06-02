@@ -51,6 +51,7 @@ export default function EpisodeClient({ episode, show, isWatched: initialIsWatch
         try {
             if (isWatched) {
                 await markEpisodeAsUnwatched(episode.episode_id, userId);
+                await handleEpisodeWatched(userId, show.show_id);
             } else {
                 await markEpisodeAsWatched(episode.episode_id, userId);
                 await handleEpisodeWatched(userId, show.show_id);

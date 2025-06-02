@@ -74,6 +74,16 @@ export type Seasons = $Result.DefaultSelection<Prisma.$SeasonsPayload>
  */
 export type ShowCast = $Result.DefaultSelection<Prisma.$ShowCastPayload>
 /**
+ * Model Platforms
+ * 
+ */
+export type Platforms = $Result.DefaultSelection<Prisma.$PlatformsPayload>
+/**
+ * Model SeriesPlatforms
+ * 
+ */
+export type SeriesPlatforms = $Result.DefaultSelection<Prisma.$SeriesPlatformsPayload>
+/**
  * Model Shows
  * 
  */
@@ -351,6 +361,26 @@ export class PrismaClient<
     * ```
     */
   get showCast(): Prisma.ShowCastDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.platforms`: Exposes CRUD operations for the **Platforms** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Platforms
+    * const platforms = await prisma.platforms.findMany()
+    * ```
+    */
+  get platforms(): Prisma.PlatformsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.seriesPlatforms`: Exposes CRUD operations for the **SeriesPlatforms** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SeriesPlatforms
+    * const seriesPlatforms = await prisma.seriesPlatforms.findMany()
+    * ```
+    */
+  get seriesPlatforms(): Prisma.SeriesPlatformsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.shows`: Exposes CRUD operations for the **Shows** model.
@@ -833,6 +863,8 @@ export namespace Prisma {
     Cast: 'Cast',
     Seasons: 'Seasons',
     ShowCast: 'ShowCast',
+    Platforms: 'Platforms',
+    SeriesPlatforms: 'SeriesPlatforms',
     Shows: 'Shows',
     UserShows: 'UserShows',
     UserEpisodes: 'UserEpisodes'
@@ -854,7 +886,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "genres" | "seriesGenres" | "showComments" | "episodesComments" | "episodes" | "cast" | "seasons" | "showCast" | "shows" | "userShows" | "userEpisodes"
+      modelProps: "user" | "session" | "account" | "verification" | "genres" | "seriesGenres" | "showComments" | "episodesComments" | "episodes" | "cast" | "seasons" | "showCast" | "platforms" | "seriesPlatforms" | "shows" | "userShows" | "userEpisodes"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1650,6 +1682,138 @@ export namespace Prisma {
           }
         }
       }
+      Platforms: {
+        payload: Prisma.$PlatformsPayload<ExtArgs>
+        fields: Prisma.PlatformsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlatformsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlatformsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformsPayload>
+          }
+          findFirst: {
+            args: Prisma.PlatformsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlatformsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformsPayload>
+          }
+          findMany: {
+            args: Prisma.PlatformsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformsPayload>[]
+          }
+          create: {
+            args: Prisma.PlatformsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformsPayload>
+          }
+          createMany: {
+            args: Prisma.PlatformsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PlatformsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformsPayload>
+          }
+          update: {
+            args: Prisma.PlatformsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformsPayload>
+          }
+          deleteMany: {
+            args: Prisma.PlatformsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlatformsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PlatformsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformsPayload>
+          }
+          aggregate: {
+            args: Prisma.PlatformsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlatforms>
+          }
+          groupBy: {
+            args: Prisma.PlatformsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlatformsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlatformsCountArgs<ExtArgs>
+            result: $Utils.Optional<PlatformsCountAggregateOutputType> | number
+          }
+        }
+      }
+      SeriesPlatforms: {
+        payload: Prisma.$SeriesPlatformsPayload<ExtArgs>
+        fields: Prisma.SeriesPlatformsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SeriesPlatformsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPlatformsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SeriesPlatformsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPlatformsPayload>
+          }
+          findFirst: {
+            args: Prisma.SeriesPlatformsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPlatformsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SeriesPlatformsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPlatformsPayload>
+          }
+          findMany: {
+            args: Prisma.SeriesPlatformsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPlatformsPayload>[]
+          }
+          create: {
+            args: Prisma.SeriesPlatformsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPlatformsPayload>
+          }
+          createMany: {
+            args: Prisma.SeriesPlatformsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.SeriesPlatformsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPlatformsPayload>
+          }
+          update: {
+            args: Prisma.SeriesPlatformsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPlatformsPayload>
+          }
+          deleteMany: {
+            args: Prisma.SeriesPlatformsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SeriesPlatformsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SeriesPlatformsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeriesPlatformsPayload>
+          }
+          aggregate: {
+            args: Prisma.SeriesPlatformsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSeriesPlatforms>
+          }
+          groupBy: {
+            args: Prisma.SeriesPlatformsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SeriesPlatformsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SeriesPlatformsCountArgs<ExtArgs>
+            result: $Utils.Optional<SeriesPlatformsCountAggregateOutputType> | number
+          }
+        }
+      }
       Shows: {
         payload: Prisma.$ShowsPayload<ExtArgs>
         fields: Prisma.ShowsFieldRefs
@@ -1944,6 +2108,8 @@ export namespace Prisma {
     cast?: CastOmit
     seasons?: SeasonsOmit
     showCast?: ShowCastOmit
+    platforms?: PlatformsOmit
+    seriesPlatforms?: SeriesPlatformsOmit
     shows?: ShowsOmit
     userShows?: UserShowsOmit
     userEpisodes?: UserEpisodesOmit
@@ -2246,6 +2412,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type PlatformsCountOutputType
+   */
+
+  export type PlatformsCountOutputType = {
+    seriesPlatforms: number
+  }
+
+  export type PlatformsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seriesPlatforms?: boolean | PlatformsCountOutputTypeCountSeriesPlatformsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PlatformsCountOutputType without action
+   */
+  export type PlatformsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlatformsCountOutputType
+     */
+    select?: PlatformsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PlatformsCountOutputType without action
+   */
+  export type PlatformsCountOutputTypeCountSeriesPlatformsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeriesPlatformsWhereInput
+  }
+
+
+  /**
    * Count Type ShowsCountOutputType
    */
 
@@ -2255,6 +2452,7 @@ export namespace Prisma {
     users_shows: number
     genres: number
     comments: number
+    platforms: number
   }
 
   export type ShowsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2263,6 +2461,7 @@ export namespace Prisma {
     users_shows?: boolean | ShowsCountOutputTypeCountUsers_showsArgs
     genres?: boolean | ShowsCountOutputTypeCountGenresArgs
     comments?: boolean | ShowsCountOutputTypeCountCommentsArgs
+    platforms?: boolean | ShowsCountOutputTypeCountPlatformsArgs
   }
 
   // Custom InputTypes
@@ -2309,6 +2508,13 @@ export namespace Prisma {
    */
   export type ShowsCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ShowCommentsWhereInput
+  }
+
+  /**
+   * ShowsCountOutputType without action
+   */
+  export type ShowsCountOutputTypeCountPlatformsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeriesPlatformsWhereInput
   }
 
 
@@ -14121,6 +14327,1922 @@ export namespace Prisma {
 
 
   /**
+   * Model Platforms
+   */
+
+  export type AggregatePlatforms = {
+    _count: PlatformsCountAggregateOutputType | null
+    _avg: PlatformsAvgAggregateOutputType | null
+    _sum: PlatformsSumAggregateOutputType | null
+    _min: PlatformsMinAggregateOutputType | null
+    _max: PlatformsMaxAggregateOutputType | null
+  }
+
+  export type PlatformsAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type PlatformsSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type PlatformsMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    type: string | null
+    country_code: string | null
+  }
+
+  export type PlatformsMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    type: string | null
+    country_code: string | null
+  }
+
+  export type PlatformsCountAggregateOutputType = {
+    id: number
+    name: number
+    type: number
+    country_code: number
+    _all: number
+  }
+
+
+  export type PlatformsAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type PlatformsSumAggregateInputType = {
+    id?: true
+  }
+
+  export type PlatformsMinAggregateInputType = {
+    id?: true
+    name?: true
+    type?: true
+    country_code?: true
+  }
+
+  export type PlatformsMaxAggregateInputType = {
+    id?: true
+    name?: true
+    type?: true
+    country_code?: true
+  }
+
+  export type PlatformsCountAggregateInputType = {
+    id?: true
+    name?: true
+    type?: true
+    country_code?: true
+    _all?: true
+  }
+
+  export type PlatformsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Platforms to aggregate.
+     */
+    where?: PlatformsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Platforms to fetch.
+     */
+    orderBy?: PlatformsOrderByWithRelationInput | PlatformsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlatformsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Platforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Platforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Platforms
+    **/
+    _count?: true | PlatformsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PlatformsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PlatformsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlatformsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlatformsMaxAggregateInputType
+  }
+
+  export type GetPlatformsAggregateType<T extends PlatformsAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlatforms]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlatforms[P]>
+      : GetScalarType<T[P], AggregatePlatforms[P]>
+  }
+
+
+
+
+  export type PlatformsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlatformsWhereInput
+    orderBy?: PlatformsOrderByWithAggregationInput | PlatformsOrderByWithAggregationInput[]
+    by: PlatformsScalarFieldEnum[] | PlatformsScalarFieldEnum
+    having?: PlatformsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlatformsCountAggregateInputType | true
+    _avg?: PlatformsAvgAggregateInputType
+    _sum?: PlatformsSumAggregateInputType
+    _min?: PlatformsMinAggregateInputType
+    _max?: PlatformsMaxAggregateInputType
+  }
+
+  export type PlatformsGroupByOutputType = {
+    id: number
+    name: string
+    type: string
+    country_code: string | null
+    _count: PlatformsCountAggregateOutputType | null
+    _avg: PlatformsAvgAggregateOutputType | null
+    _sum: PlatformsSumAggregateOutputType | null
+    _min: PlatformsMinAggregateOutputType | null
+    _max: PlatformsMaxAggregateOutputType | null
+  }
+
+  type GetPlatformsGroupByPayload<T extends PlatformsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlatformsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlatformsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlatformsGroupByOutputType[P]>
+            : GetScalarType<T[P], PlatformsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlatformsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    type?: boolean
+    country_code?: boolean
+    seriesPlatforms?: boolean | Platforms$seriesPlatformsArgs<ExtArgs>
+    _count?: boolean | PlatformsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["platforms"]>
+
+
+
+  export type PlatformsSelectScalar = {
+    id?: boolean
+    name?: boolean
+    type?: boolean
+    country_code?: boolean
+  }
+
+  export type PlatformsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "country_code", ExtArgs["result"]["platforms"]>
+  export type PlatformsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seriesPlatforms?: boolean | Platforms$seriesPlatformsArgs<ExtArgs>
+    _count?: boolean | PlatformsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $PlatformsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Platforms"
+    objects: {
+      seriesPlatforms: Prisma.$SeriesPlatformsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      type: string
+      country_code: string | null
+    }, ExtArgs["result"]["platforms"]>
+    composites: {}
+  }
+
+  type PlatformsGetPayload<S extends boolean | null | undefined | PlatformsDefaultArgs> = $Result.GetResult<Prisma.$PlatformsPayload, S>
+
+  type PlatformsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlatformsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlatformsCountAggregateInputType | true
+    }
+
+  export interface PlatformsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Platforms'], meta: { name: 'Platforms' } }
+    /**
+     * Find zero or one Platforms that matches the filter.
+     * @param {PlatformsFindUniqueArgs} args - Arguments to find a Platforms
+     * @example
+     * // Get one Platforms
+     * const platforms = await prisma.platforms.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlatformsFindUniqueArgs>(args: SelectSubset<T, PlatformsFindUniqueArgs<ExtArgs>>): Prisma__PlatformsClient<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Platforms that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlatformsFindUniqueOrThrowArgs} args - Arguments to find a Platforms
+     * @example
+     * // Get one Platforms
+     * const platforms = await prisma.platforms.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlatformsFindUniqueOrThrowArgs>(args: SelectSubset<T, PlatformsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlatformsClient<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Platforms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformsFindFirstArgs} args - Arguments to find a Platforms
+     * @example
+     * // Get one Platforms
+     * const platforms = await prisma.platforms.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlatformsFindFirstArgs>(args?: SelectSubset<T, PlatformsFindFirstArgs<ExtArgs>>): Prisma__PlatformsClient<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Platforms that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformsFindFirstOrThrowArgs} args - Arguments to find a Platforms
+     * @example
+     * // Get one Platforms
+     * const platforms = await prisma.platforms.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlatformsFindFirstOrThrowArgs>(args?: SelectSubset<T, PlatformsFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlatformsClient<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Platforms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Platforms
+     * const platforms = await prisma.platforms.findMany()
+     * 
+     * // Get first 10 Platforms
+     * const platforms = await prisma.platforms.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const platformsWithIdOnly = await prisma.platforms.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PlatformsFindManyArgs>(args?: SelectSubset<T, PlatformsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Platforms.
+     * @param {PlatformsCreateArgs} args - Arguments to create a Platforms.
+     * @example
+     * // Create one Platforms
+     * const Platforms = await prisma.platforms.create({
+     *   data: {
+     *     // ... data to create a Platforms
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlatformsCreateArgs>(args: SelectSubset<T, PlatformsCreateArgs<ExtArgs>>): Prisma__PlatformsClient<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Platforms.
+     * @param {PlatformsCreateManyArgs} args - Arguments to create many Platforms.
+     * @example
+     * // Create many Platforms
+     * const platforms = await prisma.platforms.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlatformsCreateManyArgs>(args?: SelectSubset<T, PlatformsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Platforms.
+     * @param {PlatformsDeleteArgs} args - Arguments to delete one Platforms.
+     * @example
+     * // Delete one Platforms
+     * const Platforms = await prisma.platforms.delete({
+     *   where: {
+     *     // ... filter to delete one Platforms
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlatformsDeleteArgs>(args: SelectSubset<T, PlatformsDeleteArgs<ExtArgs>>): Prisma__PlatformsClient<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Platforms.
+     * @param {PlatformsUpdateArgs} args - Arguments to update one Platforms.
+     * @example
+     * // Update one Platforms
+     * const platforms = await prisma.platforms.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlatformsUpdateArgs>(args: SelectSubset<T, PlatformsUpdateArgs<ExtArgs>>): Prisma__PlatformsClient<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Platforms.
+     * @param {PlatformsDeleteManyArgs} args - Arguments to filter Platforms to delete.
+     * @example
+     * // Delete a few Platforms
+     * const { count } = await prisma.platforms.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlatformsDeleteManyArgs>(args?: SelectSubset<T, PlatformsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Platforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Platforms
+     * const platforms = await prisma.platforms.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlatformsUpdateManyArgs>(args: SelectSubset<T, PlatformsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Platforms.
+     * @param {PlatformsUpsertArgs} args - Arguments to update or create a Platforms.
+     * @example
+     * // Update or create a Platforms
+     * const platforms = await prisma.platforms.upsert({
+     *   create: {
+     *     // ... data to create a Platforms
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Platforms we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlatformsUpsertArgs>(args: SelectSubset<T, PlatformsUpsertArgs<ExtArgs>>): Prisma__PlatformsClient<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Platforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformsCountArgs} args - Arguments to filter Platforms to count.
+     * @example
+     * // Count the number of Platforms
+     * const count = await prisma.platforms.count({
+     *   where: {
+     *     // ... the filter for the Platforms we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlatformsCountArgs>(
+      args?: Subset<T, PlatformsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlatformsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Platforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlatformsAggregateArgs>(args: Subset<T, PlatformsAggregateArgs>): Prisma.PrismaPromise<GetPlatformsAggregateType<T>>
+
+    /**
+     * Group by Platforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlatformsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlatformsGroupByArgs['orderBy'] }
+        : { orderBy?: PlatformsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlatformsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlatformsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Platforms model
+   */
+  readonly fields: PlatformsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Platforms.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlatformsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    seriesPlatforms<T extends Platforms$seriesPlatformsArgs<ExtArgs> = {}>(args?: Subset<T, Platforms$seriesPlatformsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Platforms model
+   */
+  interface PlatformsFieldRefs {
+    readonly id: FieldRef<"Platforms", 'Int'>
+    readonly name: FieldRef<"Platforms", 'String'>
+    readonly type: FieldRef<"Platforms", 'String'>
+    readonly country_code: FieldRef<"Platforms", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Platforms findUnique
+   */
+  export type PlatformsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which Platforms to fetch.
+     */
+    where: PlatformsWhereUniqueInput
+  }
+
+  /**
+   * Platforms findUniqueOrThrow
+   */
+  export type PlatformsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which Platforms to fetch.
+     */
+    where: PlatformsWhereUniqueInput
+  }
+
+  /**
+   * Platforms findFirst
+   */
+  export type PlatformsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which Platforms to fetch.
+     */
+    where?: PlatformsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Platforms to fetch.
+     */
+    orderBy?: PlatformsOrderByWithRelationInput | PlatformsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Platforms.
+     */
+    cursor?: PlatformsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Platforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Platforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Platforms.
+     */
+    distinct?: PlatformsScalarFieldEnum | PlatformsScalarFieldEnum[]
+  }
+
+  /**
+   * Platforms findFirstOrThrow
+   */
+  export type PlatformsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which Platforms to fetch.
+     */
+    where?: PlatformsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Platforms to fetch.
+     */
+    orderBy?: PlatformsOrderByWithRelationInput | PlatformsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Platforms.
+     */
+    cursor?: PlatformsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Platforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Platforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Platforms.
+     */
+    distinct?: PlatformsScalarFieldEnum | PlatformsScalarFieldEnum[]
+  }
+
+  /**
+   * Platforms findMany
+   */
+  export type PlatformsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which Platforms to fetch.
+     */
+    where?: PlatformsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Platforms to fetch.
+     */
+    orderBy?: PlatformsOrderByWithRelationInput | PlatformsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Platforms.
+     */
+    cursor?: PlatformsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Platforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Platforms.
+     */
+    skip?: number
+    distinct?: PlatformsScalarFieldEnum | PlatformsScalarFieldEnum[]
+  }
+
+  /**
+   * Platforms create
+   */
+  export type PlatformsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Platforms.
+     */
+    data: XOR<PlatformsCreateInput, PlatformsUncheckedCreateInput>
+  }
+
+  /**
+   * Platforms createMany
+   */
+  export type PlatformsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Platforms.
+     */
+    data: PlatformsCreateManyInput | PlatformsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Platforms update
+   */
+  export type PlatformsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Platforms.
+     */
+    data: XOR<PlatformsUpdateInput, PlatformsUncheckedUpdateInput>
+    /**
+     * Choose, which Platforms to update.
+     */
+    where: PlatformsWhereUniqueInput
+  }
+
+  /**
+   * Platforms updateMany
+   */
+  export type PlatformsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Platforms.
+     */
+    data: XOR<PlatformsUpdateManyMutationInput, PlatformsUncheckedUpdateManyInput>
+    /**
+     * Filter which Platforms to update
+     */
+    where?: PlatformsWhereInput
+    /**
+     * Limit how many Platforms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Platforms upsert
+   */
+  export type PlatformsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Platforms to update in case it exists.
+     */
+    where: PlatformsWhereUniqueInput
+    /**
+     * In case the Platforms found by the `where` argument doesn't exist, create a new Platforms with this data.
+     */
+    create: XOR<PlatformsCreateInput, PlatformsUncheckedCreateInput>
+    /**
+     * In case the Platforms was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlatformsUpdateInput, PlatformsUncheckedUpdateInput>
+  }
+
+  /**
+   * Platforms delete
+   */
+  export type PlatformsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+    /**
+     * Filter which Platforms to delete.
+     */
+    where: PlatformsWhereUniqueInput
+  }
+
+  /**
+   * Platforms deleteMany
+   */
+  export type PlatformsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Platforms to delete
+     */
+    where?: PlatformsWhereInput
+    /**
+     * Limit how many Platforms to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Platforms.seriesPlatforms
+   */
+  export type Platforms$seriesPlatformsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    where?: SeriesPlatformsWhereInput
+    orderBy?: SeriesPlatformsOrderByWithRelationInput | SeriesPlatformsOrderByWithRelationInput[]
+    cursor?: SeriesPlatformsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SeriesPlatformsScalarFieldEnum | SeriesPlatformsScalarFieldEnum[]
+  }
+
+  /**
+   * Platforms without action
+   */
+  export type PlatformsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platforms
+     */
+    select?: PlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platforms
+     */
+    omit?: PlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SeriesPlatforms
+   */
+
+  export type AggregateSeriesPlatforms = {
+    _count: SeriesPlatformsCountAggregateOutputType | null
+    _avg: SeriesPlatformsAvgAggregateOutputType | null
+    _sum: SeriesPlatformsSumAggregateOutputType | null
+    _min: SeriesPlatformsMinAggregateOutputType | null
+    _max: SeriesPlatformsMaxAggregateOutputType | null
+  }
+
+  export type SeriesPlatformsAvgAggregateOutputType = {
+    id_show: number | null
+    id_platform: number | null
+  }
+
+  export type SeriesPlatformsSumAggregateOutputType = {
+    id_show: number | null
+    id_platform: number | null
+  }
+
+  export type SeriesPlatformsMinAggregateOutputType = {
+    id_show: number | null
+    id_platform: number | null
+  }
+
+  export type SeriesPlatformsMaxAggregateOutputType = {
+    id_show: number | null
+    id_platform: number | null
+  }
+
+  export type SeriesPlatformsCountAggregateOutputType = {
+    id_show: number
+    id_platform: number
+    _all: number
+  }
+
+
+  export type SeriesPlatformsAvgAggregateInputType = {
+    id_show?: true
+    id_platform?: true
+  }
+
+  export type SeriesPlatformsSumAggregateInputType = {
+    id_show?: true
+    id_platform?: true
+  }
+
+  export type SeriesPlatformsMinAggregateInputType = {
+    id_show?: true
+    id_platform?: true
+  }
+
+  export type SeriesPlatformsMaxAggregateInputType = {
+    id_show?: true
+    id_platform?: true
+  }
+
+  export type SeriesPlatformsCountAggregateInputType = {
+    id_show?: true
+    id_platform?: true
+    _all?: true
+  }
+
+  export type SeriesPlatformsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SeriesPlatforms to aggregate.
+     */
+    where?: SeriesPlatformsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeriesPlatforms to fetch.
+     */
+    orderBy?: SeriesPlatformsOrderByWithRelationInput | SeriesPlatformsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SeriesPlatformsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeriesPlatforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeriesPlatforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SeriesPlatforms
+    **/
+    _count?: true | SeriesPlatformsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SeriesPlatformsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SeriesPlatformsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SeriesPlatformsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SeriesPlatformsMaxAggregateInputType
+  }
+
+  export type GetSeriesPlatformsAggregateType<T extends SeriesPlatformsAggregateArgs> = {
+        [P in keyof T & keyof AggregateSeriesPlatforms]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSeriesPlatforms[P]>
+      : GetScalarType<T[P], AggregateSeriesPlatforms[P]>
+  }
+
+
+
+
+  export type SeriesPlatformsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeriesPlatformsWhereInput
+    orderBy?: SeriesPlatformsOrderByWithAggregationInput | SeriesPlatformsOrderByWithAggregationInput[]
+    by: SeriesPlatformsScalarFieldEnum[] | SeriesPlatformsScalarFieldEnum
+    having?: SeriesPlatformsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SeriesPlatformsCountAggregateInputType | true
+    _avg?: SeriesPlatformsAvgAggregateInputType
+    _sum?: SeriesPlatformsSumAggregateInputType
+    _min?: SeriesPlatformsMinAggregateInputType
+    _max?: SeriesPlatformsMaxAggregateInputType
+  }
+
+  export type SeriesPlatformsGroupByOutputType = {
+    id_show: number
+    id_platform: number
+    _count: SeriesPlatformsCountAggregateOutputType | null
+    _avg: SeriesPlatformsAvgAggregateOutputType | null
+    _sum: SeriesPlatformsSumAggregateOutputType | null
+    _min: SeriesPlatformsMinAggregateOutputType | null
+    _max: SeriesPlatformsMaxAggregateOutputType | null
+  }
+
+  type GetSeriesPlatformsGroupByPayload<T extends SeriesPlatformsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SeriesPlatformsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SeriesPlatformsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SeriesPlatformsGroupByOutputType[P]>
+            : GetScalarType<T[P], SeriesPlatformsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SeriesPlatformsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_show?: boolean
+    id_platform?: boolean
+    platforms?: boolean | PlatformsDefaultArgs<ExtArgs>
+    shows?: boolean | ShowsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seriesPlatforms"]>
+
+
+
+  export type SeriesPlatformsSelectScalar = {
+    id_show?: boolean
+    id_platform?: boolean
+  }
+
+  export type SeriesPlatformsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_show" | "id_platform", ExtArgs["result"]["seriesPlatforms"]>
+  export type SeriesPlatformsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    platforms?: boolean | PlatformsDefaultArgs<ExtArgs>
+    shows?: boolean | ShowsDefaultArgs<ExtArgs>
+  }
+
+  export type $SeriesPlatformsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SeriesPlatforms"
+    objects: {
+      platforms: Prisma.$PlatformsPayload<ExtArgs>
+      shows: Prisma.$ShowsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_show: number
+      id_platform: number
+    }, ExtArgs["result"]["seriesPlatforms"]>
+    composites: {}
+  }
+
+  type SeriesPlatformsGetPayload<S extends boolean | null | undefined | SeriesPlatformsDefaultArgs> = $Result.GetResult<Prisma.$SeriesPlatformsPayload, S>
+
+  type SeriesPlatformsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SeriesPlatformsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SeriesPlatformsCountAggregateInputType | true
+    }
+
+  export interface SeriesPlatformsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SeriesPlatforms'], meta: { name: 'SeriesPlatforms' } }
+    /**
+     * Find zero or one SeriesPlatforms that matches the filter.
+     * @param {SeriesPlatformsFindUniqueArgs} args - Arguments to find a SeriesPlatforms
+     * @example
+     * // Get one SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SeriesPlatformsFindUniqueArgs>(args: SelectSubset<T, SeriesPlatformsFindUniqueArgs<ExtArgs>>): Prisma__SeriesPlatformsClient<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SeriesPlatforms that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SeriesPlatformsFindUniqueOrThrowArgs} args - Arguments to find a SeriesPlatforms
+     * @example
+     * // Get one SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SeriesPlatformsFindUniqueOrThrowArgs>(args: SelectSubset<T, SeriesPlatformsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SeriesPlatformsClient<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SeriesPlatforms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesPlatformsFindFirstArgs} args - Arguments to find a SeriesPlatforms
+     * @example
+     * // Get one SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SeriesPlatformsFindFirstArgs>(args?: SelectSubset<T, SeriesPlatformsFindFirstArgs<ExtArgs>>): Prisma__SeriesPlatformsClient<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SeriesPlatforms that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesPlatformsFindFirstOrThrowArgs} args - Arguments to find a SeriesPlatforms
+     * @example
+     * // Get one SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SeriesPlatformsFindFirstOrThrowArgs>(args?: SelectSubset<T, SeriesPlatformsFindFirstOrThrowArgs<ExtArgs>>): Prisma__SeriesPlatformsClient<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SeriesPlatforms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesPlatformsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.findMany()
+     * 
+     * // Get first 10 SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.findMany({ take: 10 })
+     * 
+     * // Only select the `id_show`
+     * const seriesPlatformsWithId_showOnly = await prisma.seriesPlatforms.findMany({ select: { id_show: true } })
+     * 
+     */
+    findMany<T extends SeriesPlatformsFindManyArgs>(args?: SelectSubset<T, SeriesPlatformsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SeriesPlatforms.
+     * @param {SeriesPlatformsCreateArgs} args - Arguments to create a SeriesPlatforms.
+     * @example
+     * // Create one SeriesPlatforms
+     * const SeriesPlatforms = await prisma.seriesPlatforms.create({
+     *   data: {
+     *     // ... data to create a SeriesPlatforms
+     *   }
+     * })
+     * 
+     */
+    create<T extends SeriesPlatformsCreateArgs>(args: SelectSubset<T, SeriesPlatformsCreateArgs<ExtArgs>>): Prisma__SeriesPlatformsClient<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SeriesPlatforms.
+     * @param {SeriesPlatformsCreateManyArgs} args - Arguments to create many SeriesPlatforms.
+     * @example
+     * // Create many SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SeriesPlatformsCreateManyArgs>(args?: SelectSubset<T, SeriesPlatformsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SeriesPlatforms.
+     * @param {SeriesPlatformsDeleteArgs} args - Arguments to delete one SeriesPlatforms.
+     * @example
+     * // Delete one SeriesPlatforms
+     * const SeriesPlatforms = await prisma.seriesPlatforms.delete({
+     *   where: {
+     *     // ... filter to delete one SeriesPlatforms
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SeriesPlatformsDeleteArgs>(args: SelectSubset<T, SeriesPlatformsDeleteArgs<ExtArgs>>): Prisma__SeriesPlatformsClient<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SeriesPlatforms.
+     * @param {SeriesPlatformsUpdateArgs} args - Arguments to update one SeriesPlatforms.
+     * @example
+     * // Update one SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SeriesPlatformsUpdateArgs>(args: SelectSubset<T, SeriesPlatformsUpdateArgs<ExtArgs>>): Prisma__SeriesPlatformsClient<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SeriesPlatforms.
+     * @param {SeriesPlatformsDeleteManyArgs} args - Arguments to filter SeriesPlatforms to delete.
+     * @example
+     * // Delete a few SeriesPlatforms
+     * const { count } = await prisma.seriesPlatforms.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SeriesPlatformsDeleteManyArgs>(args?: SelectSubset<T, SeriesPlatformsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SeriesPlatforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesPlatformsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SeriesPlatformsUpdateManyArgs>(args: SelectSubset<T, SeriesPlatformsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SeriesPlatforms.
+     * @param {SeriesPlatformsUpsertArgs} args - Arguments to update or create a SeriesPlatforms.
+     * @example
+     * // Update or create a SeriesPlatforms
+     * const seriesPlatforms = await prisma.seriesPlatforms.upsert({
+     *   create: {
+     *     // ... data to create a SeriesPlatforms
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SeriesPlatforms we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SeriesPlatformsUpsertArgs>(args: SelectSubset<T, SeriesPlatformsUpsertArgs<ExtArgs>>): Prisma__SeriesPlatformsClient<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SeriesPlatforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesPlatformsCountArgs} args - Arguments to filter SeriesPlatforms to count.
+     * @example
+     * // Count the number of SeriesPlatforms
+     * const count = await prisma.seriesPlatforms.count({
+     *   where: {
+     *     // ... the filter for the SeriesPlatforms we want to count
+     *   }
+     * })
+    **/
+    count<T extends SeriesPlatformsCountArgs>(
+      args?: Subset<T, SeriesPlatformsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SeriesPlatformsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SeriesPlatforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesPlatformsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SeriesPlatformsAggregateArgs>(args: Subset<T, SeriesPlatformsAggregateArgs>): Prisma.PrismaPromise<GetSeriesPlatformsAggregateType<T>>
+
+    /**
+     * Group by SeriesPlatforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeriesPlatformsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SeriesPlatformsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SeriesPlatformsGroupByArgs['orderBy'] }
+        : { orderBy?: SeriesPlatformsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SeriesPlatformsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSeriesPlatformsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SeriesPlatforms model
+   */
+  readonly fields: SeriesPlatformsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SeriesPlatforms.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SeriesPlatformsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    platforms<T extends PlatformsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlatformsDefaultArgs<ExtArgs>>): Prisma__PlatformsClient<$Result.GetResult<Prisma.$PlatformsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    shows<T extends ShowsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ShowsDefaultArgs<ExtArgs>>): Prisma__ShowsClient<$Result.GetResult<Prisma.$ShowsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SeriesPlatforms model
+   */
+  interface SeriesPlatformsFieldRefs {
+    readonly id_show: FieldRef<"SeriesPlatforms", 'Int'>
+    readonly id_platform: FieldRef<"SeriesPlatforms", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SeriesPlatforms findUnique
+   */
+  export type SeriesPlatformsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which SeriesPlatforms to fetch.
+     */
+    where: SeriesPlatformsWhereUniqueInput
+  }
+
+  /**
+   * SeriesPlatforms findUniqueOrThrow
+   */
+  export type SeriesPlatformsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which SeriesPlatforms to fetch.
+     */
+    where: SeriesPlatformsWhereUniqueInput
+  }
+
+  /**
+   * SeriesPlatforms findFirst
+   */
+  export type SeriesPlatformsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which SeriesPlatforms to fetch.
+     */
+    where?: SeriesPlatformsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeriesPlatforms to fetch.
+     */
+    orderBy?: SeriesPlatformsOrderByWithRelationInput | SeriesPlatformsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SeriesPlatforms.
+     */
+    cursor?: SeriesPlatformsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeriesPlatforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeriesPlatforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SeriesPlatforms.
+     */
+    distinct?: SeriesPlatformsScalarFieldEnum | SeriesPlatformsScalarFieldEnum[]
+  }
+
+  /**
+   * SeriesPlatforms findFirstOrThrow
+   */
+  export type SeriesPlatformsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which SeriesPlatforms to fetch.
+     */
+    where?: SeriesPlatformsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeriesPlatforms to fetch.
+     */
+    orderBy?: SeriesPlatformsOrderByWithRelationInput | SeriesPlatformsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SeriesPlatforms.
+     */
+    cursor?: SeriesPlatformsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeriesPlatforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeriesPlatforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SeriesPlatforms.
+     */
+    distinct?: SeriesPlatformsScalarFieldEnum | SeriesPlatformsScalarFieldEnum[]
+  }
+
+  /**
+   * SeriesPlatforms findMany
+   */
+  export type SeriesPlatformsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    /**
+     * Filter, which SeriesPlatforms to fetch.
+     */
+    where?: SeriesPlatformsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeriesPlatforms to fetch.
+     */
+    orderBy?: SeriesPlatformsOrderByWithRelationInput | SeriesPlatformsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SeriesPlatforms.
+     */
+    cursor?: SeriesPlatformsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeriesPlatforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeriesPlatforms.
+     */
+    skip?: number
+    distinct?: SeriesPlatformsScalarFieldEnum | SeriesPlatformsScalarFieldEnum[]
+  }
+
+  /**
+   * SeriesPlatforms create
+   */
+  export type SeriesPlatformsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SeriesPlatforms.
+     */
+    data: XOR<SeriesPlatformsCreateInput, SeriesPlatformsUncheckedCreateInput>
+  }
+
+  /**
+   * SeriesPlatforms createMany
+   */
+  export type SeriesPlatformsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SeriesPlatforms.
+     */
+    data: SeriesPlatformsCreateManyInput | SeriesPlatformsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SeriesPlatforms update
+   */
+  export type SeriesPlatformsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SeriesPlatforms.
+     */
+    data: XOR<SeriesPlatformsUpdateInput, SeriesPlatformsUncheckedUpdateInput>
+    /**
+     * Choose, which SeriesPlatforms to update.
+     */
+    where: SeriesPlatformsWhereUniqueInput
+  }
+
+  /**
+   * SeriesPlatforms updateMany
+   */
+  export type SeriesPlatformsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SeriesPlatforms.
+     */
+    data: XOR<SeriesPlatformsUpdateManyMutationInput, SeriesPlatformsUncheckedUpdateManyInput>
+    /**
+     * Filter which SeriesPlatforms to update
+     */
+    where?: SeriesPlatformsWhereInput
+    /**
+     * Limit how many SeriesPlatforms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SeriesPlatforms upsert
+   */
+  export type SeriesPlatformsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SeriesPlatforms to update in case it exists.
+     */
+    where: SeriesPlatformsWhereUniqueInput
+    /**
+     * In case the SeriesPlatforms found by the `where` argument doesn't exist, create a new SeriesPlatforms with this data.
+     */
+    create: XOR<SeriesPlatformsCreateInput, SeriesPlatformsUncheckedCreateInput>
+    /**
+     * In case the SeriesPlatforms was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SeriesPlatformsUpdateInput, SeriesPlatformsUncheckedUpdateInput>
+  }
+
+  /**
+   * SeriesPlatforms delete
+   */
+  export type SeriesPlatformsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    /**
+     * Filter which SeriesPlatforms to delete.
+     */
+    where: SeriesPlatformsWhereUniqueInput
+  }
+
+  /**
+   * SeriesPlatforms deleteMany
+   */
+  export type SeriesPlatformsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SeriesPlatforms to delete
+     */
+    where?: SeriesPlatformsWhereInput
+    /**
+     * Limit how many SeriesPlatforms to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SeriesPlatforms without action
+   */
+  export type SeriesPlatformsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Shows
    */
 
@@ -14315,6 +16437,7 @@ export namespace Prisma {
     users_shows?: boolean | Shows$users_showsArgs<ExtArgs>
     genres?: boolean | Shows$genresArgs<ExtArgs>
     comments?: boolean | Shows$commentsArgs<ExtArgs>
+    platforms?: boolean | Shows$platformsArgs<ExtArgs>
     _count?: boolean | ShowsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shows"]>
 
@@ -14334,6 +16457,7 @@ export namespace Prisma {
     users_shows?: boolean | Shows$users_showsArgs<ExtArgs>
     genres?: boolean | Shows$genresArgs<ExtArgs>
     comments?: boolean | Shows$commentsArgs<ExtArgs>
+    platforms?: boolean | Shows$platformsArgs<ExtArgs>
     _count?: boolean | ShowsCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -14345,6 +16469,7 @@ export namespace Prisma {
       users_shows: Prisma.$UserShowsPayload<ExtArgs>[]
       genres: Prisma.$SeriesGenresPayload<ExtArgs>[]
       comments: Prisma.$ShowCommentsPayload<ExtArgs>[]
+      platforms: Prisma.$SeriesPlatformsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       show_id: number
@@ -14696,6 +16821,7 @@ export namespace Prisma {
     users_shows<T extends Shows$users_showsArgs<ExtArgs> = {}>(args?: Subset<T, Shows$users_showsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserShowsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     genres<T extends Shows$genresArgs<ExtArgs> = {}>(args?: Subset<T, Shows$genresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesGenresPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends Shows$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Shows$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShowCommentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    platforms<T extends Shows$platformsArgs<ExtArgs> = {}>(args?: Subset<T, Shows$platformsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeriesPlatformsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15189,6 +17315,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ShowCommentsScalarFieldEnum | ShowCommentsScalarFieldEnum[]
+  }
+
+  /**
+   * Shows.platforms
+   */
+  export type Shows$platformsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeriesPlatforms
+     */
+    select?: SeriesPlatformsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SeriesPlatforms
+     */
+    omit?: SeriesPlatformsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeriesPlatformsInclude<ExtArgs> | null
+    where?: SeriesPlatformsWhereInput
+    orderBy?: SeriesPlatformsOrderByWithRelationInput | SeriesPlatformsOrderByWithRelationInput[]
+    cursor?: SeriesPlatformsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SeriesPlatformsScalarFieldEnum | SeriesPlatformsScalarFieldEnum[]
   }
 
   /**
@@ -17301,6 +19451,24 @@ export namespace Prisma {
   export type ShowCastScalarFieldEnum = (typeof ShowCastScalarFieldEnum)[keyof typeof ShowCastScalarFieldEnum]
 
 
+  export const PlatformsScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    type: 'type',
+    country_code: 'country_code'
+  };
+
+  export type PlatformsScalarFieldEnum = (typeof PlatformsScalarFieldEnum)[keyof typeof PlatformsScalarFieldEnum]
+
+
+  export const SeriesPlatformsScalarFieldEnum: {
+    id_show: 'id_show',
+    id_platform: 'id_platform'
+  };
+
+  export type SeriesPlatformsScalarFieldEnum = (typeof SeriesPlatformsScalarFieldEnum)[keyof typeof SeriesPlatformsScalarFieldEnum]
+
+
   export const ShowsScalarFieldEnum: {
     show_id: 'show_id',
     title: 'title',
@@ -17449,6 +19617,15 @@ export namespace Prisma {
   };
 
   export type ShowCastOrderByRelevanceFieldEnum = (typeof ShowCastOrderByRelevanceFieldEnum)[keyof typeof ShowCastOrderByRelevanceFieldEnum]
+
+
+  export const PlatformsOrderByRelevanceFieldEnum: {
+    name: 'name',
+    type: 'type',
+    country_code: 'country_code'
+  };
+
+  export type PlatformsOrderByRelevanceFieldEnum = (typeof PlatformsOrderByRelevanceFieldEnum)[keyof typeof PlatformsOrderByRelevanceFieldEnum]
 
 
   export const ShowsOrderByRelevanceFieldEnum: {
@@ -18281,6 +20458,105 @@ export namespace Prisma {
     character_name?: StringWithAggregatesFilter<"ShowCast"> | string
   }
 
+  export type PlatformsWhereInput = {
+    AND?: PlatformsWhereInput | PlatformsWhereInput[]
+    OR?: PlatformsWhereInput[]
+    NOT?: PlatformsWhereInput | PlatformsWhereInput[]
+    id?: IntFilter<"Platforms"> | number
+    name?: StringFilter<"Platforms"> | string
+    type?: StringFilter<"Platforms"> | string
+    country_code?: StringNullableFilter<"Platforms"> | string | null
+    seriesPlatforms?: SeriesPlatformsListRelationFilter
+  }
+
+  export type PlatformsOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    country_code?: SortOrderInput | SortOrder
+    seriesPlatforms?: SeriesPlatformsOrderByRelationAggregateInput
+    _relevance?: PlatformsOrderByRelevanceInput
+  }
+
+  export type PlatformsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: PlatformsWhereInput | PlatformsWhereInput[]
+    OR?: PlatformsWhereInput[]
+    NOT?: PlatformsWhereInput | PlatformsWhereInput[]
+    name?: StringFilter<"Platforms"> | string
+    type?: StringFilter<"Platforms"> | string
+    country_code?: StringNullableFilter<"Platforms"> | string | null
+    seriesPlatforms?: SeriesPlatformsListRelationFilter
+  }, "id">
+
+  export type PlatformsOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    country_code?: SortOrderInput | SortOrder
+    _count?: PlatformsCountOrderByAggregateInput
+    _avg?: PlatformsAvgOrderByAggregateInput
+    _max?: PlatformsMaxOrderByAggregateInput
+    _min?: PlatformsMinOrderByAggregateInput
+    _sum?: PlatformsSumOrderByAggregateInput
+  }
+
+  export type PlatformsScalarWhereWithAggregatesInput = {
+    AND?: PlatformsScalarWhereWithAggregatesInput | PlatformsScalarWhereWithAggregatesInput[]
+    OR?: PlatformsScalarWhereWithAggregatesInput[]
+    NOT?: PlatformsScalarWhereWithAggregatesInput | PlatformsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Platforms"> | number
+    name?: StringWithAggregatesFilter<"Platforms"> | string
+    type?: StringWithAggregatesFilter<"Platforms"> | string
+    country_code?: StringNullableWithAggregatesFilter<"Platforms"> | string | null
+  }
+
+  export type SeriesPlatformsWhereInput = {
+    AND?: SeriesPlatformsWhereInput | SeriesPlatformsWhereInput[]
+    OR?: SeriesPlatformsWhereInput[]
+    NOT?: SeriesPlatformsWhereInput | SeriesPlatformsWhereInput[]
+    id_show?: IntFilter<"SeriesPlatforms"> | number
+    id_platform?: IntFilter<"SeriesPlatforms"> | number
+    platforms?: XOR<PlatformsScalarRelationFilter, PlatformsWhereInput>
+    shows?: XOR<ShowsScalarRelationFilter, ShowsWhereInput>
+  }
+
+  export type SeriesPlatformsOrderByWithRelationInput = {
+    id_show?: SortOrder
+    id_platform?: SortOrder
+    platforms?: PlatformsOrderByWithRelationInput
+    shows?: ShowsOrderByWithRelationInput
+  }
+
+  export type SeriesPlatformsWhereUniqueInput = Prisma.AtLeast<{
+    id_show_id_platform?: SeriesPlatformsId_showId_platformCompoundUniqueInput
+    AND?: SeriesPlatformsWhereInput | SeriesPlatformsWhereInput[]
+    OR?: SeriesPlatformsWhereInput[]
+    NOT?: SeriesPlatformsWhereInput | SeriesPlatformsWhereInput[]
+    id_show?: IntFilter<"SeriesPlatforms"> | number
+    id_platform?: IntFilter<"SeriesPlatforms"> | number
+    platforms?: XOR<PlatformsScalarRelationFilter, PlatformsWhereInput>
+    shows?: XOR<ShowsScalarRelationFilter, ShowsWhereInput>
+  }, "id_show_id_platform">
+
+  export type SeriesPlatformsOrderByWithAggregationInput = {
+    id_show?: SortOrder
+    id_platform?: SortOrder
+    _count?: SeriesPlatformsCountOrderByAggregateInput
+    _avg?: SeriesPlatformsAvgOrderByAggregateInput
+    _max?: SeriesPlatformsMaxOrderByAggregateInput
+    _min?: SeriesPlatformsMinOrderByAggregateInput
+    _sum?: SeriesPlatformsSumOrderByAggregateInput
+  }
+
+  export type SeriesPlatformsScalarWhereWithAggregatesInput = {
+    AND?: SeriesPlatformsScalarWhereWithAggregatesInput | SeriesPlatformsScalarWhereWithAggregatesInput[]
+    OR?: SeriesPlatformsScalarWhereWithAggregatesInput[]
+    NOT?: SeriesPlatformsScalarWhereWithAggregatesInput | SeriesPlatformsScalarWhereWithAggregatesInput[]
+    id_show?: IntWithAggregatesFilter<"SeriesPlatforms"> | number
+    id_platform?: IntWithAggregatesFilter<"SeriesPlatforms"> | number
+  }
+
   export type ShowsWhereInput = {
     AND?: ShowsWhereInput | ShowsWhereInput[]
     OR?: ShowsWhereInput[]
@@ -18294,6 +20570,7 @@ export namespace Prisma {
     users_shows?: UserShowsListRelationFilter
     genres?: SeriesGenresListRelationFilter
     comments?: ShowCommentsListRelationFilter
+    platforms?: SeriesPlatformsListRelationFilter
   }
 
   export type ShowsOrderByWithRelationInput = {
@@ -18306,6 +20583,7 @@ export namespace Prisma {
     users_shows?: UserShowsOrderByRelationAggregateInput
     genres?: SeriesGenresOrderByRelationAggregateInput
     comments?: ShowCommentsOrderByRelationAggregateInput
+    platforms?: SeriesPlatformsOrderByRelationAggregateInput
     _relevance?: ShowsOrderByRelevanceInput
   }
 
@@ -18322,6 +20600,7 @@ export namespace Prisma {
     users_shows?: UserShowsListRelationFilter
     genres?: SeriesGenresListRelationFilter
     comments?: ShowCommentsListRelationFilter
+    platforms?: SeriesPlatformsListRelationFilter
   }, "show_id">
 
   export type ShowsOrderByWithAggregationInput = {
@@ -19215,6 +21494,90 @@ export namespace Prisma {
     character_name?: StringFieldUpdateOperationsInput | string
   }
 
+  export type PlatformsCreateInput = {
+    name: string
+    type: string
+    country_code?: string | null
+    seriesPlatforms?: SeriesPlatformsCreateNestedManyWithoutPlatformsInput
+  }
+
+  export type PlatformsUncheckedCreateInput = {
+    id?: number
+    name: string
+    type: string
+    country_code?: string | null
+    seriesPlatforms?: SeriesPlatformsUncheckedCreateNestedManyWithoutPlatformsInput
+  }
+
+  export type PlatformsUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    country_code?: NullableStringFieldUpdateOperationsInput | string | null
+    seriesPlatforms?: SeriesPlatformsUpdateManyWithoutPlatformsNestedInput
+  }
+
+  export type PlatformsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    country_code?: NullableStringFieldUpdateOperationsInput | string | null
+    seriesPlatforms?: SeriesPlatformsUncheckedUpdateManyWithoutPlatformsNestedInput
+  }
+
+  export type PlatformsCreateManyInput = {
+    id?: number
+    name: string
+    type: string
+    country_code?: string | null
+  }
+
+  export type PlatformsUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    country_code?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PlatformsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    country_code?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SeriesPlatformsCreateInput = {
+    platforms: PlatformsCreateNestedOneWithoutSeriesPlatformsInput
+    shows: ShowsCreateNestedOneWithoutPlatformsInput
+  }
+
+  export type SeriesPlatformsUncheckedCreateInput = {
+    id_show: number
+    id_platform: number
+  }
+
+  export type SeriesPlatformsUpdateInput = {
+    platforms?: PlatformsUpdateOneRequiredWithoutSeriesPlatformsNestedInput
+    shows?: ShowsUpdateOneRequiredWithoutPlatformsNestedInput
+  }
+
+  export type SeriesPlatformsUncheckedUpdateInput = {
+    id_show?: IntFieldUpdateOperationsInput | number
+    id_platform?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SeriesPlatformsCreateManyInput = {
+    id_show: number
+    id_platform: number
+  }
+
+  export type SeriesPlatformsUpdateManyMutationInput = {
+
+  }
+
+  export type SeriesPlatformsUncheckedUpdateManyInput = {
+    id_show?: IntFieldUpdateOperationsInput | number
+    id_platform?: IntFieldUpdateOperationsInput | number
+  }
+
   export type ShowsCreateInput = {
     show_id: number
     title: string
@@ -19225,6 +21588,7 @@ export namespace Prisma {
     users_shows?: UserShowsCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsUncheckedCreateInput = {
@@ -19237,6 +21601,7 @@ export namespace Prisma {
     users_shows?: UserShowsUncheckedCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresUncheckedCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsUncheckedCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsUncheckedCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsUpdateInput = {
@@ -19249,6 +21614,7 @@ export namespace Prisma {
     users_shows?: UserShowsUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUpdateManyWithoutShowsNestedInput
   }
 
   export type ShowsUncheckedUpdateInput = {
@@ -19261,6 +21627,7 @@ export namespace Prisma {
     users_shows?: UserShowsUncheckedUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUncheckedUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUncheckedUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUncheckedUpdateManyWithoutShowsNestedInput
   }
 
   export type ShowsCreateManyInput = {
@@ -20165,6 +22532,86 @@ export namespace Prisma {
     person_id?: SortOrder
   }
 
+  export type SeriesPlatformsListRelationFilter = {
+    every?: SeriesPlatformsWhereInput
+    some?: SeriesPlatformsWhereInput
+    none?: SeriesPlatformsWhereInput
+  }
+
+  export type SeriesPlatformsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PlatformsOrderByRelevanceInput = {
+    fields: PlatformsOrderByRelevanceFieldEnum | PlatformsOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type PlatformsCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    country_code?: SortOrder
+  }
+
+  export type PlatformsAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type PlatformsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    country_code?: SortOrder
+  }
+
+  export type PlatformsMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    country_code?: SortOrder
+  }
+
+  export type PlatformsSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type PlatformsScalarRelationFilter = {
+    is?: PlatformsWhereInput
+    isNot?: PlatformsWhereInput
+  }
+
+  export type SeriesPlatformsId_showId_platformCompoundUniqueInput = {
+    id_show: number
+    id_platform: number
+  }
+
+  export type SeriesPlatformsCountOrderByAggregateInput = {
+    id_show?: SortOrder
+    id_platform?: SortOrder
+  }
+
+  export type SeriesPlatformsAvgOrderByAggregateInput = {
+    id_show?: SortOrder
+    id_platform?: SortOrder
+  }
+
+  export type SeriesPlatformsMaxOrderByAggregateInput = {
+    id_show?: SortOrder
+    id_platform?: SortOrder
+  }
+
+  export type SeriesPlatformsMinOrderByAggregateInput = {
+    id_show?: SortOrder
+    id_platform?: SortOrder
+  }
+
+  export type SeriesPlatformsSumOrderByAggregateInput = {
+    id_show?: SortOrder
+    id_platform?: SortOrder
+  }
+
   export type SeasonsListRelationFilter = {
     every?: SeasonsWhereInput
     some?: SeasonsWhereInput
@@ -20994,6 +23441,76 @@ export namespace Prisma {
     update?: XOR<XOR<CastUpdateToOneWithWhereWithoutShow_castInput, CastUpdateWithoutShow_castInput>, CastUncheckedUpdateWithoutShow_castInput>
   }
 
+  export type SeriesPlatformsCreateNestedManyWithoutPlatformsInput = {
+    create?: XOR<SeriesPlatformsCreateWithoutPlatformsInput, SeriesPlatformsUncheckedCreateWithoutPlatformsInput> | SeriesPlatformsCreateWithoutPlatformsInput[] | SeriesPlatformsUncheckedCreateWithoutPlatformsInput[]
+    connectOrCreate?: SeriesPlatformsCreateOrConnectWithoutPlatformsInput | SeriesPlatformsCreateOrConnectWithoutPlatformsInput[]
+    createMany?: SeriesPlatformsCreateManyPlatformsInputEnvelope
+    connect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+  }
+
+  export type SeriesPlatformsUncheckedCreateNestedManyWithoutPlatformsInput = {
+    create?: XOR<SeriesPlatformsCreateWithoutPlatformsInput, SeriesPlatformsUncheckedCreateWithoutPlatformsInput> | SeriesPlatformsCreateWithoutPlatformsInput[] | SeriesPlatformsUncheckedCreateWithoutPlatformsInput[]
+    connectOrCreate?: SeriesPlatformsCreateOrConnectWithoutPlatformsInput | SeriesPlatformsCreateOrConnectWithoutPlatformsInput[]
+    createMany?: SeriesPlatformsCreateManyPlatformsInputEnvelope
+    connect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+  }
+
+  export type SeriesPlatformsUpdateManyWithoutPlatformsNestedInput = {
+    create?: XOR<SeriesPlatformsCreateWithoutPlatformsInput, SeriesPlatformsUncheckedCreateWithoutPlatformsInput> | SeriesPlatformsCreateWithoutPlatformsInput[] | SeriesPlatformsUncheckedCreateWithoutPlatformsInput[]
+    connectOrCreate?: SeriesPlatformsCreateOrConnectWithoutPlatformsInput | SeriesPlatformsCreateOrConnectWithoutPlatformsInput[]
+    upsert?: SeriesPlatformsUpsertWithWhereUniqueWithoutPlatformsInput | SeriesPlatformsUpsertWithWhereUniqueWithoutPlatformsInput[]
+    createMany?: SeriesPlatformsCreateManyPlatformsInputEnvelope
+    set?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    disconnect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    delete?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    connect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    update?: SeriesPlatformsUpdateWithWhereUniqueWithoutPlatformsInput | SeriesPlatformsUpdateWithWhereUniqueWithoutPlatformsInput[]
+    updateMany?: SeriesPlatformsUpdateManyWithWhereWithoutPlatformsInput | SeriesPlatformsUpdateManyWithWhereWithoutPlatformsInput[]
+    deleteMany?: SeriesPlatformsScalarWhereInput | SeriesPlatformsScalarWhereInput[]
+  }
+
+  export type SeriesPlatformsUncheckedUpdateManyWithoutPlatformsNestedInput = {
+    create?: XOR<SeriesPlatformsCreateWithoutPlatformsInput, SeriesPlatformsUncheckedCreateWithoutPlatformsInput> | SeriesPlatformsCreateWithoutPlatformsInput[] | SeriesPlatformsUncheckedCreateWithoutPlatformsInput[]
+    connectOrCreate?: SeriesPlatformsCreateOrConnectWithoutPlatformsInput | SeriesPlatformsCreateOrConnectWithoutPlatformsInput[]
+    upsert?: SeriesPlatformsUpsertWithWhereUniqueWithoutPlatformsInput | SeriesPlatformsUpsertWithWhereUniqueWithoutPlatformsInput[]
+    createMany?: SeriesPlatformsCreateManyPlatformsInputEnvelope
+    set?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    disconnect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    delete?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    connect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    update?: SeriesPlatformsUpdateWithWhereUniqueWithoutPlatformsInput | SeriesPlatformsUpdateWithWhereUniqueWithoutPlatformsInput[]
+    updateMany?: SeriesPlatformsUpdateManyWithWhereWithoutPlatformsInput | SeriesPlatformsUpdateManyWithWhereWithoutPlatformsInput[]
+    deleteMany?: SeriesPlatformsScalarWhereInput | SeriesPlatformsScalarWhereInput[]
+  }
+
+  export type PlatformsCreateNestedOneWithoutSeriesPlatformsInput = {
+    create?: XOR<PlatformsCreateWithoutSeriesPlatformsInput, PlatformsUncheckedCreateWithoutSeriesPlatformsInput>
+    connectOrCreate?: PlatformsCreateOrConnectWithoutSeriesPlatformsInput
+    connect?: PlatformsWhereUniqueInput
+  }
+
+  export type ShowsCreateNestedOneWithoutPlatformsInput = {
+    create?: XOR<ShowsCreateWithoutPlatformsInput, ShowsUncheckedCreateWithoutPlatformsInput>
+    connectOrCreate?: ShowsCreateOrConnectWithoutPlatformsInput
+    connect?: ShowsWhereUniqueInput
+  }
+
+  export type PlatformsUpdateOneRequiredWithoutSeriesPlatformsNestedInput = {
+    create?: XOR<PlatformsCreateWithoutSeriesPlatformsInput, PlatformsUncheckedCreateWithoutSeriesPlatformsInput>
+    connectOrCreate?: PlatformsCreateOrConnectWithoutSeriesPlatformsInput
+    upsert?: PlatformsUpsertWithoutSeriesPlatformsInput
+    connect?: PlatformsWhereUniqueInput
+    update?: XOR<XOR<PlatformsUpdateToOneWithWhereWithoutSeriesPlatformsInput, PlatformsUpdateWithoutSeriesPlatformsInput>, PlatformsUncheckedUpdateWithoutSeriesPlatformsInput>
+  }
+
+  export type ShowsUpdateOneRequiredWithoutPlatformsNestedInput = {
+    create?: XOR<ShowsCreateWithoutPlatformsInput, ShowsUncheckedCreateWithoutPlatformsInput>
+    connectOrCreate?: ShowsCreateOrConnectWithoutPlatformsInput
+    upsert?: ShowsUpsertWithoutPlatformsInput
+    connect?: ShowsWhereUniqueInput
+    update?: XOR<XOR<ShowsUpdateToOneWithWhereWithoutPlatformsInput, ShowsUpdateWithoutPlatformsInput>, ShowsUncheckedUpdateWithoutPlatformsInput>
+  }
+
   export type SeasonsCreateNestedManyWithoutShowsInput = {
     create?: XOR<SeasonsCreateWithoutShowsInput, SeasonsUncheckedCreateWithoutShowsInput> | SeasonsCreateWithoutShowsInput[] | SeasonsUncheckedCreateWithoutShowsInput[]
     connectOrCreate?: SeasonsCreateOrConnectWithoutShowsInput | SeasonsCreateOrConnectWithoutShowsInput[]
@@ -21029,6 +23546,13 @@ export namespace Prisma {
     connect?: ShowCommentsWhereUniqueInput | ShowCommentsWhereUniqueInput[]
   }
 
+  export type SeriesPlatformsCreateNestedManyWithoutShowsInput = {
+    create?: XOR<SeriesPlatformsCreateWithoutShowsInput, SeriesPlatformsUncheckedCreateWithoutShowsInput> | SeriesPlatformsCreateWithoutShowsInput[] | SeriesPlatformsUncheckedCreateWithoutShowsInput[]
+    connectOrCreate?: SeriesPlatformsCreateOrConnectWithoutShowsInput | SeriesPlatformsCreateOrConnectWithoutShowsInput[]
+    createMany?: SeriesPlatformsCreateManyShowsInputEnvelope
+    connect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+  }
+
   export type SeasonsUncheckedCreateNestedManyWithoutShowsInput = {
     create?: XOR<SeasonsCreateWithoutShowsInput, SeasonsUncheckedCreateWithoutShowsInput> | SeasonsCreateWithoutShowsInput[] | SeasonsUncheckedCreateWithoutShowsInput[]
     connectOrCreate?: SeasonsCreateOrConnectWithoutShowsInput | SeasonsCreateOrConnectWithoutShowsInput[]
@@ -21062,6 +23586,13 @@ export namespace Prisma {
     connectOrCreate?: ShowCommentsCreateOrConnectWithoutShowInput | ShowCommentsCreateOrConnectWithoutShowInput[]
     createMany?: ShowCommentsCreateManyShowInputEnvelope
     connect?: ShowCommentsWhereUniqueInput | ShowCommentsWhereUniqueInput[]
+  }
+
+  export type SeriesPlatformsUncheckedCreateNestedManyWithoutShowsInput = {
+    create?: XOR<SeriesPlatformsCreateWithoutShowsInput, SeriesPlatformsUncheckedCreateWithoutShowsInput> | SeriesPlatformsCreateWithoutShowsInput[] | SeriesPlatformsUncheckedCreateWithoutShowsInput[]
+    connectOrCreate?: SeriesPlatformsCreateOrConnectWithoutShowsInput | SeriesPlatformsCreateOrConnectWithoutShowsInput[]
+    createMany?: SeriesPlatformsCreateManyShowsInputEnvelope
+    connect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
   }
 
   export type SeasonsUpdateManyWithoutShowsNestedInput = {
@@ -21134,6 +23665,20 @@ export namespace Prisma {
     deleteMany?: ShowCommentsScalarWhereInput | ShowCommentsScalarWhereInput[]
   }
 
+  export type SeriesPlatformsUpdateManyWithoutShowsNestedInput = {
+    create?: XOR<SeriesPlatformsCreateWithoutShowsInput, SeriesPlatformsUncheckedCreateWithoutShowsInput> | SeriesPlatformsCreateWithoutShowsInput[] | SeriesPlatformsUncheckedCreateWithoutShowsInput[]
+    connectOrCreate?: SeriesPlatformsCreateOrConnectWithoutShowsInput | SeriesPlatformsCreateOrConnectWithoutShowsInput[]
+    upsert?: SeriesPlatformsUpsertWithWhereUniqueWithoutShowsInput | SeriesPlatformsUpsertWithWhereUniqueWithoutShowsInput[]
+    createMany?: SeriesPlatformsCreateManyShowsInputEnvelope
+    set?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    disconnect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    delete?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    connect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    update?: SeriesPlatformsUpdateWithWhereUniqueWithoutShowsInput | SeriesPlatformsUpdateWithWhereUniqueWithoutShowsInput[]
+    updateMany?: SeriesPlatformsUpdateManyWithWhereWithoutShowsInput | SeriesPlatformsUpdateManyWithWhereWithoutShowsInput[]
+    deleteMany?: SeriesPlatformsScalarWhereInput | SeriesPlatformsScalarWhereInput[]
+  }
+
   export type SeasonsUncheckedUpdateManyWithoutShowsNestedInput = {
     create?: XOR<SeasonsCreateWithoutShowsInput, SeasonsUncheckedCreateWithoutShowsInput> | SeasonsCreateWithoutShowsInput[] | SeasonsUncheckedCreateWithoutShowsInput[]
     connectOrCreate?: SeasonsCreateOrConnectWithoutShowsInput | SeasonsCreateOrConnectWithoutShowsInput[]
@@ -21202,6 +23747,20 @@ export namespace Prisma {
     update?: ShowCommentsUpdateWithWhereUniqueWithoutShowInput | ShowCommentsUpdateWithWhereUniqueWithoutShowInput[]
     updateMany?: ShowCommentsUpdateManyWithWhereWithoutShowInput | ShowCommentsUpdateManyWithWhereWithoutShowInput[]
     deleteMany?: ShowCommentsScalarWhereInput | ShowCommentsScalarWhereInput[]
+  }
+
+  export type SeriesPlatformsUncheckedUpdateManyWithoutShowsNestedInput = {
+    create?: XOR<SeriesPlatformsCreateWithoutShowsInput, SeriesPlatformsUncheckedCreateWithoutShowsInput> | SeriesPlatformsCreateWithoutShowsInput[] | SeriesPlatformsUncheckedCreateWithoutShowsInput[]
+    connectOrCreate?: SeriesPlatformsCreateOrConnectWithoutShowsInput | SeriesPlatformsCreateOrConnectWithoutShowsInput[]
+    upsert?: SeriesPlatformsUpsertWithWhereUniqueWithoutShowsInput | SeriesPlatformsUpsertWithWhereUniqueWithoutShowsInput[]
+    createMany?: SeriesPlatformsCreateManyShowsInputEnvelope
+    set?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    disconnect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    delete?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    connect?: SeriesPlatformsWhereUniqueInput | SeriesPlatformsWhereUniqueInput[]
+    update?: SeriesPlatformsUpdateWithWhereUniqueWithoutShowsInput | SeriesPlatformsUpdateWithWhereUniqueWithoutShowsInput[]
+    updateMany?: SeriesPlatformsUpdateManyWithWhereWithoutShowsInput | SeriesPlatformsUpdateManyWithWhereWithoutShowsInput[]
+    deleteMany?: SeriesPlatformsScalarWhereInput | SeriesPlatformsScalarWhereInput[]
   }
 
   export type ShowsCreateNestedOneWithoutUsers_showsInput = {
@@ -22057,6 +24616,7 @@ export namespace Prisma {
     show_cast?: ShowCastCreateNestedManyWithoutShowsInput
     users_shows?: UserShowsCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsUncheckedCreateWithoutGenresInput = {
@@ -22068,6 +24628,7 @@ export namespace Prisma {
     show_cast?: ShowCastUncheckedCreateNestedManyWithoutShowsInput
     users_shows?: UserShowsUncheckedCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsUncheckedCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsUncheckedCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsCreateOrConnectWithoutGenresInput = {
@@ -22115,6 +24676,7 @@ export namespace Prisma {
     show_cast?: ShowCastUpdateManyWithoutShowsNestedInput
     users_shows?: UserShowsUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUpdateManyWithoutShowsNestedInput
   }
 
   export type ShowsUncheckedUpdateWithoutGenresInput = {
@@ -22126,6 +24688,7 @@ export namespace Prisma {
     show_cast?: ShowCastUncheckedUpdateManyWithoutShowsNestedInput
     users_shows?: UserShowsUncheckedUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUncheckedUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUncheckedUpdateManyWithoutShowsNestedInput
   }
 
   export type UserCreateWithoutShowCommentsInput = {
@@ -22172,6 +24735,7 @@ export namespace Prisma {
     show_cast?: ShowCastCreateNestedManyWithoutShowsInput
     users_shows?: UserShowsCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresCreateNestedManyWithoutShowsInput
+    platforms?: SeriesPlatformsCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsUncheckedCreateWithoutCommentsInput = {
@@ -22183,6 +24747,7 @@ export namespace Prisma {
     show_cast?: ShowCastUncheckedCreateNestedManyWithoutShowsInput
     users_shows?: UserShowsUncheckedCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresUncheckedCreateNestedManyWithoutShowsInput
+    platforms?: SeriesPlatformsUncheckedCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsCreateOrConnectWithoutCommentsInput = {
@@ -22251,6 +24816,7 @@ export namespace Prisma {
     show_cast?: ShowCastUpdateManyWithoutShowsNestedInput
     users_shows?: UserShowsUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUpdateManyWithoutShowsNestedInput
+    platforms?: SeriesPlatformsUpdateManyWithoutShowsNestedInput
   }
 
   export type ShowsUncheckedUpdateWithoutCommentsInput = {
@@ -22262,6 +24828,7 @@ export namespace Prisma {
     show_cast?: ShowCastUncheckedUpdateManyWithoutShowsNestedInput
     users_shows?: UserShowsUncheckedUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUncheckedUpdateManyWithoutShowsNestedInput
+    platforms?: SeriesPlatformsUncheckedUpdateManyWithoutShowsNestedInput
   }
 
   export type UserCreateWithoutEpisodeCommentsInput = {
@@ -22617,6 +25184,7 @@ export namespace Prisma {
     users_shows?: UserShowsCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsUncheckedCreateWithoutSeasonsInput = {
@@ -22628,6 +25196,7 @@ export namespace Prisma {
     users_shows?: UserShowsUncheckedCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresUncheckedCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsUncheckedCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsUncheckedCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsCreateOrConnectWithoutSeasonsInput = {
@@ -22686,6 +25255,7 @@ export namespace Prisma {
     users_shows?: UserShowsUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUpdateManyWithoutShowsNestedInput
   }
 
   export type ShowsUncheckedUpdateWithoutSeasonsInput = {
@@ -22697,6 +25267,7 @@ export namespace Prisma {
     users_shows?: UserShowsUncheckedUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUncheckedUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUncheckedUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUncheckedUpdateManyWithoutShowsNestedInput
   }
 
   export type ShowsCreateWithoutShow_castInput = {
@@ -22708,6 +25279,7 @@ export namespace Prisma {
     users_shows?: UserShowsCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsUncheckedCreateWithoutShow_castInput = {
@@ -22719,6 +25291,7 @@ export namespace Prisma {
     users_shows?: UserShowsUncheckedCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresUncheckedCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsUncheckedCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsUncheckedCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsCreateOrConnectWithoutShow_castInput = {
@@ -22763,6 +25336,7 @@ export namespace Prisma {
     users_shows?: UserShowsUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUpdateManyWithoutShowsNestedInput
   }
 
   export type ShowsUncheckedUpdateWithoutShow_castInput = {
@@ -22774,6 +25348,7 @@ export namespace Prisma {
     users_shows?: UserShowsUncheckedUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUncheckedUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUncheckedUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUncheckedUpdateManyWithoutShowsNestedInput
   }
 
   export type CastUpsertWithoutShow_castInput = {
@@ -22797,6 +25372,154 @@ export namespace Prisma {
     person_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SeriesPlatformsCreateWithoutPlatformsInput = {
+    shows: ShowsCreateNestedOneWithoutPlatformsInput
+  }
+
+  export type SeriesPlatformsUncheckedCreateWithoutPlatformsInput = {
+    id_show: number
+  }
+
+  export type SeriesPlatformsCreateOrConnectWithoutPlatformsInput = {
+    where: SeriesPlatformsWhereUniqueInput
+    create: XOR<SeriesPlatformsCreateWithoutPlatformsInput, SeriesPlatformsUncheckedCreateWithoutPlatformsInput>
+  }
+
+  export type SeriesPlatformsCreateManyPlatformsInputEnvelope = {
+    data: SeriesPlatformsCreateManyPlatformsInput | SeriesPlatformsCreateManyPlatformsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SeriesPlatformsUpsertWithWhereUniqueWithoutPlatformsInput = {
+    where: SeriesPlatformsWhereUniqueInput
+    update: XOR<SeriesPlatformsUpdateWithoutPlatformsInput, SeriesPlatformsUncheckedUpdateWithoutPlatformsInput>
+    create: XOR<SeriesPlatformsCreateWithoutPlatformsInput, SeriesPlatformsUncheckedCreateWithoutPlatformsInput>
+  }
+
+  export type SeriesPlatformsUpdateWithWhereUniqueWithoutPlatformsInput = {
+    where: SeriesPlatformsWhereUniqueInput
+    data: XOR<SeriesPlatformsUpdateWithoutPlatformsInput, SeriesPlatformsUncheckedUpdateWithoutPlatformsInput>
+  }
+
+  export type SeriesPlatformsUpdateManyWithWhereWithoutPlatformsInput = {
+    where: SeriesPlatformsScalarWhereInput
+    data: XOR<SeriesPlatformsUpdateManyMutationInput, SeriesPlatformsUncheckedUpdateManyWithoutPlatformsInput>
+  }
+
+  export type SeriesPlatformsScalarWhereInput = {
+    AND?: SeriesPlatformsScalarWhereInput | SeriesPlatformsScalarWhereInput[]
+    OR?: SeriesPlatformsScalarWhereInput[]
+    NOT?: SeriesPlatformsScalarWhereInput | SeriesPlatformsScalarWhereInput[]
+    id_show?: IntFilter<"SeriesPlatforms"> | number
+    id_platform?: IntFilter<"SeriesPlatforms"> | number
+  }
+
+  export type PlatformsCreateWithoutSeriesPlatformsInput = {
+    name: string
+    type: string
+    country_code?: string | null
+  }
+
+  export type PlatformsUncheckedCreateWithoutSeriesPlatformsInput = {
+    id?: number
+    name: string
+    type: string
+    country_code?: string | null
+  }
+
+  export type PlatformsCreateOrConnectWithoutSeriesPlatformsInput = {
+    where: PlatformsWhereUniqueInput
+    create: XOR<PlatformsCreateWithoutSeriesPlatformsInput, PlatformsUncheckedCreateWithoutSeriesPlatformsInput>
+  }
+
+  export type ShowsCreateWithoutPlatformsInput = {
+    show_id: number
+    title: string
+    summary?: string | null
+    image?: string | null
+    seasons?: SeasonsCreateNestedManyWithoutShowsInput
+    show_cast?: ShowCastCreateNestedManyWithoutShowsInput
+    users_shows?: UserShowsCreateNestedManyWithoutShowsInput
+    genres?: SeriesGenresCreateNestedManyWithoutShowsInput
+    comments?: ShowCommentsCreateNestedManyWithoutShowInput
+  }
+
+  export type ShowsUncheckedCreateWithoutPlatformsInput = {
+    show_id: number
+    title: string
+    summary?: string | null
+    image?: string | null
+    seasons?: SeasonsUncheckedCreateNestedManyWithoutShowsInput
+    show_cast?: ShowCastUncheckedCreateNestedManyWithoutShowsInput
+    users_shows?: UserShowsUncheckedCreateNestedManyWithoutShowsInput
+    genres?: SeriesGenresUncheckedCreateNestedManyWithoutShowsInput
+    comments?: ShowCommentsUncheckedCreateNestedManyWithoutShowInput
+  }
+
+  export type ShowsCreateOrConnectWithoutPlatformsInput = {
+    where: ShowsWhereUniqueInput
+    create: XOR<ShowsCreateWithoutPlatformsInput, ShowsUncheckedCreateWithoutPlatformsInput>
+  }
+
+  export type PlatformsUpsertWithoutSeriesPlatformsInput = {
+    update: XOR<PlatformsUpdateWithoutSeriesPlatformsInput, PlatformsUncheckedUpdateWithoutSeriesPlatformsInput>
+    create: XOR<PlatformsCreateWithoutSeriesPlatformsInput, PlatformsUncheckedCreateWithoutSeriesPlatformsInput>
+    where?: PlatformsWhereInput
+  }
+
+  export type PlatformsUpdateToOneWithWhereWithoutSeriesPlatformsInput = {
+    where?: PlatformsWhereInput
+    data: XOR<PlatformsUpdateWithoutSeriesPlatformsInput, PlatformsUncheckedUpdateWithoutSeriesPlatformsInput>
+  }
+
+  export type PlatformsUpdateWithoutSeriesPlatformsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    country_code?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PlatformsUncheckedUpdateWithoutSeriesPlatformsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    country_code?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ShowsUpsertWithoutPlatformsInput = {
+    update: XOR<ShowsUpdateWithoutPlatformsInput, ShowsUncheckedUpdateWithoutPlatformsInput>
+    create: XOR<ShowsCreateWithoutPlatformsInput, ShowsUncheckedCreateWithoutPlatformsInput>
+    where?: ShowsWhereInput
+  }
+
+  export type ShowsUpdateToOneWithWhereWithoutPlatformsInput = {
+    where?: ShowsWhereInput
+    data: XOR<ShowsUpdateWithoutPlatformsInput, ShowsUncheckedUpdateWithoutPlatformsInput>
+  }
+
+  export type ShowsUpdateWithoutPlatformsInput = {
+    show_id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    seasons?: SeasonsUpdateManyWithoutShowsNestedInput
+    show_cast?: ShowCastUpdateManyWithoutShowsNestedInput
+    users_shows?: UserShowsUpdateManyWithoutShowsNestedInput
+    genres?: SeriesGenresUpdateManyWithoutShowsNestedInput
+    comments?: ShowCommentsUpdateManyWithoutShowNestedInput
+  }
+
+  export type ShowsUncheckedUpdateWithoutPlatformsInput = {
+    show_id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    seasons?: SeasonsUncheckedUpdateManyWithoutShowsNestedInput
+    show_cast?: ShowCastUncheckedUpdateManyWithoutShowsNestedInput
+    users_shows?: UserShowsUncheckedUpdateManyWithoutShowsNestedInput
+    genres?: SeriesGenresUncheckedUpdateManyWithoutShowsNestedInput
+    comments?: ShowCommentsUncheckedUpdateManyWithoutShowNestedInput
   }
 
   export type SeasonsCreateWithoutShowsInput = {
@@ -22912,6 +25635,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SeriesPlatformsCreateWithoutShowsInput = {
+    platforms: PlatformsCreateNestedOneWithoutSeriesPlatformsInput
+  }
+
+  export type SeriesPlatformsUncheckedCreateWithoutShowsInput = {
+    id_platform: number
+  }
+
+  export type SeriesPlatformsCreateOrConnectWithoutShowsInput = {
+    where: SeriesPlatformsWhereUniqueInput
+    create: XOR<SeriesPlatformsCreateWithoutShowsInput, SeriesPlatformsUncheckedCreateWithoutShowsInput>
+  }
+
+  export type SeriesPlatformsCreateManyShowsInputEnvelope = {
+    data: SeriesPlatformsCreateManyShowsInput | SeriesPlatformsCreateManyShowsInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SeasonsUpsertWithWhereUniqueWithoutShowsInput = {
     where: SeasonsWhereUniqueInput
     update: XOR<SeasonsUpdateWithoutShowsInput, SeasonsUncheckedUpdateWithoutShowsInput>
@@ -23002,6 +25743,22 @@ export namespace Prisma {
     data: XOR<ShowCommentsUpdateManyMutationInput, ShowCommentsUncheckedUpdateManyWithoutShowInput>
   }
 
+  export type SeriesPlatformsUpsertWithWhereUniqueWithoutShowsInput = {
+    where: SeriesPlatformsWhereUniqueInput
+    update: XOR<SeriesPlatformsUpdateWithoutShowsInput, SeriesPlatformsUncheckedUpdateWithoutShowsInput>
+    create: XOR<SeriesPlatformsCreateWithoutShowsInput, SeriesPlatformsUncheckedCreateWithoutShowsInput>
+  }
+
+  export type SeriesPlatformsUpdateWithWhereUniqueWithoutShowsInput = {
+    where: SeriesPlatformsWhereUniqueInput
+    data: XOR<SeriesPlatformsUpdateWithoutShowsInput, SeriesPlatformsUncheckedUpdateWithoutShowsInput>
+  }
+
+  export type SeriesPlatformsUpdateManyWithWhereWithoutShowsInput = {
+    where: SeriesPlatformsScalarWhereInput
+    data: XOR<SeriesPlatformsUpdateManyMutationInput, SeriesPlatformsUncheckedUpdateManyWithoutShowsInput>
+  }
+
   export type ShowsCreateWithoutUsers_showsInput = {
     show_id: number
     title: string
@@ -23011,6 +25768,7 @@ export namespace Prisma {
     show_cast?: ShowCastCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsUncheckedCreateWithoutUsers_showsInput = {
@@ -23022,6 +25780,7 @@ export namespace Prisma {
     show_cast?: ShowCastUncheckedCreateNestedManyWithoutShowsInput
     genres?: SeriesGenresUncheckedCreateNestedManyWithoutShowsInput
     comments?: ShowCommentsUncheckedCreateNestedManyWithoutShowInput
+    platforms?: SeriesPlatformsUncheckedCreateNestedManyWithoutShowsInput
   }
 
   export type ShowsCreateOrConnectWithoutUsers_showsInput = {
@@ -23084,6 +25843,7 @@ export namespace Prisma {
     show_cast?: ShowCastUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUpdateManyWithoutShowsNestedInput
   }
 
   export type ShowsUncheckedUpdateWithoutUsers_showsInput = {
@@ -23095,6 +25855,7 @@ export namespace Prisma {
     show_cast?: ShowCastUncheckedUpdateManyWithoutShowsNestedInput
     genres?: SeriesGenresUncheckedUpdateManyWithoutShowsNestedInput
     comments?: ShowCommentsUncheckedUpdateManyWithoutShowNestedInput
+    platforms?: SeriesPlatformsUncheckedUpdateManyWithoutShowsNestedInput
   }
 
   export type UserUpsertWithoutUsers_showsInput = {
@@ -23623,6 +26384,22 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type SeriesPlatformsCreateManyPlatformsInput = {
+    id_show: number
+  }
+
+  export type SeriesPlatformsUpdateWithoutPlatformsInput = {
+    shows?: ShowsUpdateOneRequiredWithoutPlatformsNestedInput
+  }
+
+  export type SeriesPlatformsUncheckedUpdateWithoutPlatformsInput = {
+    id_show?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SeriesPlatformsUncheckedUpdateManyWithoutPlatformsInput = {
+    id_show?: IntFieldUpdateOperationsInput | number
+  }
+
   export type SeasonsCreateManyShowsInput = {
     season_id: number
     summary?: string | null
@@ -23652,6 +26429,10 @@ export namespace Prisma {
     content: string
     postedAt?: Date | string
     id_user: string
+  }
+
+  export type SeriesPlatformsCreateManyShowsInput = {
+    id_platform: number
   }
 
   export type SeasonsUpdateWithoutShowsInput = {
@@ -23746,6 +26527,18 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     id_user?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SeriesPlatformsUpdateWithoutShowsInput = {
+    platforms?: PlatformsUpdateOneRequiredWithoutSeriesPlatformsNestedInput
+  }
+
+  export type SeriesPlatformsUncheckedUpdateWithoutShowsInput = {
+    id_platform?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SeriesPlatformsUncheckedUpdateManyWithoutShowsInput = {
+    id_platform?: IntFieldUpdateOperationsInput | number
   }
 
 

@@ -2,7 +2,7 @@
 
 import { Label } from "@/components/shadcn/label";
 import { Textarea } from "@/components/shadcn/textarea";
-import { createComment } from "../AddCommentAction";
+import { createComment } from "../actions/AddCommentAction";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/shadcn/button";
 import { useState } from "react";

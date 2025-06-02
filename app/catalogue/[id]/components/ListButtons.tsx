@@ -1,10 +1,11 @@
 "use client"
 
 import { Heart, ListPlus, ListX } from "lucide-react";
-import { addToList, removeFromList, toggleFavorite } from "../ListActions";
+import { addToList, removeFromList, toggleFavorite } from "../actions/ListActions";
 import { useState } from "react";
 import { useUIStore } from "@/lib/stores/uiStore";
 import { NOTIFICATION_DURATION, NOTIFICATION_TYPES, NOTIFICATION_MESSAGES } from "@/lib/constants/notifications";
+import { Button } from "@/components/shadcn/button";
 
 interface Props {
     showId: number;
@@ -88,13 +89,12 @@ export default function ListButtons({ showId, userId, isInList, isFavorite }: Pr
 
     return (
         <div className="flex gap-4">
-            <button
+            <Button
                 onClick={handleListAction}
                 disabled={isLoading}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${isInList
-                    ? "bg-red-500 hover:bg-red-600"
-                    : "bg-accent-primary hover:bg-accent-primary-hover"
-                    }`}
+                variant={isInList ? "destructive" : "default"}
+                size="lg"
+                className="hover:scale-105 transition-transform duration-300"
             >
                 {isInList ? (
                     <>
@@ -107,20 +107,19 @@ export default function ListButtons({ showId, userId, isInList, isFavorite }: Pr
                         Ajouter à ma liste
                     </>
                 )}
-            </button>
+            </Button>
 
             {isInList && (
-                <button
+                <Button
                     onClick={handleFavoriteAction}
                     disabled={isLoading}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${isFavorite
-                        ? "bg-yellow-500 hover:bg-yellow-600"
-                        : "bg-accent-primary hover:bg-accent-primary-hover"
-                        }`}
+                    variant={isFavorite ? "secondary" : "default"}
+                    size="lg"
+                    className="hover:scale-105 transition-transform duration-300"
                 >
                     <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
                     {isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
-                </button>
+                </Button>
             )}
         </div>
     );

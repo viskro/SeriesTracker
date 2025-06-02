@@ -50,6 +50,18 @@ export default async function Dashboard() {
                         added_at: "desc"
                     }
                 },
+                users_episodes: {
+                    select: {
+                        episode: {
+                            select: {
+                                season_id: true,
+                            }
+                        }
+                    },
+                    orderBy: {
+                        watched_at: "desc"
+                    }
+                },
                 _count: {
                     select: {
                         users_shows: true
@@ -72,6 +84,33 @@ export default async function Dashboard() {
             })
         ])
     ]);
+
+    const countShowsOngoing = await prisma.userShows.count({
+        where: {
+            id_user: user.id,
+            status: "ongoing"
+        }
+    })
+
+    const countShowsFinished = await prisma.userShows.count({
+        where: {
+            id_user: user.id,
+            status: "finished"
+        }
+    })
+
+    const lastEpisodeWatched = await prisma.seasons.findUnique({
+        where: {
+            season_id: userData?.users_episodes[0].episode.season_id
+        },
+        select: {
+            shows: {
+                select: {
+                    title: true
+                }
+            }
+        }
+    })
 
     if (!userData) {
         redirect('/auth/signin');
@@ -99,6 +138,9 @@ export default async function Dashboard() {
             }}
             fiveShows={fiveShows}
             fourFavorites={fourFavorites}
+            lastEpisodeWatched={lastEpisodeWatched}
+            countShowsFinished={countShowsFinished}
+            countShowsOngoing={countShowsOngoing}
         />
     );
 }

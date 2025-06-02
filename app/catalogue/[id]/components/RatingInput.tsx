@@ -2,7 +2,7 @@
 
 import { Star } from "lucide-react";
 import { useState } from "react";
-import { submitRating } from "../RatingAction";
+import { submitRating } from "../actions/RatingAction";
 
 interface Props {
     showId: number;
@@ -16,11 +16,7 @@ export default function RatingInput({ showId, userId, isInList, currentRating }:
     const [isLoading, setIsLoading] = useState(false);
 
     if (!isInList) {
-        return (
-            <div className="text-text-primary/80">
-                Ajoutez la série à votre liste pour la noter
-            </div>
-        );
+        return;
     }
 
     const handleRating = async (rating: number) => {
@@ -41,7 +37,7 @@ export default function RatingInput({ showId, userId, isInList, currentRating }:
                             onMouseEnter={() => setHoveredRating(rating)}
                             onMouseLeave={() => setHoveredRating(null)}
                             disabled={isLoading}
-                            className="p-1"
+                            className="p-1 hover:cursor-pointer"
                         >
                             <Star
                                 className={`w-6 h-6 transition-colors ${(hoveredRating ?? currentRating ?? 0) >= rating
@@ -57,11 +53,6 @@ export default function RatingInput({ showId, userId, isInList, currentRating }:
                         </button>
                     ))}
                 </div>
-                {currentRating && (
-                    <span className="text-text-primary/80">
-                        Votre note : {currentRating}/5
-                    </span>
-                )}
             </div>
         </div>
     );

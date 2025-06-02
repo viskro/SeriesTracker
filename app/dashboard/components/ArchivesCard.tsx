@@ -12,7 +12,7 @@ export const ArchivesCard = ({ userData }: Props) => {
                 <div className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-accent-primary"></div>
                     <p className="text-sm text-text-primary/80">
-                        {userData.archivedShowsCount} série{userData.archivedShowsCount !== 1 ? 's' : ''} archivée{userData.archivedShowsCount !== 1 ? 's' : ''}
+                        <span className="text-accent-primary">{userData.archivedShowsCount}</span> série{userData.archivedShowsCount !== 1 ? 's' : ''} archivée{userData.archivedShowsCount !== 1 ? 's' : ''}
                     </p>
                 </div>
                 {userData.archivedShowsCount > 0 && (

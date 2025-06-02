@@ -7,13 +7,19 @@ import { useRouter } from "next/navigation"
 
 interface CardSerieCatalogueProps {
   title: string
-  image: string
+  image?: string
   airdate: string
   showId: number
   averageRating: number
+  platforms: {
+    platforms: {
+      name: string
+    }
+  }[]
+  genres: string[] | null
 }
 
-export function CardSerieCatalogue({ title, image, airdate, showId, averageRating }: CardSerieCatalogueProps) {
+export function CardSerieCatalogue({ title, image, airdate, showId, averageRating, platforms, genres }: CardSerieCatalogueProps) {
   const router = useRouter();
   return (
     <div
@@ -21,15 +27,21 @@ export function CardSerieCatalogue({ title, image, airdate, showId, averageRatin
       onClick={() => router.push(`/catalogue/${showId}`)}
     >
       <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden">
-        <Image
-          src={image}
-          alt={`Image de la série ${title}`}
-          blurDataURL={image}
-          fill
-          sizes="100%"
-          className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
-          loading="lazy"
-        />
+        {image ? (
+          <Image
+            src={image}
+            alt={`Image de la série ${title}`}
+            blurDataURL={image}
+            fill
+            sizes="100%"
+            className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full bg-background-primary flex items-center justify-center">
+            <p className="text-accent-primary font-bold">Aucune image disponible</p>
+          </div>
+        )}
       </div>
       <div className="flex flex-col gap-3">
         <div className="flex justify-between items-center">
@@ -39,12 +51,16 @@ export function CardSerieCatalogue({ title, image, airdate, showId, averageRatin
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          <BadgeSerie text="Catégorie" variant="category" />
-          <BadgeSerie text="Catégorie" variant="category" />
+          {genres?.map((genre, index) => (
+            <BadgeSerie key={index} text={genre} variant="category" />
+          ))}
         </div>
         <div className="space-y-1">
-          <p className="text-sm text-text-primary/80">Plateforme(s) : Netflix, Disney+</p>
-          <p className="text-sm text-text-primary/80">Date de sortie : {airdate}</p>
+          <p className="text-sm text-text-primary/80">
+            {platforms ? `Plateforme(s) : ` : 'Plateforme(s) non disponible(s)'}
+            {platforms && <span className="text-accent-primary">{platforms.map(p => p.platforms.name).join(', ')}</span>}
+          </p>
+          <p className="text-sm text-text-primary/80">Date de sortie : <span className="text-accent-primary">{airdate}</span></p>
         </div>
       </div>
     </div>

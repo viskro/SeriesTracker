@@ -28,6 +28,24 @@ export default async function Page({ params }: PageProps) {
                     comments: true,
                 },
             },
+            genres: {
+                select: {
+                    genres: {
+                        select: {
+                            name: true
+                        }
+                    }
+                }
+            },
+            platforms: {
+                select: {
+                    platforms: {
+                        select: {
+                            name: true
+                        }
+                    }
+                }
+            },
             comments: {
                 include: {
                     user: {
@@ -120,6 +138,9 @@ export default async function Page({ params }: PageProps) {
         image: season.image,
     }));
 
+    const genres = show.genres.map(genre => genre.genres.name);
+    const platforms = show.platforms.map(platform => platform.platforms.name);
+
     const synopsis = await trad(show.summary);
 
     return (
@@ -133,6 +154,8 @@ export default async function Page({ params }: PageProps) {
             cast={cast}
             seasons={seasons}
             synopsis={synopsis}
+            genres={genres}
+            platforms={platforms}
         />
     );
 }
