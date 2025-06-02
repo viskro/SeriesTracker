@@ -1,10 +1,9 @@
 import { CardSerieCatalogue } from "@/components/Cards/CardSerieCatalogue";
-import Filter from "@/components/Filters/Filter";
-import Sort from "@/components/Filters/Sort";
 import { Section } from "@/components/Layout/Section";
 import { Pagination } from "@/components/shared/Pagination";
 import prisma from "@/lib/prisma";
-import { buildOrderBy, buildWhereClause, FilterType } from "@/lib/types/filters";
+import { buildWhereClause, FilterType } from "@/lib/types/filters";
+import { CatalogueControls } from "./components/CatalogueControls";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -41,9 +40,10 @@ export default async function Page({
         initial?: string;
         sort?: string;
         order?: string;
+        q?: string;
     }>;
 }) {
-    const { page, platform, category, initial, sort, order, rating } = await searchParams;
+    const { page, platform, category, initial, sort, order, rating, q } = await searchParams;
     const currentPage = await Number(page) || 1;
     const skip = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -55,21 +55,26 @@ export default async function Page({
     if (initial) filters.initial = initial.split(',').filter(Boolean);
 
     // Construire la clause where
-    const whereClause = buildWhereClause(filters as Record<FilterType, string[]>);
+    const whereClause = buildWhereClause(filters as Record<FilterType, string[]>, q);
 
-    // Construire l'ordre de tri
-    const orderBy = buildOrderBy(sort as any, order as any);
+    // Construire la clause where pour le comptage (exclut mode: 'insensitive' pour le titre si q est présent)
+    const countWhereClause = q
+        ? { ...whereClause, title: { contains: q } }
+        : whereClause;
 
     const showCount = await prisma.shows.count({
-        where: whereClause
+        where: countWhereClause
     });
 
     const shows = await prisma.shows.findMany({
         where: whereClause,
         skip,
         take: ITEMS_PER_PAGE,
-        // @ts-ignore
-        orderBy,
+        orderBy: sort === "rating" || sort === "date"
+            ? undefined
+            : sort === "title"
+                ? { title: order as "asc" | "desc" }
+                : { title: "asc" },
         select: {
             show_id: true,
             title: true,
@@ -127,6 +132,24 @@ export default async function Page({
         ])
     );
 
+    // Si le tri est par note ou par date, trier les shows en mémoire
+    if (sort === "rating" || sort === "date") {
+        shows.sort((a, b) => {
+            if (sort === "rating") {
+                const ratingA = ratingMap.get(a.show_id)?.average || 0;
+                const ratingB = ratingMap.get(b.show_id)?.average || 0;
+                return order === "asc" ? ratingA - ratingB : ratingB - ratingA;
+            } else {
+                // Tri par date
+                const dateA = a.seasons[0]?.episodes[0]?.airdate || '';
+                const dateB = b.seasons[0]?.episodes[0]?.airdate || '';
+                return order === "asc"
+                    ? dateA.localeCompare(dateB)
+                    : dateB.localeCompare(dateA);
+            }
+        });
+    }
+
     const totalPages = Math.ceil(showCount / ITEMS_PER_PAGE);
 
     return (
@@ -140,10 +163,7 @@ export default async function Page({
                         Découvrez notre collection de {showCount} séries
                     </p>
 
-                    <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 p-4 bg-background-secondary rounded-2xl border border-border-primary mb-8">
-                        <Filter />
-                        <Sort />
-                    </div>
+                    <CatalogueControls />
 
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {shows.map((show) => {

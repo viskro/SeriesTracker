@@ -7,10 +7,23 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from './components/shee
 import { ScrollArea } from './components/scroll-area';
 import { FilterGroup } from './FilterGroup';
 import { FILTER_GROUPS } from '@/lib/types/filters';
+import { useEffect, useState } from 'react';
 
 const Filter: NextPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
+
+  useEffect(() => {
+    const newSelectedFilters: Record<string, string[]> = {};
+    FILTER_GROUPS.forEach((group) => {
+      const values = searchParams.get(group.type)?.split(',').filter(Boolean) || [];
+      if (values.length > 0) {
+        newSelectedFilters[group.type] = values;
+      }
+    });
+    setSelectedFilters(newSelectedFilters);
+  }, [searchParams]);
 
   const handleFilter = (type: string, value: string, checked: boolean) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -38,7 +51,7 @@ const Filter: NextPage = () => {
   };
 
   const getSelectedValues = (type: string) => {
-    return searchParams.get(type)?.split(',').filter(Boolean) || [];
+    return selectedFilters[type] || [];
   };
 
   return (
@@ -52,8 +65,9 @@ const Filter: NextPage = () => {
           Filtres
         </Button>
       </SheetTrigger>
-      <SheetTitle className='text-accent-primary'>Filtres</SheetTitle>
-      <SheetContent side={"left"} className="bg-gradient-to-br from-background-secondary to-background-primary border-border-primary text-text-primary">
+
+      <SheetContent side={"left"} className="bg-gradient-to-br from-background-secondary to-background-primary border-border-primary text-text-primary" aria-describedby='Filtres pour le catalogue'>
+        <SheetTitle className='text-accent-primary text-2xl font-title'>Filtrer par</SheetTitle>
         <ScrollArea className="h-[calc(100vh-8rem)] pr-4 my-4">
           {FILTER_GROUPS.map((group) => (
             <FilterGroup

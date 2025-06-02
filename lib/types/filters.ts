@@ -1,5 +1,3 @@
-import { Prisma } from "@prisma/client";
-
 export type FilterType = "platform" | "category" | "rating" | "initial";
 export type SortType = "rating" | "title" | "date";
 export type SortOrder = "asc" | "desc";
@@ -19,10 +17,8 @@ export interface FilterGroup {
 export interface SortOption {
 	type: SortType;
 	title: string;
-	options: {
-		name: string;
-		order: SortOrder;
-	}[];
+	order: SortOrder;
+	name: string;
 }
 
 export const FILTER_GROUPS: FilterGroup[] = [
@@ -92,26 +88,38 @@ export const SORT_OPTIONS: SortOption[] = [
 	{
 		type: "rating",
 		title: "Note",
-		options: [
-			{ name: "Croissante", order: "asc" },
-			{ name: "Décroissante", order: "desc" },
-		],
+		order: "desc",
+		name: "Note décroissante",
+	},
+	{
+		type: "rating",
+		title: "Note",
+		order: "asc",
+		name: "Note croissante",
 	},
 	{
 		type: "title",
 		title: "Titre",
-		options: [
-			{ name: "A-Z", order: "asc" },
-			{ name: "Z-A", order: "desc" },
-		],
+		order: "asc",
+		name: "A-Z",
+	},
+	{
+		type: "title",
+		title: "Titre",
+		order: "desc",
+		name: "Z-A",
 	},
 	{
 		type: "date",
 		title: "Date de sortie",
-		options: [
-			{ name: "Plus ancien", order: "asc" },
-			{ name: "Plus récent", order: "desc" },
-		],
+		order: "asc",
+		name: "Plus ancien",
+	},
+	{
+		type: "date",
+		title: "Date de sortie",
+		order: "desc",
+		name: "Plus récent",
 	},
 ];
 
@@ -146,28 +154,31 @@ type WhereInput = {
 			startsWith: string;
 		};
 	}>;
+	title?: {
+		contains: string;
+		mode: "insensitive";
+	};
 };
 
 type OrderByInput = {
 	users_shows?: {
-		_avg: {
+		_count?: {
 			rating: "asc" | "desc";
 		};
 	};
 	title?: "asc" | "desc";
 	seasons?: {
-		_max: {
-			episodes: {
-				_max: {
-					airdate: "asc" | "desc";
-				};
+		episodes: {
+			orderBy: {
+				airdate: "asc" | "desc";
 			};
 		};
 	};
 };
 
 export function buildWhereClause(
-	filters: Record<FilterType, string[]>
+	filters: Record<FilterType, string[]>,
+	q?: string
 ): WhereInput {
 	const where: WhereInput = {};
 
@@ -222,6 +233,13 @@ export function buildWhereClause(
 		}
 	}
 
+	if (q) {
+		where.title = {
+			contains: q,
+			// mode: 'insensitive', // Comment out for count compatibility if needed
+		};
+	}
+
 	return where;
 }
 
@@ -234,7 +252,7 @@ export function buildOrderBy(sort?: SortType, order?: SortOrder): OrderByInput {
 		case "rating":
 			return {
 				users_shows: {
-					_avg: {
+					_count: {
 						rating: order,
 					},
 				},
@@ -244,11 +262,9 @@ export function buildOrderBy(sort?: SortType, order?: SortOrder): OrderByInput {
 		case "date":
 			return {
 				seasons: {
-					_max: {
-						episodes: {
-							_max: {
-								airdate: order,
-							},
+					episodes: {
+						orderBy: {
+							airdate: order,
 						},
 					},
 				},

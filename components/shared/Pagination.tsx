@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Pagination as ShadcnPagination,
   PaginationContent,
@@ -7,6 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/shadcn/pagination";
+import { useSearchParams } from "next/navigation";
 
 interface PaginationProps {
   currentPage: number;
@@ -15,9 +18,15 @@ interface PaginationProps {
 }
 
 export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps) {
+  const searchParams = useSearchParams();
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   const showEllipsis = totalPages > 7;
 
+  const createPageUrl = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    return `${baseUrl}?${params.toString()}`;
+  };
 
   const getVisiblePages = () => {
     if (!showEllipsis) return pages;
@@ -44,7 +53,7 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            href={`${baseUrl}?page=${currentPage - 1}`}
+            href={createPageUrl(currentPage - 1)}
             className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
           />
         </PaginationItem>
@@ -61,7 +70,7 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
           return (
             <PaginationItem key={page}>
               <PaginationLink
-                href={`${baseUrl}?page=${page}`}
+                href={createPageUrl(page as number)}
                 isActive={currentPage === page}
                 className="bg-gradient-to-br from-background-secondary to-background-primary border border-border-primary hover:border-accent-primary/40 transition-all duration-300"
               >
@@ -73,7 +82,7 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
 
         <PaginationItem>
           <PaginationNext
-            href={`${baseUrl}?page=${currentPage + 1}`}
+            href={createPageUrl(currentPage + 1)}
             className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
           />
         </PaginationItem>
