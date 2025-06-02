@@ -99,18 +99,21 @@ export default async function Dashboard() {
         }
     })
 
-    const lastEpisodeWatched = await prisma.seasons.findUnique({
-        where: {
-            season_id: userData?.users_episodes[0].episode.season_id
-        },
-        select: {
-            shows: {
-                select: {
-                    title: true
+    let lastEpisodeWatched = null;
+    if (userData?.users_episodes && userData.users_episodes.length > 0) {
+        lastEpisodeWatched = await prisma.seasons.findUnique({
+            where: {
+                season_id: userData.users_episodes[0].episode.season_id
+            },
+            select: {
+                shows: {
+                    select: {
+                        title: true
+                    }
                 }
             }
-        }
-    })
+        });
+    }
 
     if (!userData) {
         redirect('/auth/signin');
