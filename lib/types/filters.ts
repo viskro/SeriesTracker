@@ -156,7 +156,6 @@ type WhereInput = {
 	}>;
 	title?: {
 		contains: string;
-		mode: "insensitive";
 	};
 };
 
@@ -236,7 +235,6 @@ export function buildWhereClause(
 	if (q) {
 		where.title = {
 			contains: q,
-			// mode: 'insensitive', // Comment out for count compatibility if needed
 		};
 	}
 
