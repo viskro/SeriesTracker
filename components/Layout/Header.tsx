@@ -6,7 +6,7 @@ import SecondaryButton from '../Buttons/SecondaryButton'
 import { Avatar, AvatarImage } from '../shadcn/avatar'
 import { signOut } from '@/lib/auth-client';
 import { Skeleton } from '../shadcn/skeleton';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useAuthStore } from '@/lib/stores/authStore';
 import { useUIStore } from '@/lib/stores/uiStore';
@@ -14,6 +14,7 @@ import { NOTIFICATION_DURATION, NOTIFICATION_TYPES, NOTIFICATION_MESSAGES } from
 import { v4 as uuidv4 } from 'uuid';
 
 const Header = () => {
+  const router = useRouter();
   const { user, isAuthenticated, isLoading, logout } = useAuthStore();
   const { isMenuOpen, toggleMenu, addNotification } = useUIStore();
 
@@ -27,7 +28,7 @@ const Header = () => {
         message: NOTIFICATION_MESSAGES.AUTH.LOGOUT_SUCCESS,
         duration: NOTIFICATION_DURATION
       });
-      redirect("/");
+      router.push('/');
     } catch (error) {
       addNotification({
         id: uuidv4(),

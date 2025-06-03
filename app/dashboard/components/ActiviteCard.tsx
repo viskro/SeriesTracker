@@ -18,9 +18,16 @@ export const ActiviteCard = ({ userData, lastEpisodeWatched }: Props) => {
             <div className="space-y-4">
                 <div className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-accent-primary"></div>
-                    <p className="text-sm text-text-primary/80">
-                        Vous avez regardé un épisode de <span className="text-accent-primary">{lastEpisodeWatched?.shows.title}</span>
-                    </p>
+                    {!lastEpisodeWatched ? (
+                        <p className="text-sm text-text-primary/80">
+                            Vous n&apos;avez pas encore regardé d&apos;épisodes.
+                        </p>
+                    ) : (
+                        <p className="text-sm text-text-primary/80">
+                            Vous avez regardé un épisode de <span className="text-accent-primary">{lastEpisodeWatched?.shows.title}</span>
+                        </p>
+                    )
+                    }
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-accent-primary"></div>

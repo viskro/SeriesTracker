@@ -7,7 +7,6 @@ import { Checkbox } from "@/components/shadcn/checkbox";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { signUp } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
 import { Section } from "@/components/Layout/Section";
 import { useAuthStore } from "@/lib/stores/authStore";
 import { useUIStore } from "@/lib/stores/uiStore";
@@ -19,7 +18,6 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [acceptTerms, setAcceptTerms] = useState(false);
@@ -66,7 +64,7 @@ export default function SignUp() {
                     email,
                     password,
                     name: username,
-                    callbackURL: "/dashboard"
+                    callbackURL: "/dashboard",
                 },
                 {
                     onRequest: () => {
@@ -76,6 +74,7 @@ export default function SignUp() {
                     onResponse: () => {
                         setLoading(false);
                     },
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     onSuccess: (data: any) => {
                         setLoading(false);
                         setUser(data.user);
@@ -83,20 +82,22 @@ export default function SignUp() {
                             id: uuidv4(),
                             type: NOTIFICATION_TYPES.SUCCESS,
                             message: NOTIFICATION_MESSAGES.AUTH.LOGIN_SUCCESS,
-                            duration: NOTIFICATION_DURATION
+                            duration: NOTIFICATION_DURATION,
                         });
-                        router.push("/dashboard");
                     },
                     onError: (error) => {
                         setLoading(false);
-                        setError(error.error.message || "Une erreur s'est produite lors de l'inscription");
+                        setError(
+                            error.error.message ||
+                            "Une erreur s'est produite lors de l'inscription"
+                        );
                         addNotification({
                             id: uuidv4(),
                             type: NOTIFICATION_TYPES.ERROR,
                             message: `${NOTIFICATION_MESSAGES.AUTH.ERROR} : ${error.error.message}`,
-                            duration: NOTIFICATION_DURATION
+                            duration: NOTIFICATION_DURATION,
                         });
-                    }
+                    },
                 }
             );
         } catch {

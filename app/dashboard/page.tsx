@@ -64,7 +64,8 @@ export default async function Dashboard() {
                 },
                 _count: {
                     select: {
-                        users_shows: true
+                        users_shows: true,
+                        users_episodes: true
                     }
                 }
             }
@@ -99,6 +100,40 @@ export default async function Dashboard() {
         }
     })
 
+    // Calcul du temps passé en utilisant une durée moyenne de 40 minutes par épisode
+    const averageEpisodeDurationMinutes = 40;
+    const totalWatchedEpisodes = userData?.users_episodes.length;
+    let totalTimeSpentMinutes = 0;
+    if (totalWatchedEpisodes) {
+        totalTimeSpentMinutes = totalWatchedEpisodes * averageEpisodeDurationMinutes;
+    }
+
+    const hours = Math.floor(totalTimeSpentMinutes / 60);
+    const minutes = totalTimeSpentMinutes % 60;
+    const timeSpentString = `${hours}H\n${minutes}M`;
+
+    const totalEpisodesToWatch = await prisma.seasons.count({
+        where: {
+            shows: {
+                users_shows: {
+                    every: {
+                        user: {
+                            id: user.id,
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    let timeAvailable = 0;
+    if (userData?.users_episodes) {
+        timeAvailable = totalEpisodesToWatch * averageEpisodeDurationMinutes;
+
+    }
+
+    const timeTowatch = `${Math.floor(timeAvailable / 60)}H\n${timeAvailable % 60}M`;
+
     let lastEpisodeWatched = null;
     if (userData?.users_episodes && userData.users_episodes.length > 0) {
         lastEpisodeWatched = await prisma.seasons.findUnique({
@@ -131,6 +166,8 @@ export default async function Dashboard() {
 
     const [showComments, episodeComments, archivedShowsCount] = stats;
     const countComments = showComments + episodeComments;
+    const totalCatalogueShows = await prisma.shows.count();
+    const totalUserListShows = userData.users_shows.length;
 
     return (
         <DashboardClient
@@ -144,6 +181,10 @@ export default async function Dashboard() {
             lastEpisodeWatched={lastEpisodeWatched}
             countShowsFinished={countShowsFinished}
             countShowsOngoing={countShowsOngoing}
+            totalCatalogueShows={totalCatalogueShows}
+            totalUserListShows={totalUserListShows}
+            timeSpent={timeSpentString}
+            timeTowatch={timeTowatch}
         />
     );
 }

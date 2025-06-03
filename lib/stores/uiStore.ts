@@ -18,7 +18,7 @@ interface Notification {
 }
 
 export const useUIStore = create<UIState>((set) => ({
-	isMenuOpen: true,
+	isMenuOpen: false,
 	currentTheme: "dark",
 	notifications: [],
 	toggleMenu: () => set((state) => ({ isMenuOpen: !state.isMenuOpen })),
