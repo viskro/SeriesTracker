@@ -4,6 +4,7 @@ import { Heart, ListPlus, ListX } from "lucide-react";
 import { Button } from "@/components/shadcn/button";
 import { useListActions } from "../hooks/useListActions";
 import { useAuth } from "../../../lib/hooks/useAuth";
+import { useAuthStore } from "@/lib/stores/authStore";
 
 interface Props {
     showId: number;
@@ -12,15 +13,16 @@ interface Props {
 }
 
 export default function ListButtons({ showId, isInList, isFavorite }: Props) {
-    const { userId, isAuthenticated } = useAuth();
+    // const { userId, isAuthenticated } = useAuth();
+    const { user } = useAuthStore();
     const { isLoading, handleListAction, handleFavoriteAction } = useListActions(
         showId,
-        userId || "",
+        user?.id || "",
         isInList,
         isFavorite
     );
 
-    if (!isAuthenticated) {
+    if (!user) {
         return null;
     }
 

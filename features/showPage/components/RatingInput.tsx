@@ -3,7 +3,7 @@
 import { Star } from "lucide-react";
 import { useState } from "react";
 import { submitRating } from "../actions/RatingAction";
-import { useAuth } from "../../../lib/hooks/useAuth";
+import { useAuthStore } from "@/lib/stores/authStore";
 
 interface Props {
     showId: number;
@@ -12,18 +12,19 @@ interface Props {
 }
 
 export default function RatingInput({ showId, isInList, currentRating }: Props) {
-    const { userId, isAuthenticated } = useAuth();
+    // const { userId, isAuthenticated } = useAuth();
+    const { user } = useAuthStore();
     const [hoveredRating, setHoveredRating] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    if (!isInList || !isAuthenticated) {
+    if (!isInList || !user) {
         return null;
     }
 
     const handleRating = async (rating: number) => {
-        if (!userId) return;
+        if (!user.id) return;
         setIsLoading(true);
-        await submitRating(showId, userId, rating);
+        await submitRating(showId, user.id, rating);
         setIsLoading(false);
     };
 

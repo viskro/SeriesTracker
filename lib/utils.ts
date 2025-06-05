@@ -9,11 +9,20 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-export async function trad(text: string | null) {
+export async function trad(text: string | null): Promise<string | null> {
 	// Nettoyer le texte des balises html
 	const cleanText = (html: string) => html.replace(/<[^>]*>/g, "").trim();
 	const synopsis = cleanText(text || "");
 
-	// Traduire de l'anglais au français
-	return await translate(synopsis, "fr");
+	try {
+		// Traduire de l'anglais au français
+		return await translate(synopsis, "fr");
+	} catch (error: any) {
+		if (error.message.includes("429")) {
+			console.error("Erreur 429 : Trop de requêtes. Réessayez plus tard.");
+		} else {
+			console.error("Erreur lors de la traduction :", error);
+		}
+		return null; // Retourne null en cas d'erreur
+	}
 }

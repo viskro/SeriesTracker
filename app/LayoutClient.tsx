@@ -9,7 +9,7 @@ import { useSessionSync } from "@/lib/hooks/useSession";
 export function LayoutClient({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAuthPage = pathname.startsWith("/auth");
-    useSessionSync();
+    // useSessionSync();
 
     return (
         <>

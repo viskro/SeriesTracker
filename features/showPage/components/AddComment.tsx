@@ -5,17 +5,18 @@ import { Textarea } from "@/components/shadcn/textarea";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/shadcn/button";
 import { useCommentActions } from "../hooks/useCommentActions";
-import { useAuth } from "../../../lib/hooks/useAuth";
+import { useAuthStore } from "@/lib/stores/authStore";
 
 interface Props {
     idShow: number;
 }
 
 export default function AddComment({ idShow }: Props) {
-    const { userId, isAuthenticated } = useAuth();
-    const { content, setContent, isLoading, handleSubmit } = useCommentActions(userId || "", idShow);
+    // const { userId, isAuthenticated } = useAuth();
+    const { user } = useAuthStore();
+    const { content, setContent, isLoading, handleSubmit } = useCommentActions(user?.id || "", idShow);
 
-    if (!isAuthenticated) {
+    if (!user) {
         return null;
     }
 

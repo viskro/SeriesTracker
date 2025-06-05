@@ -4,6 +4,7 @@ import { getUser } from "@/lib/auth-session";
 import { trad } from "@/lib/utils";
 import { getShowDetails } from "@/features/showPage/actions/getShowDetails";
 import { getUserShowState } from "@/features/showPage/hooks/useUserShowState";
+import { useAuthStore } from "@/lib/stores/authStore";
 
 type PageProps = {
     params: Promise<{ id: string }>
@@ -11,7 +12,8 @@ type PageProps = {
 
 export default async function Page({ params }: PageProps) {
     const { id } = await params;
-    const user = await getUser();
+    // const user = await getUser();
+    const { user } = await useAuthStore()
     const showId = parseInt(id);
 
     if (isNaN(showId)) {
@@ -25,12 +27,10 @@ export default async function Page({ params }: PageProps) {
 
     const { show, averageRating, totalRatings, cast, seasons, genres, platforms } = showDetails;
     const { isInList, isFavorite, currentRating } = await getUserShowState(user?.id, showId);
-    let synopsis;
-    if (show.summary === "") {
-        return
-    } else {
-        synopsis = await trad(show.summary);
-    }
+
+
+      const synopsis = await trad(show.summary);
+    
 
     return (
         <PageClient

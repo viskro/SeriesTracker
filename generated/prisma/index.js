@@ -365,7 +365,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Administrator\\Desktop\\Dev\\SeriesTracker-main\\SeriesTracker-main\\generated\\prisma",
+      "value": "C:\\Users\\e6k20508\\Documents\\GitHub\\SeriesTracker\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -379,7 +379,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Administrator\\Desktop\\Dev\\SeriesTracker-main\\SeriesTracker-main\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\e6k20508\\Documents\\GitHub\\SeriesTracker\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -393,6 +393,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

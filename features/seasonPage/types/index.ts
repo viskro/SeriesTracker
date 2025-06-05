@@ -27,5 +27,5 @@ export type SeasonPageProps = {
 		summary: string | null;
 	};
 	episodes: EpisodeWithShowId[];
-	synopsis: string;
+	synopsis: string | null;
 };

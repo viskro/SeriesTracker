@@ -18,15 +18,9 @@ export default async function Page({ params }: { params: Promise<{ season_id: st
     }
 
     const { season, episodes } = seasonData;
-    let synopsis: string;
-    if (seasonData.season.summary === null ||
-        seasonData.season.summary === undefined ||
-        seasonData.season.summary === ""
-    ) {
-        synopsis = "Aucune description trouvée";
-    } else {
-        synopsis = await trad(seasonData.season.summary);
-    }
+
+    const synopsis: string | null = await trad(seasonData.season.summary);
+    
 
 
 

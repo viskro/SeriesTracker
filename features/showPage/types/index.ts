@@ -28,7 +28,7 @@ export type ShowPageProps = {
 	totalRatings: number;
 	cast: CastMember[];
 	seasons: SeasonDisplay[];
-	synopsis: string;
+	synopsis: string | null;
 	genres: string[];
 	platforms: string[];
 };
