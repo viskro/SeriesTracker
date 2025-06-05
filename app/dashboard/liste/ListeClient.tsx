@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Input } from '@/components/shadcn/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/shadcn/select';
-import { Section } from '@/components/Layout/Section';
+import { Section } from '@/features/layout/components/Section';
 import { Search, Filter } from 'lucide-react';
 import { ShowCard } from './components/ShowCard';
 

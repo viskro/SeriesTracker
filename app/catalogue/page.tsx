@@ -1,156 +1,27 @@
 import { CardSerieCatalogue } from "@/components/Cards/CardSerieCatalogue";
-import { Section } from "@/components/Layout/Section";
+import { Section } from "@/features/layout/components/Section";
 import { Pagination } from "@/components/shared/Pagination";
-import prisma from "@/lib/prisma";
-import { buildWhereClause, FilterType } from "@/lib/types/filters";
-import { CatalogueControls } from "./components/CatalogueControls";
-
-const ITEMS_PER_PAGE = 12;
-
-type ShowWithRelations = {
-    show_id: number;
-    title: string;
-    image: string | null;
-    summary: string | null;
-    seasons: {
-        episodes: {
-            airdate: string | null;
-        }[];
-    }[];
-    platforms: {
-        platforms: {
-            name: string;
-        };
-    }[];
-    genres: {
-        genres: {
-            name: string;
-        };
-    }[];
-};
+import { CatalogueControls } from "@/features/catalogue/components/CatalogueControls";
+import { getShows } from "@/features/catalogue/actions/getShows";
+import { parseFilters } from "@/features/catalogue/actions/parseFilters";
+import { SearchParams } from "@/features/catalogue/types";
 
 export default async function Page({
     searchParams,
 }: {
-    searchParams: Promise<{
-        page?: string;
-        platform?: string;
-        category?: string;
-        rating?: string;
-        initial?: string;
-        sort?: string;
-        order?: string;
-        q?: string;
-    }>;
+    searchParams: Promise<SearchParams>;
 }) {
-    const { page, platform, category, initial, sort, order, rating, q } = await searchParams;
-    const currentPage = await Number(page) || 1;
-    const skip = (currentPage - 1) * ITEMS_PER_PAGE;
+    const { page, sort, order, q } = await searchParams;
+    const currentPage = Number(page) || 1;
 
-    // Construire les filtres
-    const filters: Partial<Record<FilterType, string[]>> = {};
-    if (platform) filters.platform = platform.split(',').filter(Boolean);
-    if (category) filters.category = category.split(',').filter(Boolean);
-    if (rating) filters.rating = rating.split(',').filter(Boolean);
-    if (initial) filters.initial = initial.split(',').filter(Boolean);
-
-    // Construire la clause where
-    const whereClause = buildWhereClause(filters as Record<FilterType, string[]>, q);
-
-    // Construire la clause where pour le comptage (exclut mode: 'insensitive' pour le titre si q est présent)
-    const countWhereClause = q
-        ? { ...whereClause, title: { contains: q } }
-        : whereClause;
-
-    const showCount = await prisma.shows.count({
-        where: countWhereClause
-    });
-
-    const shows = await prisma.shows.findMany({
-        where: whereClause,
-        skip,
-        take: ITEMS_PER_PAGE,
-        orderBy: sort === "rating" || sort === "date"
-            ? undefined
-            : sort === "title"
-                ? { title: order as "asc" | "desc" }
-                : { title: "asc" },
-        select: {
-            show_id: true,
-            title: true,
-            image: true,
-            summary: true,
-            seasons: {
-                select: {
-                    episodes: {
-                        select: {
-                            airdate: true,
-                        }
-                    }
-                }
-            },
-            platforms: {
-                select: {
-                    platforms: {
-                        select: {
-                            name: true,
-                        }
-                    }
-                }
-            },
-            genres: {
-                select: {
-                    genres: {
-                        select: {
-                            name: true
-                        }
-                    }
-                }
-            }
-        }
-    }) as ShowWithRelations[];
-
-    // Récupérer les notes moyennes pour toutes les séries
-    const ratingStats = await prisma.userShows.groupBy({
-        by: ['id_show'],
-        _avg: {
-            rating: true
-        },
-        _count: {
-            rating: true
-        }
-    });
-
-    // Créer un map des notes moyennes pour un accès facile
-    const ratingMap = new Map(
-        ratingStats.map(stat => [
-            stat.id_show,
-            {
-                average: stat._avg.rating ? Math.round(stat._avg.rating) : 0,
-                count: stat._count.rating
-            }
-        ])
+    const filters = parseFilters(await searchParams);
+    const { shows, showCount, ratingMap, totalPages } = await getShows(
+        filters,
+        q,
+        currentPage,
+        sort,
+        order
     );
-
-    // Si le tri est par note ou par date, trier les shows en mémoire
-    if (sort === "rating" || sort === "date") {
-        shows.sort((a, b) => {
-            if (sort === "rating") {
-                const ratingA = ratingMap.get(a.show_id)?.average || 0;
-                const ratingB = ratingMap.get(b.show_id)?.average || 0;
-                return order === "asc" ? ratingA - ratingB : ratingB - ratingA;
-            } else {
-                // Tri par date
-                const dateA = a.seasons[0]?.episodes[0]?.airdate || '';
-                const dateB = b.seasons[0]?.episodes[0]?.airdate || '';
-                return order === "asc"
-                    ? dateA.localeCompare(dateB)
-                    : dateB.localeCompare(dateA);
-            }
-        });
-    }
-
-    const totalPages = Math.ceil(showCount / ITEMS_PER_PAGE);
 
     return (
         <main className="w-full min-h-screen bg-background-primary">

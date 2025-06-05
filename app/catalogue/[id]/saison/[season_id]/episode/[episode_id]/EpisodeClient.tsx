@@ -1,64 +1,21 @@
 "use client";
 
-import { Section } from "@/components/Layout/Section";
+import { Section } from "@/features/layout/components/Section";
 import Image from "next/image";
 import { useState } from "react";
-import { Comment } from "@/app/catalogue/[id]/components/Comment";
-import AddComment from "@/app/catalogue/[id]/components/AddComment";
-import { markEpisodeAsWatched, markEpisodeAsUnwatched } from "./actions";
-import { useShowStatus } from "@/lib/hooks/useShowStatus";
+import { Comment } from "@/features/showPage/components/Comment";
+import AddComment from "@/features/showPage/components/AddComment";
+import { useEpisodeActions } from "@features/episodePage/hooks/useEpisodeActions";
+import { EpisodePageProps } from "@features/episodePage/types";
 
-interface Comment {
-    content: string;
-    postedAt: Date;
-    user: {
-        name: string;
-    };
-}
-
-interface Show {
-    show_id: number;
-    title: string;
-    image: string | null;
-}
-
-interface Episode {
-    episode_id: number;
-    name: string;
-    season_number: number;
-    episode_number: number | null;
-    airdate: string | null;
-    summary: string | null;
-    image: string | null;
-}
-
-interface Props {
-    episode: Episode;
-    show: Show;
-    isWatched: boolean;
-    comments: Comment[];
-    userId?: string;
-    synopsis: string;
-}
-
-export default function EpisodeClient({ episode, show, isWatched: initialIsWatched, comments, userId, synopsis }: Props) {
+export default function EpisodeClient({ episode, show, isWatched: initialIsWatched, comments, userId, synopsis }: EpisodePageProps) {
     const [isWatched, setIsWatched] = useState(initialIsWatched);
-    const { handleEpisodeWatched } = useShowStatus();
+    const { isLoading, handleWatchToggle } = useEpisodeActions(episode.episode_id, userId || "", show.show_id);
 
-    const handleWatchToggle = async () => {
-        if (!userId) return;
-
-        try {
-            if (isWatched) {
-                await markEpisodeAsUnwatched(episode.episode_id, userId);
-                await handleEpisodeWatched(userId, show.show_id);
-            } else {
-                await markEpisodeAsWatched(episode.episode_id, userId);
-                await handleEpisodeWatched(userId, show.show_id);
-            }
+    const onWatchToggle = async () => {
+        const success = await handleWatchToggle(isWatched);
+        if (success) {
             setIsWatched(!isWatched);
-        } catch (error) {
-            console.error('Erreur lors de la mise à jour du statut:', error);
         }
     };
 
@@ -94,7 +51,8 @@ export default function EpisodeClient({ episode, show, isWatched: initialIsWatch
                         </div>
                         {userId && (
                             <button
-                                onClick={handleWatchToggle}
+                                onClick={onWatchToggle}
+                                disabled={isLoading}
                                 className={`mt-4 px-6 py-3 rounded-xl font-title text-lg transition-colors duration-200 ${isWatched
                                     ? 'bg-accent-primary/20 text-accent-primary hover:bg-accent-primary/30'
                                     : 'bg-accent-primary text-white hover:bg-accent-primary/90'
@@ -111,7 +69,7 @@ export default function EpisodeClient({ episode, show, isWatched: initialIsWatch
                 <Section className="mt-20 relative w-full">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-primary/5 to-transparent rounded-3xl -z-10" />
                     <div className="w-full max-w-7xl mx-auto p-8">
-                        <AddComment idShow={episode.episode_id} idUser={userId} />
+                        <AddComment idShow={episode.episode_id} />
                     </div>
                 </Section>
             )}

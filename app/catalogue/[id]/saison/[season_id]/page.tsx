@@ -1,6 +1,6 @@
-import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import SeasonClient from "./SeasonClient";
+import { getSeasonDetails } from "@/features/seasonPage/actions/getSeasonDetails";
+import SeasonClient from "@/features/seasonPage/components/SeasonClient";
 import { trad } from "@/lib/utils";
 
 export default async function Page({ params }: { params: Promise<{ season_id: string }> }) {
@@ -11,58 +11,30 @@ export default async function Page({ params }: { params: Promise<{ season_id: st
         notFound();
     }
 
-    const season = await prisma.seasons.findUnique({
-        where: {
-            season_id: seasonId,
-        },
-        include: {
-            shows: {
-                select: {
-                    show_id: true,
-                    title: true,
-                    image: true,
-                }
-            },
-            episodes: {
-                orderBy: {
-                    episode_number: 'asc',
-                },
-                select: {
-                    episode_id: true,
-                    name: true,
-                    image: true,
-                    summary: true,
-                    url: true,
-                    season_id: true,
-                    episode_number: true,
-                    season_number: true,
-                    airdate: true,
-                    seasons: {
-                        select: {
-                            show_id: true
-                        }
-                    }
-                }
-            },
-        },
-    });
+    const seasonData = await getSeasonDetails(seasonId);
 
-    if (!season) {
+    if (!seasonData) {
         notFound();
     }
 
-    const episodesWithShowId = season.episodes.map(episode => ({
-        ...episode,
-        show_id: episode.seasons.show_id
-    }));
+    const { season, episodes } = seasonData;
+    let synopsis: string;
+    if (seasonData.season.summary === null ||
+        seasonData.season.summary === undefined ||
+        seasonData.season.summary === ""
+    ) {
+        synopsis = "Aucune description trouvée";
+    } else {
+        synopsis = await trad(seasonData.season.summary);
+    }
 
-    const synopsis = await trad(season.summary)
+
 
     return (
         <SeasonClient
             season={season}
             show={season.shows}
-            episodes={episodesWithShowId}
+            episodes={episodes}
             synopsis={synopsis}
         />
     );

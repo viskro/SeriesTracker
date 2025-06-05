@@ -1,8 +1,9 @@
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import EpisodeClient from "./EpisodeClient";
 import { trad } from "@/lib/utils";
 import { getUser } from "@/lib/auth-session";
+import EpisodeClient from "./EpisodeClient";
+import { Episode } from "@/features/episodePage/types";
 
 export default async function Page({ params }: {
     params: Promise<{ id: string; season_id: string; episode_id: string }>;
@@ -69,7 +70,7 @@ export default async function Page({ params }: {
 
     return (
         <EpisodeClient
-            episode={episode}
+            episode={episode as Episode}
             show={episode.seasons.shows}
             isWatched={isWatched}
             comments={comments}

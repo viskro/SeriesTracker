@@ -1,43 +1,20 @@
 "use client";
 
-import { Section } from "@/components/Layout/Section";
+import { Section } from "@/features/layout/components/Section";
+import { Episodes, Seasons } from "@/generated/prisma";
+import { Show } from "@/lib/types";
+import { trad } from "@/lib/utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-interface Episode {
-    episode_id: number;
-    name: string;
-    season_number: number;
-    episode_number: number | null;
-    airdate: string | null;
-    summary: string | null;
-    image: string | null;
-}
-
-interface Show {
-    show_id: number;
-    title: string;
-    image: string | null;
-}
-
-interface Season {
-    season_id: number;
-    summary: string | null;
-    image: string | null;
-}
-
 interface Props {
-    season: Season;
+    season: Seasons;
     show: Show;
-    episodes: Episode[];
+    episodes: Episodes[];
     synopsis: string;
 }
 
 export default function SeasonClient({ season, show, episodes, synopsis }: Props) {
-    const cleanText = (html: string | null) => {
-        if (!html) return "";
-        return html.replace(/<[^>]*>/g, '').trim();
-    };
     const router = useRouter();
 
     return (
@@ -121,7 +98,7 @@ export default function SeasonClient({ season, show, episodes, synopsis }: Props
                                         </div>
                                         {episode.summary && (
                                             <p className="text-primary leading-relaxed">
-                                                {cleanText(episode.summary)}
+                                                {trad(episode.summary)}
                                             </p>
                                         )}
                                     </div>

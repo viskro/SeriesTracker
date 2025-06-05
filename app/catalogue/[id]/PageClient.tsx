@@ -1,47 +1,35 @@
 "use client"
 
-import { Section } from '@/components/Layout/Section';
+import { Section } from '@/features/layout/components/Section';
 import Image from 'next/image';
-import AddComment from './components/AddComment';
-import { Comment } from './components/Comment';
+import AddComment from '@/features/showPage/components/AddComment';
+import { Comment } from '@/features/showPage/components/Comment';
 import { useAuthStore } from '@/lib/stores/authStore';
-import { Show } from '@/lib/types';
-import ListButtons from './components/ListButtons';
-import RatingInput from './components/RatingInput';
+import ListButtons from '@/features/showPage/components/ListButtons';
+import RatingInput from '@/features/showPage/components/RatingInput';
 import { StarRating } from '@/components/Cards/StarRating';
-import { CastCarousel } from '@/app/catalogue/[id]/components/CastCarousel';
-import { SeasonsList } from './components/SeasonsList';
+import { CastCarousel } from '@/features/showPage/components/CastCarousel';
+import { SeasonsList } from '@/features/showPage/components/SeasonsList';
+import { ShowPageProps } from '@/features/showPage/types';
 
-interface Props {
-    show: Show | null;
-    isInList: boolean;
-    isFavorite: boolean;
-    currentRating?: number | null;
-    averageRating: number;
-    totalRatings: number;
-    cast: {
-        id: number;
-        name: string;
-        image?: string | null;
-        character: string;
-    }[];
-    seasons: {
-        id: number;
-        image?: string | null;
-    }[];
-    synopsis: string;
-    genres: string[];
-    platforms: string[];
-}
-
-export default function PageClient({ show, isInList, isFavorite, currentRating, averageRating, totalRatings, cast, seasons, synopsis, genres, platforms }: Props) {
+export default function PageClient({
+    show,
+    isInList,
+    isFavorite,
+    currentRating,
+    averageRating,
+    totalRatings,
+    cast,
+    seasons,
+    synopsis,
+    genres,
+    platforms
+}: ShowPageProps) {
     const { user, isAuthenticated, isLoading } = useAuthStore();
 
     if (!show) {
         return <Section>Série introuvable</Section>;
     }
-
-
 
     return (
         <main className="w-full min-h-screen bg-background-primary">
@@ -73,7 +61,7 @@ export default function PageClient({ show, isInList, isFavorite, currentRating, 
                             </div>
                             <div className='flex flex-col gap-2'>
                                 <h2 className="text-xl font-title text-accent-primary">Nombre de saisons</h2>
-                                <p className="text-text-primary/90">{show._count.seasons}</p>
+                                <p className="text-text-primary/90">{show._count?.seasons}</p>
                             </div>
                         </div>
                         <div className="space-y-2">
@@ -89,13 +77,11 @@ export default function PageClient({ show, isInList, isFavorite, currentRating, 
                             <div className='mt-auto flex flex-col gap-4'>
                                 <ListButtons
                                     showId={show.show_id}
-                                    userId={user.id}
                                     isInList={isInList}
                                     isFavorite={isFavorite}
                                 />
                                 <RatingInput
                                     showId={show.show_id}
-                                    userId={user.id}
                                     isInList={isInList}
                                     currentRating={currentRating}
                                 />
@@ -117,7 +103,7 @@ export default function PageClient({ show, isInList, isFavorite, currentRating, 
                 <Section className="mt-20 relative w-full">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-primary/5 to-transparent rounded-3xl -z-10" />
                     <div className="w-full max-w-7xl mx-auto p-8">
-                        <AddComment idShow={show.show_id} idUser={user.id} />
+                        <AddComment idShow={show.show_id} />
                     </div>
                 </Section>
             )}
@@ -125,12 +111,12 @@ export default function PageClient({ show, isInList, isFavorite, currentRating, 
             <Section className="mt-10 mb-20 relative w-full">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-primary/5 to-transparent rounded-3xl -z-10" />
                 <div className="w-full max-w-7xl mx-auto p-8">
-                    <h2 className="font-title text-2xl text-accent-primary mb-8">Commentaires ({show._count.comments})</h2>
-                    {show.comments.length === 0 ? (
+                    <h2 className="font-title text-2xl text-accent-primary mb-8">Commentaires ({show._count?.comments})</h2>
+                    {show.comments?.length === 0 ? (
                         <p className="text-text-primary/80">Aucun commentaire pour le moment.</p>
                     ) : (
                         <div className="flex flex-col gap-4">
-                            {show.comments.map((comment, index) => (
+                            {show.comments?.map((comment, index) => (
                                 <Comment
                                     key={index}
                                     user={comment.user}

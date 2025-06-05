@@ -3,7 +3,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { LayoutClient } from "./LayoutClient";
 import { Roboto, Poppins, Space_Mono } from "next/font/google";
-import { Notifications } from "@/components/Layout/Notifications";
+import { Notifications } from "@/features/layout/components/Notifications";
 import { Analytics } from "@vercel/analytics/next"
 
 const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: "600" });

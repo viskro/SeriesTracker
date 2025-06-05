@@ -1,6 +1,6 @@
 "use client";
 
-import { Section } from "@/components/Layout/Section";
+import { Section } from "@/features/layout/components/Section";
 import { useAuthStore } from "@/lib/stores/authStore";
 import Image from "next/image";
 import { ProgressionCard } from "./components/ProgressionCard";

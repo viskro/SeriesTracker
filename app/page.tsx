@@ -2,10 +2,13 @@ import Image from "next/image"
 import catalogueImage from "../public/images/catalogue_serie.jpg"
 import PrimaryButton from "@/components/Buttons/PrimaryButton"
 import { CalendarDays, MessageCircleMore, UserCheck } from "lucide-react"
-import { CardSerieIndex } from "@/components/Cards/CardSerieIndex"
-import { Section } from "@/components/Layout/Section"
+import { CardSerieIndex } from "@/features/index/components/CardSerieIndex"
+import { Section } from "@/features/layout/components/Section"
+import { GetPopularShows } from "@/features/index/actions/getPopularShows"
 
-export default function Home() {
+export default async function Home() {
+
+  const popularShows = await GetPopularShows();
 
   return (
     <main className="w-full h-full flex flex-col items-center bg-background-primary">
@@ -100,10 +103,9 @@ export default function Home() {
         <div className="flex flex-col gap-12">
           <h2 className="font-title text-accent-primary text-3xl">Séries populaires</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <CardSerieIndex />
-            <CardSerieIndex />
-            <CardSerieIndex />
-            <CardSerieIndex />
+            {popularShows.map((show) => (
+              <CardSerieIndex key={show.show_id} show={show} />
+            ))}
           </div>
         </div>
       </Section>

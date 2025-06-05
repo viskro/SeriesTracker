@@ -364,7 +364,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Administrator\\Desktop\\Dev\\series_tracker\\generated\\prisma",
+      "value": "C:\\Users\\Administrator\\Desktop\\Dev\\SeriesTracker-main\\SeriesTracker-main\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -378,7 +378,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Administrator\\Desktop\\Dev\\series_tracker\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Administrator\\Desktop\\Dev\\SeriesTracker-main\\SeriesTracker-main\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
