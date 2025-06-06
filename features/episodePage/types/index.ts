@@ -34,5 +34,5 @@ export interface EpisodePageProps {
 	isWatched: boolean;
 	comments: Comment[];
 	userId?: string;
-	synopsis: string | null;
+	synopsis: string | null | undefined;
 }

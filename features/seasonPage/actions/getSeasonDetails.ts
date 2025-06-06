@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import prisma from "@/shared/lib/prisma";
 import { SeasonWithDetails } from "../types";
 
 export async function getSeasonDetails(seasonId: number) {

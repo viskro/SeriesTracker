@@ -1,13 +1,13 @@
-import { signOut } from "@/lib/auth-client";
+import { signOut } from "@/shared/lib/auth-client";
 import {
 	NOTIFICATION_DURATION,
 	NOTIFICATION_TYPES,
 	NOTIFICATION_MESSAGES,
-} from "@/lib/constants/notifications";
+} from "@/shared/constants/notifications";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import { useAuthStore } from "@/lib/stores/authStore";
-import { useUIStore } from "@/lib/stores/uiStore";
+import { useAuthStore } from "@/shared/stores/authStore";
+import { useUIStore } from "@/shared/stores/uiStore";
 
 export function useLogout() {
 	const { logout } = useAuthStore();

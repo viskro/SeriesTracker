@@ -1,14 +1,14 @@
 "use client";
 
 import Link from 'next/link'
-import PrimaryButton from '../../../components/Buttons/PrimaryButton'
-import SecondaryButton from '../../../components/Buttons/SecondaryButton'
-import { Avatar, AvatarImage } from '../../../components/shadcn/avatar'
-import { Skeleton } from '../../../components/shadcn/skeleton';
+import PrimaryButton from '../../../shared/components/PrimaryButton'
+import SecondaryButton from '../../../shared/components/SecondaryButton'
+import { Avatar, AvatarImage } from '../../../shared/components/shadcn/avatar'
+import { Skeleton } from '../../../shared/components/shadcn/skeleton';
 
 import { Menu, X } from 'lucide-react';
-import { useAuthStore } from '@/lib/stores/authStore';
-import { useUIStore } from '@/lib/stores/uiStore';
+import { useAuthStore } from '@/shared/stores/authStore';
+import { useUIStore } from '@/shared/stores/uiStore';
 import { useLogout } from '../hooks/useLogout';
 
 

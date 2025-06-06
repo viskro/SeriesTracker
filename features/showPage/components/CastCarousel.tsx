@@ -5,9 +5,9 @@ import {
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
-} from "@/components/shadcn/carousel";
+} from "@/shared/components/shadcn/carousel";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils/utils";
 
 interface CastMember {
     id: number;

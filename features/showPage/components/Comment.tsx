@@ -1,6 +1,6 @@
-import { Avatar, AvatarImage } from "@/components/shadcn/avatar";
-import { CommentType } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import { Avatar, AvatarImage } from "@/shared/components/shadcn/avatar";
+import { CommentType } from "@/shared/types/types";
+import { cn } from "@/shared/utils/utils";
 
 export function Comment({ className, user, postedAt, content }: CommentType) {
     return (

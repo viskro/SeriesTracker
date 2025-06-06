@@ -2,10 +2,10 @@
 
 import { Section } from "@/features/layout/components/Section";
 import { SignInForm } from "@/features/auth/components/SignInForm";
-import { useSession } from "@/lib/auth-client";
-import { useAuthStore } from "@/lib/stores/authStore";
-import { useUIStore } from "@/lib/stores/uiStore";
-import { NOTIFICATION_DURATION, NOTIFICATION_TYPES, NOTIFICATION_MESSAGES } from "@/lib/constants/notifications";
+import { useSession } from "@/shared/lib/auth-client";
+import { useAuthStore } from "@/shared/stores/authStore";
+import { useUIStore } from "@/shared/stores/uiStore";
+import { NOTIFICATION_DURATION, NOTIFICATION_TYPES, NOTIFICATION_MESSAGES } from "@/shared/constants/notifications";
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

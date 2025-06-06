@@ -1,5 +1,8 @@
-import prisma from "@/lib/prisma";
-import { buildWhereClause, FilterType } from "@/lib/types/filters";
+import prisma from "@/shared/lib/prisma";
+import {
+	buildWhereClause,
+	FilterType,
+} from "@/features/catalogue/types/filters";
 import { ShowWithRelations, RatingStats } from "../types";
 
 const ITEMS_PER_PAGE = 12;

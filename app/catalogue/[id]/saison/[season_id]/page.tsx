@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getSeasonDetails } from "@/features/seasonPage/actions/getSeasonDetails";
 import SeasonClient from "@/features/seasonPage/components/SeasonClient";
-import { trad } from "@/lib/utils";
+import { cleanText } from "@/shared/utils/utils";
 
 export default async function Page({ params }: { params: Promise<{ season_id: string }> }) {
     const { season_id } = await params;
@@ -19,8 +19,8 @@ export default async function Page({ params }: { params: Promise<{ season_id: st
 
     const { season, episodes } = seasonData;
 
-    const synopsis: string | null = await trad(seasonData.season.summary);
-    
+    const synopsis: string | null | undefined = cleanText(seasonData.season.summary);
+
 
 
 

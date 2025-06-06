@@ -1,17 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { signUp } from "@/lib/auth-client";
-import { useAuthStore } from "@/lib/stores/authStore";
-import { useUIStore } from "@/lib/stores/uiStore";
+import { signUp } from "@/shared/lib/auth-client";
+import { useAuthStore } from "@/shared/stores/authStore";
+import { useUIStore } from "@/shared/stores/uiStore";
 import {
 	NOTIFICATION_DURATION,
 	NOTIFICATION_TYPES,
 	NOTIFICATION_MESSAGES,
-} from "@/lib/constants/notifications";
+} from "@/shared/constants/notifications";
 import { v4 as uuidv4 } from "uuid";
 import { SignUpFormData } from "../types";
-import { UserData } from "@/lib/types";
+import { UserData } from "@/shared/types/types";
 
 export function useSignUp() {
 	const [loading, setLoading] = useState(false);

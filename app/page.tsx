@@ -1,6 +1,6 @@
 import Image from "next/image"
 import catalogueImage from "../public/images/catalogue_serie.jpg"
-import PrimaryButton from "@/components/Buttons/PrimaryButton"
+import PrimaryButton from "@/shared/components/PrimaryButton"
 import { CalendarDays, MessageCircleMore, UserCheck } from "lucide-react"
 import { CardSerieIndex } from "@/features/index/components/CardSerieIndex"
 import { Section } from "@/features/layout/components/Section"

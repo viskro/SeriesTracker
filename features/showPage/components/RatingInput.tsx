@@ -3,7 +3,7 @@
 import { Star } from "lucide-react";
 import { useState } from "react";
 import { submitRating } from "../actions/RatingAction";
-import { useAuthStore } from "@/lib/stores/authStore";
+import { useAuthStore } from "@/shared/stores/authStore";
 
 interface Props {
     showId: number;

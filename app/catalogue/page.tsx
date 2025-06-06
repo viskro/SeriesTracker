@@ -1,6 +1,6 @@
-import { CardSerieCatalogue } from "@/components/Cards/CardSerieCatalogue";
+import { CardSerieCatalogue } from "@/features/catalogue/components/CardSerieCatalogue";
 import { Section } from "@/features/layout/components/Section";
-import { Pagination } from "@/components/shared/Pagination";
+import { Pagination } from "@/features/catalogue/components/Pagination";
 import { CatalogueControls } from "@/features/catalogue/components/CatalogueControls";
 import { getShows } from "@/features/catalogue/actions/getShows";
 import { parseFilters } from "@/features/catalogue/actions/parseFilters";

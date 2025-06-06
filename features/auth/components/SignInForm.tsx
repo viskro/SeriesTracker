@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/shadcn/button";
-import { Input } from "@/components/shadcn/input";
-import { Label } from "@/components/shadcn/label";
-import { Checkbox } from "@/components/shadcn/checkbox";
+import { Button } from "@/shared/components/shadcn/button";
+import { Input } from "@/shared/components/shadcn/input";
+import { Label } from "@/shared/components/shadcn/label";
+import { Checkbox } from "@/shared/components/shadcn/checkbox";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useSignIn } from "../hooks/useSignIn";

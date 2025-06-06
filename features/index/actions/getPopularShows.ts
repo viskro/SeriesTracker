@@ -1,5 +1,5 @@
-import prisma from "@/lib/prisma";
-import { Show } from "@/lib/types";
+import prisma from "@/shared/lib/prisma";
+import { Show } from "@/shared/types/types";
 
 interface ShowWithGenres extends Show {
 	genres: {

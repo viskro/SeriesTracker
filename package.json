@@ -49,6 +49,7 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.7",
     "@types/axios": "^0.9.36",
+    "@types/html-to-text": "^9.0.4",
     "@types/node": "^20.17.57",
     "@types/react": "^19",
     "@types/react-dom": "^19",

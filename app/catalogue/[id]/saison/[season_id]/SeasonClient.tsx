@@ -2,8 +2,8 @@
 
 import { Section } from "@/features/layout/components/Section";
 import { Episodes, Seasons } from "@/generated/prisma";
-import { Show } from "@/lib/types";
-import { trad } from "@/lib/utils";
+import { Show } from "@/shared/types/types";
+import { cleanText } from "@/shared/utils/utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -29,6 +29,7 @@ export default function SeasonClient({ season, show, episodes, synopsis }: Props
                             }
                             alt={`Affiche de ${show.title}`}
                             fill
+                            sizes="100%"
                             className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                         />
                     </div>
@@ -79,6 +80,7 @@ export default function SeasonClient({ season, show, episodes, synopsis }: Props
                                             src={episode.image || "https://placehold.co/400x225"}
                                             alt={episode.name}
                                             fill
+                                            sizes="100%"
                                             className="object-cover"
                                         />
                                     </div>
@@ -98,7 +100,7 @@ export default function SeasonClient({ season, show, episodes, synopsis }: Props
                                         </div>
                                         {episode.summary && (
                                             <p className="text-primary leading-relaxed">
-                                                {trad(episode.summary)}
+                                                {cleanText(episode.summary)}
                                             </p>
                                         )}
                                     </div>

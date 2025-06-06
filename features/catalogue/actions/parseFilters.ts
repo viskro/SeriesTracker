@@ -1,4 +1,4 @@
-import { FilterType } from "@/lib/types/filters";
+import { FilterType } from "@/features/catalogue/types/filters";
 import { SearchParams } from "../types";
 
 export function parseFilters(searchParams: SearchParams) {

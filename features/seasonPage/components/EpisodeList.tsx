@@ -1,9 +1,9 @@
 "use client";
 
+import { cleanText } from "@/shared/utils/utils";
 import { EpisodeWithShowId } from "../types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { trad } from "@/lib/utils";
 
 interface Props {
     episodes: EpisodeWithShowId[];
@@ -51,7 +51,7 @@ export default function EpisodeList({ episodes, showId, seasonId }: Props) {
                             </div>
                             {episode.summary && (
                                 <p className="text-primary leading-relaxed">
-                                    {trad(episode.summary)}
+                                    {cleanText(episode.summary)}
                                 </p>
                             )}
                         </div>

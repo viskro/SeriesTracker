@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { addToList, removeFromList } from "../actions/ListActions";
 import { toggleFavorite } from "../actions/FavoriteAction";
-import { useUIStore } from "@/lib/stores/uiStore";
+import { useUIStore } from "@/shared/stores/uiStore";
 import {
 	NOTIFICATION_DURATION,
 	NOTIFICATION_TYPES,
 	NOTIFICATION_MESSAGES,
-} from "@/lib/constants/notifications";
+} from "@/shared/constants/notifications";
 
 export const useListActions = (
 	showId: number,

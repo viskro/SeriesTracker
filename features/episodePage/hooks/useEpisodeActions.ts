@@ -3,7 +3,7 @@ import {
 	markEpisodeAsWatched,
 	markEpisodeAsUnwatched,
 } from "../actions/episodeActions";
-import { useShowStatus } from "@/lib/hooks/useShowStatus";
+import { useShowStatus } from "@/features/episodePage/hooks/useShowStatus";
 
 export const useEpisodeActions = (
 	episodeId: number,

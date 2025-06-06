@@ -1,4 +1,4 @@
-import { Show } from "@/lib/types";
+import { Show } from "@/shared/types/types";
 
 export type CastMember = {
 	id: number;
@@ -28,7 +28,7 @@ export type ShowPageProps = {
 	totalRatings: number;
 	cast: CastMember[];
 	seasons: SeasonDisplay[];
-	synopsis: string | null;
+	synopsis: string | null | undefined;
 	genres: string[];
 	platforms: string[];
 };

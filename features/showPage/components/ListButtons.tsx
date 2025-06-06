@@ -1,10 +1,9 @@
 "use client"
 
 import { Heart, ListPlus, ListX } from "lucide-react";
-import { Button } from "@/components/shadcn/button";
+import { Button } from "@/shared/components/shadcn/button";
 import { useListActions } from "../hooks/useListActions";
-import { useAuth } from "../../../lib/hooks/useAuth";
-import { useAuthStore } from "@/lib/stores/authStore";
+import { useAuthStore } from "@/shared/stores/authStore";
 
 interface Props {
     showId: number;

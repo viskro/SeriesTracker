@@ -1,7 +1,7 @@
 "use client";
 
-import Filter from '@/components/Filters/Filter';
-import Sort from '@/components/Filters/Sort';
+import Filter from '@/features/catalogue/components/Filters/Filter';
+import Sort from '@/features/catalogue/components/Filters/Sort';
 import { SearchBar } from './SearchBar';
 
 export function CatalogueControls() {

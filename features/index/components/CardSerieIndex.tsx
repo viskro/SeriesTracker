@@ -1,6 +1,6 @@
 import Image from "next/image";
-import BadgeSerie from "../../../components/shared/BadgeSerie";
-import { Show } from "@/lib/types";
+import BadgeSerie from "../../../shared/components/BadgeSerie";
+import { Show } from "@/shared/types/types";
 
 type Props = {
   show: Show;

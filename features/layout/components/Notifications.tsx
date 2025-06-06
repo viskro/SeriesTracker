@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useUIStore } from "@/lib/stores/uiStore";
+import { useUIStore } from "@/shared/stores/uiStore";
 import { getNotificationStyles, getNotificationIcon } from "../actions/getNotification";
 import { X } from "lucide-react";
 

@@ -1,11 +1,11 @@
 'use client'
 
-import { Label } from "@/components/shadcn/label";
-import { Textarea } from "@/components/shadcn/textarea";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/shadcn/button";
+import { Label } from "@/shared/components/shadcn/label";
+import { Textarea } from "@/shared/components/shadcn/textarea";
+import { cn } from "@/shared/utils/utils";
+import { buttonVariants } from "@/shared/components/shadcn/button";
 import { useCommentActions } from "../hooks/useCommentActions";
-import { useAuthStore } from "@/lib/stores/authStore";
+import { useAuthStore } from "@/shared/stores/authStore";
 
 interface Props {
     idShow: number;

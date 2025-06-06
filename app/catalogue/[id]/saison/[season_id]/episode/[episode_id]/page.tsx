@@ -1,16 +1,15 @@
-import prisma from "@/lib/prisma";
+import prisma from "@/shared/lib/prisma";
 import { notFound } from "next/navigation";
-import { trad } from "@/lib/utils";
-import { getUser } from "@/lib/auth-session";
-import EpisodeClient from "./EpisodeClient";
+import { cleanText } from "@/shared/utils/utils";
+import { getUser } from "@/shared/lib/auth-session";
+import EpisodeClient from "@features/episodePage/components/EpisodeClient";
 import { Episode } from "@/features/episodePage/types";
-import { useAuthStore } from "@/lib/stores/authStore";
 
 export default async function Page({ params }: {
     params: Promise<{ id: string; season_id: string; episode_id: string }>;
 }) {
-    // const user = await getUser();
-    const { user } = await useAuthStore();
+    const user = await getUser();
+
     const { id } = await params;
     const { season_id } = await params;
     const { episode_id } = await params;
@@ -68,7 +67,7 @@ export default async function Page({ params }: {
     });
 
     const isWatched = episode.users.length > 0;
-    const synopsis = await trad(episode.summary);
+    const synopsis = cleanText(episode.summary);
 
     return (
         <EpisodeClient

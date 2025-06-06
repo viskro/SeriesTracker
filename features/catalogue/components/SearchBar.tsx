@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from '@/components/shadcn/input';
+import { Input } from '@/shared/components/shadcn/input';
 import { Search } from 'lucide-react';
 import { useSearch } from '../hooks/useSearch';
 
