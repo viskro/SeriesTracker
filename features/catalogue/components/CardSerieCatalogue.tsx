@@ -1,7 +1,7 @@
 "use client"
 
 import { StarRating } from "@/shared/components/StarRating"
-import BadgeSerie from "../../shared/components/BadgeSerie"
+import BadgeSerie from "@/shared/components/BadgeSerie"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
