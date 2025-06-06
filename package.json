@@ -31,7 +31,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
-    "html-to-text": "^9.0.5",
     "lucide-react": "^0.508.0",
     "next": "15.3.2",
     "radix-ui": "^1.4.2",
@@ -40,9 +39,7 @@
     "react-hook-form": "^7.57.0",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.2.0",
-    "translate": "^3.0.1",
     "uuid": "^11.1.0",
-    "zod": "^3.25.51",
     "zustand": "^5.0.5"
   },
   "devDependencies": {
@@ -55,7 +52,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
-    "prisma": "^6.7.0",
+    "prisma": "^6.9.0",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.4",
