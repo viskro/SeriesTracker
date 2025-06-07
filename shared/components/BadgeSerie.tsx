@@ -1,34 +1,36 @@
 import { NextPage } from 'next'
 import { Badge } from './shadcn/badge';
+import { ShowStatus } from '@/features/listePage/types';
 
 interface Props {
-  text: string;
-  variant: "vu" | "enCours" | "aVenir" | "category";
+  children: React.ReactNode;
+  variant?: ShowStatus | "category" | null;
+  className?: string;
 }
 
-const BadgeSerie: NextPage<Props> = ({ text, variant }) => {
+const BadgeSerie: NextPage<Props> = ({ children, variant, className }) => {
   const getVariantClasses = () => {
     switch (variant) {
-      case "vu":
-        return "bg-green-500/20 text-green-500 border-green-500/20 hover:bg-green-500/30";
-      case "enCours":
-        return "bg-blue-500/20 text-blue-500 border-blue-500/20 hover:bg-blue-500/30";
-      case "aVenir":
-        return "bg-yellow-500/20 text-yellow-500 border-yellow-500/20 hover:bg-yellow-500/30";
+      case "finished":
+        return "bg-gradient-to-br from-accent-primary/80 to-accent-primary/60 text-white hover:from-accent-primary hover:to-accent-primary/80";
+      case "ongoing":
+        return "bg-gradient-to-br from-accent-secondary/80 to-accent-secondary/60 text-white hover:from-accent-secondary hover:to-accent-secondary/80";
+      case "to_watch":
+        return "bg-gradient-to-br from-background-secondary to-background-primary text-primary hover:border-accent-primary/40 border border-border-primary";
       case "category":
-        return "bg-accent-primary/20 text-accent-primary border-accent-primary/20 hover:bg-accent-primary/30";
+        return "bg-gradient-to-br from-accent-primary/20 to-accent-primary/10 text-accent-primary border border-accent-primary/20 hover:border-accent-primary/40";
       default:
-        return "bg-accent-primary/20 text-accent-primary border-accent-primary/20 hover:bg-accent-primary/30";
+        return "bg-gradient-to-br from-background-secondary to-background-primary text-primary border border-border-primary hover:border-accent-primary/40";
     }
   };
 
   return (
     <Badge
-      className={`font-badge text-xs px-2 py-1 border transition-colors duration-200 ${getVariantClasses()}`}
+      className={`font-badge text-xs px-2 py-1 transition-all duration-300 ${getVariantClasses()} ${className}`}
     >
-      {text}
+      {children}
     </Badge>
-  )
+  );
 }
 
 export default BadgeSerie

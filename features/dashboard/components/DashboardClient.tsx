@@ -26,9 +26,9 @@ export default function DashboardClient({
 
     if (authLoading) {
         return (
-            <Section className="mt-20">
+            <Section className="mt-10 sm:mt-5">
                 <div className="flex items-center justify-center h-40">
-                    <p className="text-primary">Chargement...</p>
+                    <p className="text-text-primary">Chargement...</p>
                 </div>
             </Section>
         );
@@ -36,15 +36,16 @@ export default function DashboardClient({
 
     return (
         <main className="w-full min-h-screen bg-background-primary">
-            <Section className="mt-20 mx-auto max-w-7xl px-4">
-                <div className="bg-gradient-to-br from-background-secondary to-background-primary border-border-primary p-8 rounded-3xl shadow-lg">
-                    <h1 className="mb-12 text-center text-3xl font-title text-text-primary">
+            <Section className="mt-10 sm:mt-5 relative w-full">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-primary/5 to-transparent rounded-3xl -z-10" />
+                <div className="w-full max-w-7xl mx-auto p-4 sm:p-8">
+                    <h1 className="mb-8 sm:mb-12 text-center text-2xl sm:text-3xl font-title text-text-primary">
                         Votre espace personnel
                     </h1>
 
-                    <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
                         {/* Sidebar */}
-                        <div className="space-y-6 md:col-span-1">
+                        <div className="space-y-6 lg:col-span-1">
                             <ProgressionCard
                                 userData={userData}
                                 countShowsFinished={countShowsFinished}
@@ -64,14 +65,16 @@ export default function DashboardClient({
                         </div>
 
                         {/* Main Content */}
-                        <div className="md:col-span-3 space-y-8">
-                            <div className="bg-gradient-to-br from-background-secondary to-background-primary border border-border-primary hover:border-accent-primary/40 transition-all duration-300 p-6 rounded-2xl">
-                                <h2 className="mb-2 text-xl font-title text-accent-primary">
-                                    Votre liste
-                                </h2>
-                                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-                                    {userData.users_shows.length == 0 ? (
-                                        <p className="col-span-12 text-sm text-secondary">
+                        <div className="space-y-6 sm:space-y-8 lg:col-span-3">
+                            <div className="bg-gradient-to-br from-background-secondary to-background-primary border border-border-primary hover:border-accent-primary/40 transition-all duration-300 p-4 sm:p-6 rounded-2xl">
+                                <div className="flex items-center gap-2 mb-4">
+                                    <h2 className="text-xl font-title text-accent-primary">
+                                        Votre liste
+                                    </h2>
+                                </div>
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                                    {userData.users_shows.length === 0 ? (
+                                        <p className="col-span-full text-sm text-text-primary/60">
                                             Vous n&apos;avez pas encore de série dans votre liste.
                                         </p>
                                     ) : (
@@ -85,18 +88,14 @@ export default function DashboardClient({
                                                     );
                                                 }}
                                             >
-                                                <div className="aspect-auto bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
-                                                    <div className="flex h-full items-center justify-center">
-                                                        <Image
-                                                            src={
-                                                                show.image || "https://placehold.co/400x400"
-                                                            }
-                                                            alt="Série"
-                                                            width={400}
-                                                            height={400}
-                                                            className="h-full w-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                                                        />
-                                                    </div>
+                                                <div className="aspect-[2/3] bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
+                                                    <Image
+                                                        src={show.image || "https://placehold.co/400x400"}
+                                                        alt={show.title}
+                                                        fill
+                                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                                                        className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                                                    />
                                                 </div>
                                             </div>
                                         ))
@@ -104,7 +103,7 @@ export default function DashboardClient({
                                 </div>
                                 <div className="mt-4 text-right">
                                     <button
-                                        className="text-sm text-accent-primary hover:text-accent-primary/80 transition-colors duration-200 hover:cursor-pointer"
+                                        className="text-sm text-accent-primary hover:text-accent-primary/80 transition-colors duration-200"
                                         onClick={() => router.push("/dashboard/liste")}
                                     >
                                         Voir tout
@@ -112,17 +111,19 @@ export default function DashboardClient({
                                 </div>
                             </div>
 
-                            <div className="bg-gradient-to-br from-background-secondary to-background-primary border border-border-primary hover:border-accent-primary/40 transition-all duration-300 p-6 rounded-2xl">
-                                <h2 className="mb-2 text-xl font-title text-accent-primary">
-                                    Vos favoris
-                                </h2>
-                                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                                    {userData.users_shows.length == 0 ? (
-                                        <p className="col-span-12 text-sm text-secondary">
+                            <div className="bg-gradient-to-br from-background-secondary to-background-primary border border-border-primary hover:border-accent-primary/40 transition-all duration-300 p-4 sm:p-6 rounded-2xl">
+                                <div className="flex items-center gap-2 mb-4">
+                                    <h2 className="text-xl font-title text-accent-primary">
+                                        Vos favoris
+                                    </h2>
+                                </div>
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {userData.users_shows.length === 0 ? (
+                                        <p className="col-span-full text-sm text-text-primary/60">
                                             Vous n&apos;avez pas encore de série dans votre liste.
                                         </p>
-                                    ) : fourFavorites.length == 0 ? (
-                                        <p className="col-span-12 text-sm text-secondary">
+                                    ) : fourFavorites.length === 0 ? (
+                                        <p className="col-span-full text-sm text-text-primary/60">
                                             Vous n&apos;avez pas encore de série dans vos favoris.
                                         </p>
                                     ) : (
@@ -136,27 +137,18 @@ export default function DashboardClient({
                                                     );
                                                 }}
                                             >
-                                                <div className="aspect-auto bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
-                                                    <div className="flex h-full items-center justify-center">
-                                                        <Image
-                                                            src={
-                                                                show.image || "https://placehold.co/400x400"
-                                                            }
-                                                            alt="Favori"
-                                                            width={400}
-                                                            height={400}
-                                                            className="h-full w-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                                                        />
-                                                    </div>
+                                                <div className="aspect-[2/3] bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
+                                                    <Image
+                                                        src={show.image || "https://placehold.co/400x400"}
+                                                        alt={show.title}
+                                                        fill
+                                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                                        className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                                                    />
                                                 </div>
                                             </div>
                                         ))
                                     )}
-                                </div>
-                                <div className="mt-4 text-right">
-                                    <button className="text-sm text-accent-primary hover:text-accent-primary/80 transition-colors duration-200">
-                                        Voir tout
-                                    </button>
                                 </div>
                             </div>
                         </div>

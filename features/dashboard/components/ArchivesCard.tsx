@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { DashboardUserData } from "../types";
 
 interface Props {
@@ -5,6 +6,7 @@ interface Props {
 }
 
 export const ArchivesCard = ({ userData }: Props) => {
+    const router = useRouter()
     return (
         <div className="bg-gradient-to-br from-background-secondary to-background-primary p-6 rounded-2xl border border-border-primary hover:border-accent-primary/40 transition-all duration-300">
             <h3 className="text-lg font-title text-accent-primary mb-4">Archives</h3>
@@ -18,6 +20,7 @@ export const ArchivesCard = ({ userData }: Props) => {
                 {userData.archivedShowsCount > 0 && (
                     <button
                         className="w-full mt-4 px-4 py-2 bg-accent-primary/10 hover:bg-accent-primary/20 text-accent-primary rounded-lg hover:cursor-pointer transition-colors duration-200 text-sm font-medium"
+                        onClick={() => router.push("/dashboard/archives")}
                     >
                         Voir les archives
                     </button>

@@ -1,3 +1,5 @@
+"use server";
+
 import prisma from "@/shared/lib/prisma";
 
 export async function updateShowStatus(userId: string, showId: number) {

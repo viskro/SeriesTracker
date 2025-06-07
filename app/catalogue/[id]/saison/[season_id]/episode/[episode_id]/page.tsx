@@ -28,7 +28,8 @@ export default async function Page({ params }: {
         },
         include: {
             seasons: {
-                include: {
+                select: {
+                    season_id: true,
                     shows: {
                         select: {
                             show_id: true,

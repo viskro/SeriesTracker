@@ -39,30 +39,49 @@ export function CardSerieCatalogue({ title, image, airdate, showId, averageRatin
           />
         ) : (
           <div className="w-full h-full bg-background-primary flex items-center justify-center">
-            <p className="text-accent-primary font-bold">Aucune image disponible</p>
+            <p className="text-accent-primary font-bold">
+              Aucune image disponible
+            </p>
           </div>
         )}
       </div>
       <div className="flex flex-col gap-3">
         <div className="flex justify-between items-center">
-          <h3 className="text-lg font-title text-text-primary group-hover:text-accent-primary transition-colors duration-200">{title}</h3>
+          <h3 className="text-lg font-title text-text-primary group-hover:text-accent-primary transition-colors duration-200">
+            {title}
+          </h3>
           <div className="flex items-center gap-2">
-            <StarRating rating={averageRating} size="sm" />
+            <StarRating
+              rating={averageRating}
+              size="sm"
+            />
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
           {genres?.map((genre, index) => (
-            <BadgeSerie key={index} text={genre} variant="category" />
+            <BadgeSerie
+              key={index}
+              variant="category"
+            >
+              <span>{genre}</span>
+            </BadgeSerie>
           ))}
         </div>
         <div className="space-y-1">
           <p className="text-sm text-text-primary/80">
-            {platforms ? `Plateforme(s) : ` : 'Plateforme(s) non disponible(s)'}
-            {platforms && <span className="text-accent-primary">{platforms.map(p => p.platforms.name).join(', ')}</span>}
+            {platforms ? `Plateforme(s) : ` : "Plateforme(s) non disponible(s)"}
+            {platforms && (
+              <span className="text-accent-primary">
+                {platforms.map((p) => p.platforms.name).join(", ")}
+              </span>
+            )}
           </p>
-          <p className="text-sm text-text-primary/80">Date de sortie : <span className="text-accent-primary">{airdate}</span></p>
+          <p className="text-sm text-text-primary/80">
+            Date de sortie :{" "}
+            <span className="text-accent-primary">{airdate}</span>
+          </p>
         </div>
       </div>
     </div>
-  )
+  );
 }

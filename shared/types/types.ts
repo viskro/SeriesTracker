@@ -55,12 +55,3 @@ export interface Show {
 		comments: number;
 	};
 }
-
-export interface UsersShows {
-	id_user: UserData["id"];
-	id_show: Show["show_id"];
-	is_favorite: boolean | null;
-	is_archived: boolean | null;
-	status: "to_watch" | "ongoing" | "finished" | null;
-	added_at: Date | null;
-}

@@ -35,7 +35,9 @@ export function CardSerieIndex({ show }: Props) {
         <div className="flex flex-wrap gap-2">
           {
             genres.map((genre) => (
-              <BadgeSerie key={genre.genre_id} text={genre.name} variant="category" />
+              <BadgeSerie key={genre.genre_id} variant="category">
+                <span>{genre.name}</span>
+              </BadgeSerie>
             ))
           }
         </div>

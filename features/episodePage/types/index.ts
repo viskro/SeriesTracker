@@ -22,6 +22,7 @@ export interface Episode {
 	image: string | null;
 	seasons: {
 		shows: Show;
+		season_id: number;
 	};
 	users: {
 		id_user: string;
