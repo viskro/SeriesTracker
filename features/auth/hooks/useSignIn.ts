@@ -42,6 +42,7 @@ export function useSignIn() {
 					email: data.email,
 					password: data.password,
 					rememberMe: data.rememberMe,
+					callbackURL: "/dashboard",
 				},
 				{
 					onRequest: () => {
