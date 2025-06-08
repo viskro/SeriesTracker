@@ -35,7 +35,7 @@ export function SignUpForm() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 {error && (
-                    <div className="bg-red-500/10 border border-red-500/20 p-3 rounded-md text-red-500 text-sm">
+                    <div className="bg-error/10 border border-error/20 p-3 rounded-md text-error text-sm">
                         {error}
                     </div>
                 )}
@@ -116,7 +116,7 @@ export function SignUpForm() {
                 <Button
                     type="submit"
                     className="w-full bg-accent-primary hover:bg-accent-primary/90 text-white transition-colors duration-200"
-                    disabled={loading}
+                    disabled={loading && !formData.acceptTerms && !!formData.password && !!formData.confirmPassword && !!formData.email && !!formData.username}
                 >
                     {loading ? (
                         <>
