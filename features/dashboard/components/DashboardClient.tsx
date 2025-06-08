@@ -8,8 +8,56 @@ import { ActiviteCard } from "./ActiviteCard";
 import { ArchivesCard } from "./ArchivesCard";
 import { useRouter } from "next/navigation";
 import { DashboardProps } from "../types";
+import { memo } from "react";
 
-export default function DashboardClient({
+// Composant mémorisé pour une série
+const ShowCard = memo(({ show, onClick }: { show: { show_id: number, image: string | null, title: string }, onClick: () => void }) => (
+    <div
+        className="relative group hover:cursor-pointer"
+        onClick={onClick}
+    >
+        <div className="aspect-[2/3] bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
+            <Image
+                src={show.image || "https://placehold.co/400x400"}
+                alt={show.title}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                loading="lazy"
+                quality={75}
+                className="object-cover transform group-hover:scale-105 transition-transform duration-300 rounded-xl"
+            />
+        </div>
+    </div>
+));
+
+ShowCard.displayName = 'ShowCard';
+
+// Composant mémorisé pour la liste des séries
+const ShowsList = memo(({ shows, emptyMessage, onShowClick }: {
+    shows: Array<{ show_id: number, image: string | null, title: string }>,
+    emptyMessage: string,
+    onShowClick: (showId: number) => void
+}) => (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        {shows.length === 0 ? (
+            <p className="col-span-full text-sm text-text-primary/60">
+                {emptyMessage}
+            </p>
+        ) : (
+            shows.map((show) => (
+                <ShowCard
+                    key={show.show_id}
+                    show={show}
+                    onClick={() => onShowClick(show.show_id)}
+                />
+            ))
+        )}
+    </div>
+));
+
+ShowsList.displayName = 'ShowsList';
+
+function DashboardClientComponent({
     userData,
     fiveShows,
     fourFavorites,
@@ -33,6 +81,10 @@ export default function DashboardClient({
             </Section>
         );
     }
+
+    const handleShowClick = (showId: number) => {
+        router.push("/catalogue/" + showId.toString());
+    };
 
     return (
         <main className="w-full min-h-screen bg-background-primary">
@@ -72,38 +124,14 @@ export default function DashboardClient({
                                         Votre liste
                                     </h2>
                                 </div>
-                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                                    {userData.users_shows.length === 0 ? (
-                                        <p className="col-span-full text-sm text-text-primary/60">
-                                            Vous n&apos;avez pas encore de série dans votre liste.
-                                        </p>
-                                    ) : (
-                                        fiveShows.map((show) => (
-                                            <div
-                                                key={show.show_id}
-                                                className="relative group hover:cursor-pointer"
-                                                onClick={() => {
-                                                    router.push(
-                                                        "/catalogue/" + show.show_id.toString()
-                                                    );
-                                                }}
-                                            >
-                                                <div className="aspect-[2/3] bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
-                                                    <Image
-                                                        src={show.image || "https://placehold.co/400x400"}
-                                                        alt={show.title}
-                                                        fill
-                                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                                                        className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                                                    />
-                                                </div>
-                                            </div>
-                                        ))
-                                    )}
-                                </div>
+                                <ShowsList
+                                    shows={fiveShows}
+                                    emptyMessage="Vous n'avez pas encore de série dans votre liste."
+                                    onShowClick={handleShowClick}
+                                />
                                 <div className="mt-4 text-right">
                                     <button
-                                        className="text-sm text-accent-primary hover:text-accent-primary/80 transition-colors duration-200"
+                                        className="hover:cursor-pointer text-sm text-accent-primary hover:text-accent-primary/80 transition-colors duration-200"
                                         onClick={() => router.push("/dashboard/liste")}
                                     >
                                         Voir tout
@@ -117,39 +145,13 @@ export default function DashboardClient({
                                         Vos favoris
                                     </h2>
                                 </div>
-                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                                    {userData.users_shows.length === 0 ? (
-                                        <p className="col-span-full text-sm text-text-primary/60">
-                                            Vous n&apos;avez pas encore de série dans votre liste.
-                                        </p>
-                                    ) : fourFavorites.length === 0 ? (
-                                        <p className="col-span-full text-sm text-text-primary/60">
-                                            Vous n&apos;avez pas encore de série dans vos favoris.
-                                        </p>
-                                    ) : (
-                                        fourFavorites.map((show) => (
-                                            <div
-                                                key={show.show_id}
-                                                className="relative group hover:cursor-pointer"
-                                                onClick={() => {
-                                                    router.push(
-                                                        "/catalogue/" + show.show_id.toString()
-                                                    );
-                                                }}
-                                            >
-                                                <div className="aspect-[2/3] bg-background-secondary rounded-xl overflow-hidden border border-border-primary group-hover:border-accent-primary/40 transition-all duration-300">
-                                                    <Image
-                                                        src={show.image || "https://placehold.co/400x400"}
-                                                        alt={show.title}
-                                                        fill
-                                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                                        className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                                                    />
-                                                </div>
-                                            </div>
-                                        ))
-                                    )}
-                                </div>
+                                <ShowsList
+                                    shows={fourFavorites}
+                                    emptyMessage={userData.users_shows.length === 0
+                                        ? "Vous n'avez pas encore de série dans votre liste."
+                                        : "Vous n'avez pas encore de série dans vos favoris."}
+                                    onShowClick={handleShowClick}
+                                />
                             </div>
                         </div>
                     </div>
@@ -157,4 +159,6 @@ export default function DashboardClient({
             </Section>
         </main>
     );
-} 
+}
+
+export default memo(DashboardClientComponent); 

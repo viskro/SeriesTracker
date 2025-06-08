@@ -25,7 +25,7 @@ export function SortGroup({ options, selectedSort, selectedOrder, onSortChange }
                 <Button
                     variant="outline"
                     size="lg"
-                    className="bg-background-secondary border-border-primary text-text-primary hover:bg-border-primary hover:text-white transition-all duration-300"
+                    className="bg-gradient-to-br from-background-secondary to-background-primary border-border-primary text-text-primary hover:bg-border-primary hover:text-white transition-all duration-300"
                 >
                     Trier
                 </Button>

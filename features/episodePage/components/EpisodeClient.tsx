@@ -2,15 +2,33 @@
 
 import { Section } from "@/features/layout/components/Section";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { Comment } from "@/features/showPage/components/Comment";
 import AddEpisodeComment from "./AddEpisodeComment";
 import { useEpisodeActions } from "../hooks/useEpisodeActions";
 import { EpisodePageProps } from "../types";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { CommentType } from "@/shared/types/types";
 
-export default function EpisodeClient({ episode, show, isWatched: initialIsWatched, comments, userId, synopsis }: EpisodePageProps) {
+// Composant mémorisé pour les commentaires
+const CommentsList = memo(({ comments }: { comments: CommentType[] }) => (
+    <div className="space-y-6">
+        {comments.map((comment, index) => (
+            <Comment
+                key={index}
+                user={comment.user}
+                content={comment.content}
+                postedAt={comment.postedAt}
+                className={index % 2 === 0 ? 'bg-background-secondary' : 'bg-border-primary'}
+            />
+        ))}
+    </div>
+));
+
+CommentsList.displayName = 'CommentsList';
+
+function EpisodeClientComponent({ episode, show, isWatched: initialIsWatched, comments, userId, synopsis }: EpisodePageProps) {
     const [isWatched, setIsWatched] = useState(initialIsWatched);
     const { isLoading, handleWatchToggle } = useEpisodeActions(episode.episode_id, userId || "", show.show_id);
 
@@ -20,6 +38,7 @@ export default function EpisodeClient({ episode, show, isWatched: initialIsWatch
             setIsWatched(!isWatched);
         }
     };
+
 
     return (
         <main className="w-full min-h-screen bg-background-primary">
@@ -43,6 +62,8 @@ export default function EpisodeClient({ episode, show, isWatched: initialIsWatch
                                 sizes="(max-width: 768px) 100vw, 400px"
                                 className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                                 priority
+                                quality={85}
+                                loading="eager"
                             />
                         </div>
 
@@ -74,13 +95,11 @@ export default function EpisodeClient({ episode, show, isWatched: initialIsWatch
                             </div>
 
                             <div className="space-y-3">
-                                <div className="flex items-center gap-2">
-                                    <h2 className="text-xl font-title text-accent-primary">
-                                        Synopsis
-                                    </h2>
-                                </div>
-                                <p className="text-text-primary/90 leading-relaxed">
-                                    {synopsis}
+                                <h2 className="text-xl font-title text-accent-primary">
+                                    Synopsis
+                                </h2>
+                                <p className={`leading-relaxed ${synopsis ? "text-primary/90" : "text-secondary/80"}`}>
+                                    {synopsis ? synopsis : "Pas de synopsis pour cette saison."}
                                 </p>
                             </div>
 
@@ -111,19 +130,11 @@ export default function EpisodeClient({ episode, show, isWatched: initialIsWatch
             <Section className="mt-10 sm:mt-5 relative w-full">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-primary/5 to-transparent rounded-3xl -z-10" />
                 <div className="w-full max-w-7xl mx-auto p-4 sm:p-8">
-                    <div className="space-y-6">
-                        {comments.map((comment, index) => (
-                            <Comment
-                                key={index}
-                                user={comment.user}
-                                content={comment.content}
-                                postedAt={comment.postedAt}
-                                className={index % 2 === 0 ? 'bg-background-secondary' : 'bg-border-primary'}
-                            />
-                        ))}
-                    </div>
+                    <CommentsList comments={comments} />
                 </div>
             </Section>
         </main>
     );
-} 
+}
+
+export default memo(EpisodeClientComponent); 

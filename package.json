@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "set ANALYZE=true && next build"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.1",
@@ -30,6 +31,7 @@
     "better-auth": "^1.2.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "critters": "^0.0.23",
     "embla-carousel-react": "^8.6.0",
     "lucide-react": "^0.508.0",
     "next": "15.3.2",
@@ -44,6 +46,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^15.3.3",
     "@tailwindcss/postcss": "^4.1.7",
     "@types/axios": "^0.9.36",
     "@types/html-to-text": "^9.0.4",

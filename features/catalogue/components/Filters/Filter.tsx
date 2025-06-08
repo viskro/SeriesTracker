@@ -60,14 +60,14 @@ const Filter: NextPage = () => {
         <Button
           variant="outline"
           size="lg"
-          className="bg-background-secondary border-border-primary text-text-primary hover:bg-border-primary hover:text-white transition-all duration-300"
+          className="bg-gradient-to-br from-background-secondary to-background-primary border border-border-primary text-text-primary hover:bg-border-primary hover:text-white transition-all duration-300"
         >
           Filtres
         </Button>
       </SheetTrigger>
 
-      <SheetContent side={"left"} className="bg-gradient-to-br from-background-secondary to-background-primary border-border-primary text-text-primary" aria-describedby='Filtres pour le catalogue'>
-        <SheetTitle className='text-accent-primary text-2xl font-title'>Filtrer par</SheetTitle>
+      <SheetContent side="left" className="bg-gradient-to-br from-background-secondary to-background-primary border border-border-primary text-text-primary">
+        <SheetTitle className="text-accent-primary text-2xl font-title">Filtrer par</SheetTitle>
         <ScrollArea className="h-[calc(100vh-8rem)] pr-4 my-4">
           {FILTER_GROUPS.map((group) => (
             <FilterGroup

@@ -8,13 +8,41 @@ import { useAuthStore } from '@/shared/stores/authStore';
 import ListButtons from '@/features/showPage/components/ListButtons';
 import RatingInput from '@/features/showPage/components/RatingInput';
 import { StarRating } from '@/shared/components/StarRating';
-import { CastCarousel } from '@/features/showPage/components/CastCarousel';
-import { SeasonsList } from '@/features/showPage/components/SeasonsList';
+import dynamic from 'next/dynamic';
 import { ShowPageProps } from '@/features/showPage/types';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { memo } from 'react';
+import { CommentType } from '@/shared/types/types';
 
-export default function PageClient({
+const CastCarousel = dynamic(() => import('@/features/showPage/components/CastCarousel').then(mod => mod.CastCarousel), {
+    loading: () => <div className="w-full h-48 animate-pulse bg-background-secondary rounded-xl" />,
+    ssr: false
+});
+
+const SeasonsList = dynamic(() => import('@/features/showPage/components/SeasonsList').then(mod => mod.SeasonsList), {
+    loading: () => <div className="w-full h-64 animate-pulse bg-background-secondary rounded-xl" />,
+    ssr: false
+});
+
+// Composant mémorisé pour les commentaires
+const CommentsList = memo(({ comments }: { comments: CommentType[] | undefined }) => (
+    <div className="flex flex-col gap-4">
+        {comments?.map((comment, index) => (
+            <Comment
+                key={index}
+                user={comment.user}
+                content={comment.content}
+                postedAt={comment.postedAt}
+                className={index % 2 === 0 ? 'bg-background-secondary' : 'bg-border-primary'}
+            />
+        ))}
+    </div>
+));
+
+CommentsList.displayName = 'CommentsList';
+
+function PageClientComponent({
     show,
     isInList,
     isFavorite,
@@ -54,6 +82,8 @@ export default function PageClient({
                                 sizes='(max-width: 768px) 100vw, 400px'
                                 className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                                 priority
+                                quality={85}
+                                loading="eager"
                             />
                         </div>
                         <div className="flex flex-col gap-6 flex-1">
@@ -61,14 +91,12 @@ export default function PageClient({
                                 <h1 className="text-3xl sm:text-4xl font-title text-text-primary">{show.title}</h1>
                                 <div className='flex flex-col gap-2'>
                                     <div className="flex items-center gap-2">
-
                                         <h2 className="text-xl font-title text-accent-primary">Genres</h2>
                                     </div>
                                     <p className='text-text-primary/80'>{genres.join(', ')}</p>
                                 </div>
                                 <div className='flex flex-col gap-2'>
                                     <div className="flex items-center gap-2">
-
                                         <h2 className="text-xl font-title text-accent-primary">Note</h2>
                                     </div>
                                     <div className="flex items-center gap-4">
@@ -78,14 +106,12 @@ export default function PageClient({
                                 </div>
                                 <div className='flex flex-col gap-2'>
                                     <div className="flex items-center gap-2">
-
                                         <h2 className="text-xl font-title text-accent-primary">Nombre de saisons</h2>
                                     </div>
                                     <p className="text-text-primary/90">{show._count?.seasons}</p>
                                 </div>
                                 <div className="space-y-2">
                                     <div className="flex items-center gap-2">
-
                                         <h2 className="text-xl font-title text-accent-primary">Synopsis</h2>
                                     </div>
                                     <p className="text-text-primary/90 leading-relaxed">{synopsis}</p>
@@ -149,20 +175,12 @@ export default function PageClient({
                     {show.comments?.length === 0 ? (
                         <p className="text-text-primary/80">Aucun commentaire pour le moment.</p>
                     ) : (
-                        <div className="flex flex-col gap-4">
-                            {show.comments?.map((comment, index) => (
-                                <Comment
-                                    key={index}
-                                    user={comment.user}
-                                    content={comment.content}
-                                    postedAt={comment.postedAt}
-                                    className={index % 2 === 0 ? 'bg-background-secondary' : 'bg-border-primary'}
-                                />
-                            ))}
-                        </div>
+                        <CommentsList comments={show.comments} />
                     )}
                 </div>
             </Section>
         </main>
     );
 }
+
+export default memo(PageClientComponent);

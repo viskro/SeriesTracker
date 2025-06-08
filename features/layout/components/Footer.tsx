@@ -17,28 +17,36 @@ const Footer: NextPage = ({ }) => {
 
         <nav className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
           <Link
-            href={"#"}
+            href="#"
             className="hover:text-accent-primary transition-all duration-300 ease-in-out hover:scale-105"
           >
-            Navigation
+            À propos
           </Link>
           <Link
-            href={"#"}
+            href="#"
             className="hover:text-accent-primary transition-all duration-300 ease-in-out hover:scale-105"
           >
-            Navigation
+            Contact
           </Link>
           <Link
-            href={"#"}
+            href="#"
             className="hover:text-accent-primary transition-all duration-300 ease-in-out hover:scale-105"
           >
-            Navigation
+            Conditions d&apos;utilisation
+          </Link>
+          <Link
+            href="#"
+            className="hover:text-accent-primary transition-all duration-300 ease-in-out hover:scale-105"
+          >
+            Confidentialité
           </Link>
         </nav>
 
         <div className="flex items-center gap-4 md:gap-6">
           <Link
-            href={"#"}
+            href="https://facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-gradient-to-br from-background-secondary to-background-primary p-3 rounded-xl border border-border-primary hover:border-accent-primary/40 transition-all duration-300 hover:scale-105"
           >
             <Image
@@ -48,7 +56,9 @@ const Footer: NextPage = ({ }) => {
             />
           </Link>
           <Link
-            href={"#"}
+            href="https://twitter.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-gradient-to-br from-background-secondary to-background-primary p-3 rounded-xl border border-border-primary hover:border-accent-primary/40 transition-all duration-300 hover:scale-105"
           >
             <Image
@@ -58,7 +68,9 @@ const Footer: NextPage = ({ }) => {
             />
           </Link>
           <Link
-            href={"#"}
+            href="https://instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-gradient-to-br from-background-secondary to-background-primary p-3 rounded-xl border border-border-primary hover:border-accent-primary/40 transition-all duration-300 hover:scale-105"
           >
             <Image
@@ -68,6 +80,23 @@ const Footer: NextPage = ({ }) => {
             />
           </Link>
         </div>
+      </div>
+
+      <div className="w-full max-w-md bg-gradient-to-br from-background-secondary to-background-primary p-6 rounded-2xl border border-border-primary">
+        <h3 className="text-lg font-semibold mb-4">Restez informé</h3>
+        <form className="flex flex-col md:flex-row gap-4" onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="email"
+            placeholder="Votre email"
+            className="flex-1 px-4 py-2 rounded-lg bg-background-primary border border-border-primary focus:border-accent-primary focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="px-6 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90 transition-all duration-300 hover:cursor-pointer"
+          >
+            S&apos;inscrire
+          </button>
+        </form>
       </div>
 
       <div className="text-center bg-gradient-to-br from-background-secondary to-background-primary p-4 rounded-2xl border border-border-primary w-full md:w-auto">

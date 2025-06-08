@@ -4,6 +4,7 @@ import { StarRating } from "@/shared/components/StarRating"
 import BadgeSerie from "@/shared/components/BadgeSerie"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import { memo } from "react"
 
 interface CardSerieCatalogueProps {
   title: string
@@ -19,7 +20,7 @@ interface CardSerieCatalogueProps {
   genres: string[] | null
 }
 
-export function CardSerieCatalogue({ title, image, airdate, showId, averageRating, platforms, genres }: CardSerieCatalogueProps) {
+function CardSerieCatalogueComponent({ title, image, airdate, showId, averageRating, platforms, genres }: CardSerieCatalogueProps) {
   const router = useRouter();
   return (
     <div
@@ -31,11 +32,11 @@ export function CardSerieCatalogue({ title, image, airdate, showId, averageRatin
           <Image
             src={image}
             alt={`Image de la série ${title}`}
-            blurDataURL={image}
             fill
-            sizes="100%"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
+            quality={75}
           />
         ) : (
           <div className="w-full h-full bg-background-primary flex items-center justify-center">
@@ -85,3 +86,5 @@ export function CardSerieCatalogue({ title, image, airdate, showId, averageRatin
     </div>
   );
 }
+
+export const CardSerieCatalogue = memo(CardSerieCatalogueComponent);

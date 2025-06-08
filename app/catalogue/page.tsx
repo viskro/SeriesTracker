@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { CardSerieCatalogue } from "@/features/catalogue/components/CardSerieCatalogue";
 import { Section } from "@/features/layout/components/Section";
 import { Pagination } from "@/features/catalogue/components/Pagination";
@@ -5,15 +6,84 @@ import { CatalogueControls } from "@/features/catalogue/components/CatalogueCont
 import { getShows } from "@/features/catalogue/actions/getShows";
 import { parseFilters } from "@/features/catalogue/actions/parseFilters";
 import { SearchParams } from "@/features/catalogue/types";
+
+interface Show {
+    show_id: number;
+    title: string;
+    image: string | null;
+    seasons: Array<{
+        episodes: Array<{
+            airdate: string | null;
+        }>;
+    }>;
+    platforms: Array<{
+        platforms: {
+            name: string;
+        };
+    }>;
+    genres: Array<{
+        genres: {
+            name: string;
+        };
+    }>;
+}
+
+interface Rating {
+    average: number;
+}
+
+// Composant de chargement pour la grille des séries
+function ShowsGridSkeleton() {
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+            {[...Array(8)].map((_, i) => (
+                <div key={i} className="bg-background-secondary rounded-2xl p-4 animate-pulse">
+                    <div className="aspect-[2/3] bg-background-primary/50 rounded-xl mb-4" />
+                    <div className="space-y-3">
+                        <div className="h-6 bg-background-primary/50 rounded w-3/4" />
+                        <div className="h-4 bg-background-primary/50 rounded w-1/2" />
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+// Composant pour la grille des séries
+async function ShowsGrid({ shows, ratingMap }: { shows: Show[], ratingMap: Map<number, Rating> }) {
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+            {shows.map((show) => {
+                const rating = ratingMap.get(show.show_id);
+                return (
+                    <CardSerieCatalogue
+                        key={show.show_id}
+                        title={show.title}
+                        image={show.image || undefined}
+                        airdate={show.seasons[0]?.episodes[0]?.airdate || 'Date inconnue'}
+                        showId={show.show_id}
+                        averageRating={rating?.average || 0}
+                        platforms={show.platforms}
+                        genres={show.genres.map((g) => g.genres.name)}
+                    />
+                );
+            })}
+        </div>
+    );
+}
+
+export const revalidate = 3600; // Revalider toutes les heures
+
 export default async function Page({
     searchParams,
 }: {
     searchParams: Promise<SearchParams>;
 }) {
-    const { page, sort, order, q } = await searchParams;
+    const params = await searchParams;
+    const { page, sort, order, q } = params;
     const currentPage = Number(page) || 1;
 
-    const filters = parseFilters(await searchParams);
+    const filters = parseFilters(params);
     const { shows, showCount, ratingMap, totalPages } = await getShows(
         filters,
         q,
@@ -43,27 +113,13 @@ export default async function Page({
                         <div className="flex items-center gap-2 mb-4">
                             <h3 className="text-lg font-medium text-primary">Filtres et recherche</h3>
                         </div>
-                        <CatalogueControls />
+                        <CatalogueControls key={`catalogue-controls-${currentPage}`} />
                     </div>
 
-                    {/* Grille des séries */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-                        {shows.map((show) => {
-                            const rating = ratingMap.get(show.show_id);
-                            return (
-                                <CardSerieCatalogue
-                                    key={show.show_id}
-                                    title={show.title}
-                                    image={show.image || undefined}
-                                    airdate={show.seasons[0]?.episodes[0]?.airdate || 'Date inconnue'}
-                                    showId={show.show_id}
-                                    averageRating={rating?.average || 0}
-                                    platforms={show.platforms}
-                                    genres={show.genres.map(g => g.genres.name)}
-                                />
-                            );
-                        })}
-                    </div>
+                    {/* Grille des séries avec Suspense */}
+                    <Suspense fallback={<ShowsGridSkeleton />}>
+                        <ShowsGrid shows={shows} ratingMap={ratingMap} />
+                    </Suspense>
 
                     {/* Pagination */}
                     {totalPages > 1 && (

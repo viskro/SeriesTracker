@@ -47,8 +47,8 @@ export default function SeasonClient({ season, show, episodes, synopsis }: Seaso
                                 <h2 className="text-xl font-title text-accent-primary">
                                     Synopsis
                                 </h2>
-                                <p className="text--primary/90 leading-relaxed">
-                                    {synopsis}
+                                <p className={`leading-relaxed ${synopsis ? "text-primary/90" : "text-secondary/80"}`}>
+                                    {synopsis ? synopsis : "Pas de synopsis pour cette saison."}
                                 </p>
                             </div>
                         </div>

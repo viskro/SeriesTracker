@@ -28,12 +28,22 @@ export default function EpisodeList({ episodes, showId, seasonId }: Props) {
                 >
                     <div className="flex flex-col md:flex-row gap-6">
                         <div className="relative w-full md:w-[200px] aspect-video rounded-lg overflow-hidden">
-                            <Image
-                                src={episode.image || "https://placehold.co/400x225"}
-                                alt={episode.name}
-                                fill
-                                className="object-cover"
-                            />
+                            {episode.image ? (
+                                <Image
+                                    src={episode.image || "https://placehold.co/400x225"}
+                                    alt={episode.name}
+                                    fill
+                                    sizes="100"
+                                    className="object-cover"
+                                    loading="lazy"
+                                />
+                            ) : (
+                                <div className="w-full h-full bg-background-primary flex items-center justify-center">
+                                    <p className="text-accent-primary font-bold">
+                                        Aucune image disponible
+                                    </p>
+                                </div>
+                            )}
                         </div>
                         <div className="flex-1 space-y-4">
                             <div className="space-y-2">
