@@ -33,7 +33,7 @@ export default async function Home() {
           </p>
           <PrimaryButton
             text="Rejoindre la communauté"
-            to="/signup"
+            to="/auth/signup"
             className="w-full sm:w-fit transform hover:scale-105 transition-transform duration-300"
           />
         </div>

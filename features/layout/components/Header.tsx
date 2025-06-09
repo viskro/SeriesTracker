@@ -23,11 +23,9 @@ const Header = () => {
     <header className="relative z-10">
       <div className="flex items-center justify-between p-6 bg-gradient-to-br from-background-secondary to-background-primary text-primary border-b border-border-primary shadow-lg">
         <div className="flex items-center">
-          <Link href={"/"}>
-            <h1 className="text-2xl font-title">
-              Series<span className="text-accent-primary">Tracker</span>
-            </h1>
-          </Link>
+          <h1 className="text-2xl font-title">
+            Series<span className="text-accent-primary">Tracker</span>
+          </h1>
         </div>
 
         {/* Menu hamburger pour mobile */}

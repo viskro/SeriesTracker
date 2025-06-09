@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useSignUp } from "../hooks/useSignUp";
 import { SignUpFormData } from "../types";
+import Link from "next/link";
 
 export function SignUpForm() {
     const [formData, setFormData] = useState<SignUpFormData>({
@@ -116,7 +117,7 @@ export function SignUpForm() {
                 <Button
                     type="submit"
                     className="w-full bg-accent-primary hover:bg-accent-primary/90 text-white transition-colors duration-200"
-                    disabled={loading && !formData.acceptTerms && !!formData.password && !!formData.confirmPassword && !!formData.email && !!formData.username}
+                    disabled={loading || !formData.acceptTerms}
                 >
                     {loading ? (
                         <>
@@ -127,6 +128,7 @@ export function SignUpForm() {
                         "Créer un compte"
                     )}
                 </Button>
+                <span className="text-secondary text-sm">Vous avez déjà un compte ? <Link href={"/auth/signin"}><span className="hover:cursor-pointer text-accent-primary hover:text-accent-primary-hover transition-all duration-300 ease-in-out ">Connectez-vous</span></Link></span>
             </form>
         </div>
     );
