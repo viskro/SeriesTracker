@@ -13,7 +13,7 @@ export function CardSerieIndex({ show }: Props) {
   } else return null;
 
   return (
-    <div className="bg-background-secondary border-border-primary text-text-primary w-full rounded-2xl border shadow-lg p-4 flex flex-col gap-4 group transition-all duration-300 hover:bg-border-primary hover:text-white hover:shadow-accent-primary/10 hover:-translate-y-1">
+    <div className="bg-gradient-to-br from-background-secondary to-background-primary border-border-primary text-text-primary w-full rounded-2xl border shadow-lg p-4 flex flex-col gap-4 group transition-all duration-300 hover:bg-border-primary hover:text-white hover:shadow-accent-primary/10 hover:-translate-y-1">
       <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden">
         {show.image ? (
           <Image
