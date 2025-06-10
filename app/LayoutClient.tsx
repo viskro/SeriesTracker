@@ -9,14 +9,15 @@ import { useSessionSync } from "@/shared/hooks/useSession";
 export function LayoutClient({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAuthPage = pathname.startsWith("/auth");
+    const isPresentationPage = pathname.startsWith("/presentation");
     useSessionSync();
 
     return (
         <>
-            {!isAuthPage && <Header />}
+            {!isAuthPage || isPresentationPage && <Header />}
             <Toaster />
             {children}
-            {!isAuthPage && <Footer />}
+            {!isAuthPage || isPresentationPage && <Footer />}
         </>
     );
 }
