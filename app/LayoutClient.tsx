@@ -14,10 +14,10 @@ export function LayoutClient({ children }: { children: React.ReactNode }) {
 
     return (
         <>
-            {!isAuthPage || !isPresentationPage && <Header />}
+            {!isAuthPage && <Header />}
             <Toaster />
             {children}
-            {!isAuthPage || !isPresentationPage && <Footer />}
+            {!isAuthPage && <Footer />}
         </>
     );
 }
