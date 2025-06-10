@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Section } from '@/features/layout/components/Section';
 import { Search, Filter, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { ShowCard } from '@/features/archivesPage/components/ShowCard';
+import { ShowCard } from '@/features/listePage/components/ShowCard';
 import { ShowStatus } from '@/features/archivesPage/types';
 
 interface UserShow {

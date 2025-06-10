@@ -106,7 +106,7 @@ function EpisodeClientComponent({ episode, show, isWatched: initialIsWatched, co
                             <button
                                 onClick={onWatchToggle}
                                 disabled={isLoading}
-                                className={`mt-4 w-full sm:w-auto px-6 py-3 rounded-xl font-title text-base sm:text-lg transition-colors duration-200 ${isWatched
+                                className={`mt-4 w-full sm:w-auto px-6 py-3 rounded-xl font-title text-base sm:text-lg transition-colors duration-200 hover:cursor-pointer ${isWatched
                                     ? 'bg-accent-primary/20 text-accent-primary hover:bg-accent-primary/30'
                                     : 'bg-accent-primary text-white hover:bg-accent-primary/90'
                                     }`}
