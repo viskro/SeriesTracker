@@ -6,6 +6,7 @@ import { CatalogueControls } from "@/features/catalogue/components/CatalogueCont
 import { getShows } from "@/features/catalogue/actions/getShows";
 import { parseFilters } from "@/features/catalogue/actions/parseFilters";
 import { SearchParams } from "@/features/catalogue/types";
+import ShowsGridSkeleton from "./loading";
 
 interface Show {
     show_id: number;
@@ -33,21 +34,7 @@ interface Rating {
 }
 
 // Composant de chargement pour la grille des séries
-function ShowsGridSkeleton() {
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-background-secondary rounded-2xl p-4 animate-pulse">
-                    <div className="aspect-[2/3] bg-background-primary/50 rounded-xl mb-4" />
-                    <div className="space-y-3">
-                        <div className="h-6 bg-background-primary/50 rounded w-3/4" />
-                        <div className="h-4 bg-background-primary/50 rounded w-1/2" />
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
-}
+
 
 // Composant pour la grille des séries
 async function ShowsGrid({ shows, ratingMap }: { shows: Show[], ratingMap: Map<number, Rating> }) {
@@ -71,8 +58,6 @@ async function ShowsGrid({ shows, ratingMap }: { shows: Show[], ratingMap: Map<n
         </div>
     );
 }
-
-export const revalidate = 3600; // Revalider toutes les heures
 
 export default async function Page({
     searchParams,

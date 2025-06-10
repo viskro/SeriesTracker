@@ -5,20 +5,7 @@ import { cleanText } from "@/shared/utils/utils";
 import { getUser } from "@/shared/lib/auth-session";
 import EpisodeClient from "@features/episodePage/components/EpisodeClient";
 import { Episode } from "@/features/episodePage/types";
-
-// Composant de chargement pour les détails de l'épisode
-function EpisodeDetailsSkeleton() {
-    return (
-        <div className="animate-pulse">
-            <div className="h-72 bg-background-secondary/50 rounded-3xl mb-6" />
-            <div className="space-y-4">
-                <div className="h-8 bg-background-secondary/50 rounded w-1/3" />
-                <div className="h-4 bg-background-secondary/50 rounded w-2/3" />
-                <div className="h-4 bg-background-secondary/50 rounded w-1/2" />
-            </div>
-        </div>
-    );
-}
+import EpisodeDetailsSkeleton from "./loading";
 
 // Composant pour les détails de l'épisode
 async function EpisodeDetails({ episodeId, userId }: { episodeId: number, userId?: string }) {
@@ -81,8 +68,6 @@ async function EpisodeDetails({ episodeId, userId }: { episodeId: number, userId
         />
     );
 }
-
-export const revalidate = 3600; // Revalider toutes les heures
 
 export default async function Page({ params }: {
     params: Promise<{ id: string; season_id: string; episode_id: string }>;

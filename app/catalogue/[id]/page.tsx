@@ -5,20 +5,8 @@ import { getUser } from "@/shared/lib/auth-session";
 import { cleanText } from "@/shared/utils/utils";
 import { getShowDetails } from "@/features/showPage/actions/getShowDetails";
 import { getUserShowState } from "@/features/showPage/hooks/useUserShowState";
+import ShowDetailsSkeleton from "./loading"
 
-// Composant de chargement pour les détails de la série
-function ShowDetailsSkeleton() {
-    return (
-        <div className="animate-pulse">
-            <div className="h-96 bg-background-secondary/50 rounded-3xl mb-8" />
-            <div className="space-y-4">
-                <div className="h-8 bg-background-secondary/50 rounded w-1/3" />
-                <div className="h-4 bg-background-secondary/50 rounded w-2/3" />
-                <div className="h-4 bg-background-secondary/50 rounded w-1/2" />
-            </div>
-        </div>
-    );
-}
 
 // Composant pour les détails de la série
 async function ShowDetails({ showId }: { showId: number }) {
@@ -49,8 +37,6 @@ async function ShowDetails({ showId }: { showId: number }) {
         />
     );
 }
-
-export const revalidate = 3600; // Revalider toutes les heures
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;

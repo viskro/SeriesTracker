@@ -6,8 +6,6 @@ import { CardSerieIndex } from "@/features/index/components/CardSerieIndex"
 import { Section } from "@/features/layout/components/Section"
 import { GetPopularShows } from "@/features/index/actions/getPopularShows"
 
-export const revalidate = 3600; // Revalider toutes les heures
-
 export default async function Home() {
 
   const popularShows = await GetPopularShows();

@@ -9,6 +9,7 @@ import { ArchivesCard } from "./ArchivesCard";
 import { useRouter } from "next/navigation";
 import { DashboardProps } from "../types";
 import { memo } from "react";
+import DashboardSkeleton from "@/app/dashboard/loading";
 
 // Composant mémorisé pour une série
 const ShowCard = memo(({ show, onClick }: { show: { show_id: number, image: string | null, title: string }, onClick: () => void }) => (
@@ -73,13 +74,7 @@ function DashboardClientComponent({
     const router = useRouter();
 
     if (authLoading) {
-        return (
-            <Section className="mt-10 sm:mt-5">
-                <div className="flex items-center justify-center h-40">
-                    <p className="text-text-primary">Chargement...</p>
-                </div>
-            </Section>
-        );
+        return <DashboardSkeleton />;
     }
 
     const handleShowClick = (showId: number) => {
