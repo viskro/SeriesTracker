@@ -32,6 +32,8 @@ yarn install
 DATABASE_URL="mysql://malotiaux_axel:KAduK38cIErG3mUC@51.91.12.160:9212/series_tracker"
 BETTER_AUTH_SECRET="votre_secret_betterauth"
 ```
+   Si vous préférez, vous pouvez mettre la DATABASE_URL sur "mysql://root:@127.0.0.1:3306/series_tracker"
+   Ensuite, éxécutez le fichier dump.sql afin de créer la database et insérer les données.
 
 4. Initialisez la base de données :
 
