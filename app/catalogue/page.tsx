@@ -95,9 +95,6 @@ export default async function Page({
 
                     {/* Contrôles du catalogue */}
                     <div className="mb-8 sm:mb-12">
-                        <div className="flex items-center gap-2 mb-4">
-                            <h3 className="text-lg font-medium text-primary">Filtres et recherche</h3>
-                        </div>
                         <CatalogueControls key={`catalogue-controls-${currentPage}`} />
                     </div>
 
