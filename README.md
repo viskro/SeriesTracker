@@ -1,6 +1,7 @@
 # Series Tracker
 
-Une application web moderne pour suivre vos séries préférées, construite avec Next.js, TypeScript, et Tailwind CSS.
+Une application web moderne pour suivre vos séries préférées, construite avec Next.js, TypeScript, et Tailwind CSS. \
+Déployée sur Vercel : [SeriesTracker](https://series-tracker-kohl.vercel.app/)
 
 ## Prérequis
 
